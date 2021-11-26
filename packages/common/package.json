@@ -1,0 +1,23 @@
+{
+  "name": "@myanchat/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "test": "jest",
+    "tsc": "tsc --noEmit",
+    "build": "tsc"
+},
+  "author": "",
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+      "myanchat"
+  ]
+}
