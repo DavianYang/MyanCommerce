@@ -49,7 +49,19 @@
     },
     "config": {
         "commitizen": {
-          "path": "cz-conventional-changelog"
+            "path": "./node_modules/cz-conventional-changelog",
+            "disableScopeLowerCase": false,
+            "disableSubjectLowerCase": false,
+            "maxHeaderWidth": 100,
+            "maxLineWidth": 100,
+            "defaultType": "",
+            "defaultScope": "",
+            "defaultSubject": "",
+            "defaultBody": "",
+            "defaultIssues": ""
         }
-      }
+    },
+    "dependencies": {
+        "cz-conventional-changelog": "^3.3.0"
+    }
 }
