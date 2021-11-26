@@ -1,1 +1,1 @@
-const hello = () => console.log('Hello from common233--')
+export const hello = () => console.log('Hello from common')
