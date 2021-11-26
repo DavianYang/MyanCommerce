@@ -1,6 +1,5 @@
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
-import { ConfigModule } from "@config/config.module";
-import { ConfigService } from "@config/config.service";
+import { Module, NestModule } from "@nestjs/common";
+import { ConfigModule } from "./config/config.module";
 
 @Module({
     imports: [
@@ -8,9 +7,9 @@ import { ConfigService } from "@config/config.service";
     ]
 })
 export class AppModule implements NestModule {
-    constructor(private configService: ConfigService){}
+    constructor(){}
 
-    configure(consumer: MiddlewareConsumer) {
+    configure() {
         
     }
 }

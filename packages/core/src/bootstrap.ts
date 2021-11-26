@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@config/logger/myanchat.logger'
 import { MyanChatConfig, RuntimeMyanChatConfig } from '@config/myanchat.config';
 import { setConfig, getConfig } from '@config/config-helpers';
-import { DefaultLogger } from '@/config/logger/default.logger';
+import { DefaultLogger } from '@config/logger/default.logger';
 
 export type MyanChatBootstrapFunction = (config: JSON) => Promise<INestApplication>
 
@@ -44,7 +44,7 @@ export async function bootstrap(userConfig: Partial<MyanChatConfig>): Promise<IN
 
     await app.listen(port, hostname || '')
     app.enableShutdownHooks()
-
+    logWelcomeMessage(config)
     return app;
 }
 
@@ -59,4 +59,18 @@ export async function preBootstrapConfig(userConfig: Partial<MyanChatConfig>): P
     let config = getConfig();
 
     return config;
+}
+
+function logWelcomeMessage(config: RuntimeMyanChatConfig){
+    let version: string;
+    try {
+        version = require('../package.json').version;
+    } catch (err) {
+        version = 'unknown'
+    }
+
+    const {hostname, port} = config.apiOptions;
+
+    const title = `MyanChat server (v${version} now running on http://${hostname || 'localhost'}:${port})`;
+    Logger.info(title.padStart(title.length));
 }

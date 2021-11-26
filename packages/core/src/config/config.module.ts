@@ -1,5 +1,4 @@
 import { Module, OnApplicationBootstrap, OnApplicationShutdown } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
 import { ConfigService } from './config.service';
 
 @Module({
@@ -7,13 +6,13 @@ import { ConfigService } from './config.service';
     exports: [ConfigService]
 })
 export class ConfigModule implements OnApplicationBootstrap, OnApplicationShutdown {
-    constructor(private configService: ConfigService, private moduleref: ModuleRef){}
+    constructor(){}
 
     async onApplicationBootstrap() {
         
     }
 
-    async onApplicationShutdown(signal?: string) {
+    async onApplicationShutdown() {
         
     }
 

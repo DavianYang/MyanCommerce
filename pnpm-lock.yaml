@@ -66,13 +66,14 @@ importers:
       '@nestjs/platform-express': ^7.6.15
       '@nestjs/schematics': ^7.3.0
       '@nestjs/testing': ^7.6.15
+      '@types/chalk': ^2.2.0
       '@types/express': ^4.17.11
       '@types/jest': ^26.0.22
       '@types/node': ^14.14.36
       '@types/supertest': ^2.0.10
       '@typescript-eslint/eslint-plugin': ^4.19.0
       '@typescript-eslint/parser': ^4.19.0
-      chalk: ^5.0.0
+      chalk: 4.1.2
       eslint: ^7.22.0
       eslint-config-prettier: ^8.1.0
       eslint-plugin-prettier: ^3.3.1
@@ -93,7 +94,7 @@ importers:
       '@nestjs/common': 7.6.18_8e6d4b7501d9d25f42cbf34563d4f5bc
       '@nestjs/core': 7.6.18_cf22c14faf7a8288645a80ae61717d6f
       '@nestjs/platform-express': 7.6.18_2664420588e0901c7943acb4693cbaf4
-      chalk: 5.0.0
+      chalk: 4.1.2
       reflect-metadata: 0.1.13
       rimraf: 3.0.2
       rxjs: 6.6.7
@@ -102,6 +103,7 @@ importers:
       '@nestjs/cli': 7.6.0
       '@nestjs/schematics': 7.3.1_typescript@4.4.4
       '@nestjs/testing': 7.6.18_9cd0f963ae6f35bf288217e4f1c45cb4
+      '@types/chalk': 2.2.0
       '@types/express': 4.17.13
       '@types/jest': 26.0.24
       '@types/node': 14.17.34
@@ -1462,6 +1464,13 @@ packages:
       '@types/node': 16.11.7
     dev: true
 
+  /@types/chalk/2.2.0:
+    resolution: {integrity: sha512-1zzPV9FDe1I/WHhRkf9SNgqtRJWZqrBWgu7JGveuHmmyR9CnAPCie2N/x+iHrgnpYBIcCJWHBoMRv2TRWktsvw==}
+    deprecated: This is a stub types definition for chalk (https://github.com/chalk/chalk). chalk provides its own type definitions, so you don't need @types/chalk installed!
+    dependencies:
+      chalk: 5.0.0
+    dev: true
+
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
@@ -2435,7 +2444,7 @@ packages:
   /chalk/5.0.0:
     resolution: {integrity: sha512-/duVOqst+luxCQRKEo4bNxinsOQtMP80ZYm7mMqzuh5PociNL0PvmHFvREJ9ueYL2TxlHjBcmLCdmocx9Vg+IQ==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: false
+    dev: true
 
   /char-regex/1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
