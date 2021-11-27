@@ -1,6 +1,9 @@
-import { defaultConfig } from "./default.config";
-import { mergeConfig } from "./merge.config";
-import { PartialMyanChatConfig, RuntimeMyanChatConfig } from "./myanchat.config";
+import { defaultConfig } from './default.config';
+import { mergeConfig } from './merge.config';
+import {
+    PartialMyanChatConfig,
+    RuntimeMyanChatConfig,
+} from './myanchat.config';
 
 let activeConfig = defaultConfig;
 
@@ -18,5 +21,5 @@ export function setConfig(userConfig: PartialMyanChatConfig): void {
  * should be used to access config settings.
  */
 export function getConfig(): Readonly<RuntimeMyanChatConfig> {
-    return activeConfig
+    return activeConfig;
 }

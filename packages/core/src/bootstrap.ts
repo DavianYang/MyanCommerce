@@ -56,7 +56,7 @@ export async function preBootstrapConfig(userConfig: Partial<MyanChatConfig>): P
         setConfig(userConfig);
     }
     
-    let config = getConfig();
+    const config = getConfig();
 
     return config;
 }
@@ -64,6 +64,7 @@ export async function preBootstrapConfig(userConfig: Partial<MyanChatConfig>): P
 function logWelcomeMessage(config: RuntimeMyanChatConfig){
     let version: string;
     try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         version = require('../package.json').version;
     } catch (err) {
         version = 'unknown'

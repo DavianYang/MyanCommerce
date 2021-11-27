@@ -1,4 +1,4 @@
-import { Module, NestModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { ConfigModule } from "./config/config.module";
 
 @Module({
@@ -6,10 +6,5 @@ import { ConfigModule } from "./config/config.module";
         ConfigModule
     ]
 })
-export class AppModule implements NestModule {
-    constructor(){}
-
-    configure() {
-        
-    }
+export class AppModule {
 }

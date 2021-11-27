@@ -1,60 +1,29 @@
-/* Copyright 2021, Milkdown by Mirone. */
+/* Copyright 2021, MyanChat */
 
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
+    parserOptions: {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+      },
     extends: [
-        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:promise/recommended',
-        'plugin:import/recommended',
-        'plugin:import/typescript',
-        'plugin:prettier/recommended',
-        'plugin:react-hooks/recommended',
+        'prettier',
     ],
-    plugins: ['simple-import-sort', 'header', 'eslint-plugin-tsdoc'],
+    plugins: ['@typescript-eslint/eslint-plugin'],
     env: {
-        browser: true,
         node: true,
     },
     rules: {
-        'no-console': ['error', { allow: ['warn', 'error'] }],
-
-        'import/prefer-default-export': 'off',
-        'import/no-default-export': 'error',
-        'import/no-unresolved': ['error', { ignore: ['unist', 'mdast'] }],
-
+        '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
-
-        'simple-import-sort/imports': 'error',
-        'simple-import-sort/exports': 'error',
-
-        'tsdoc/syntax': 'warn',
-
-        'header/header': ['error', 'block', ' Copyright 2021, Milkdown by Mirone. '],
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-var-requires': 'off'
     },
-    settings: {
-        react: {
-            version: 'detect',
-        },
-    },
-    overrides: [
-        {
-            files: ['**/*.js'],
-            rules: {
-                'global-require': 'off',
-                '@typescript-eslint/no-require-imports': 'off',
-                '@typescript-eslint/no-var-requires': 'off',
-                '@typescript-eslint/naming-convention': 'off',
-                'import/no-default-export': 'off',
-            },
-        },
-        {
-            files: ['shim.d.ts', 'vite.config.ts'],
-            rules: {
-                'import/no-default-export': 'off',
-            },
-        },
-    ],
 };
