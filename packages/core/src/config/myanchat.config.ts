@@ -1,7 +1,7 @@
-import { CorsOptions } from "@nestjs/common/interfaces/external/cors-options.interface";
-import { Middleware } from "@common/types/common.types";
-import { MyanChatLogger } from "./logger/myanchat.logger";
-import { Type } from "@myanchat/common/dist/shared-types";
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { Middleware } from '@common/types/common.types';
+import { MyanChatLogger } from './logger/myanchat.logger';
+import { Type } from '@myanchat/common/dist/shared-types';
 
 /**
  * @description
@@ -10,7 +10,7 @@ import { Type } from "@myanchat/common/dist/shared-types";
  *
  * @docsCategory configuration
  */
- export interface ApiOptions {
+export interface ApiOptions {
     /**
      * @description
      * Set the hostname of the server. If not set, the server will be available on localhost.
@@ -56,7 +56,7 @@ import { Type } from "@myanchat/common/dist/shared-types";
  *
  * @docsCategory configuration
  * */
- export interface MyanChatConfig {
+export interface MyanChatConfig {
     /**
      * @description
      * Configuration for the GraphQL APIs, including hostname, port, CORS settings,
@@ -90,4 +90,4 @@ type DeepPartialSimple<T> = {
               : DeepPartialSimple<T[P]>);
 };
 
-export type PartialMyanChatConfig = DeepPartialSimple<MyanChatConfig>
+export type PartialMyanChatConfig = DeepPartialSimple<MyanChatConfig>;

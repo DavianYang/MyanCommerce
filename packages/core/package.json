@@ -7,11 +7,19 @@
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "watch": "tsc ./tsconfig.build.json --watch",
+    "prebuild": "rimraf dist",
+    "build": "nest build",
     "start": "nest start",
-    "test": "jest",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
     "tsc": "tsc --noEmit",
-    "build": "tsc"
+    "tsc:watch": "tsc ./tsconfig.build.json --watch",
+    "test": "jest",
+    "test:watch": "jests --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "files": [
     "dist/**/*"

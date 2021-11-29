@@ -1,6 +1,6 @@
-import chalk from "chalk";
+import chalk from 'chalk';
 
-import { Logger, LogLevel,  MyanChatLogger} from "./myanchat.logger";
+import { Logger, LogLevel, MyanChatLogger } from './myanchat.logger';
 
 const DEFAULT_CONTEXT = 'MyanChat Server';
 
@@ -36,9 +36,13 @@ export class DefaultLogger implements MyanChatLogger {
     } as const;
     private static originalLogLevel: LogLevel;
 
-    constructor(options?: {level?: LogLevel; timestamp?: boolean}) {
-        this.level = options && options.level != null ? options.level : LogLevel.Info;
-        this.timestamp = options && options.timestamp !== undefined ? options.timestamp : true;
+    constructor(options?: { level?: LogLevel; timestamp?: boolean }) {
+        this.level =
+            options && options.level != null ? options.level : LogLevel.Info;
+        this.timestamp =
+            options && options.timestamp !== undefined
+                ? options.timestamp
+                : true;
     }
 
     /**
@@ -68,9 +72,12 @@ export class DefaultLogger implements MyanChatLogger {
      * See https://github.com/nestjs/nest/issues/1838
      * @internal
      */
-     static restoreOriginalLogLevel(): void {
+    static restoreOriginalLogLevel(): void {
         const { logger } = Logger;
-        if (logger instanceof DefaultLogger && DefaultLogger.originalLogLevel !== undefined) {
+        if (
+            logger instanceof DefaultLogger &&
+            DefaultLogger.originalLogLevel !== undefined
+        ) {
             logger.level = DefaultLogger.originalLogLevel;
         }
     }
@@ -91,7 +98,9 @@ export class DefaultLogger implements MyanChatLogger {
         if (this.level >= LogLevel.Error) {
             this.logMessage(
                 chalk.red(`error`),
-                chalk.red(this.ensureString(message) + (trace ? `\n${trace}` : '')),
+                chalk.red(
+                    this.ensureString(message) + (trace ? `\n${trace}` : ''),
+                ),
                 context,
             );
         }
@@ -99,31 +108,53 @@ export class DefaultLogger implements MyanChatLogger {
 
     warn(message: string, context?: string): void {
         if (this.level >= LogLevel.Warn) {
-            this.logMessage(chalk.yellow(`warn`), chalk.yellow(this.ensureString(message)), context);
+            this.logMessage(
+                chalk.yellow(`warn`),
+                chalk.yellow(this.ensureString(message)),
+                context,
+            );
         }
     }
 
     info(message: string, context?: string): void {
         if (this.level >= LogLevel.Info) {
-            this.logMessage(chalk.blue(`info`), this.ensureString(message), context);
+            this.logMessage(
+                chalk.blue(`info`),
+                this.ensureString(message),
+                context,
+            );
         }
     }
 
     verbose(message: string, context?: string): void {
         if (this.level >= LogLevel.Verbose) {
-            this.logMessage(chalk.magenta(`verbose`), this.ensureString(message), context);
+            this.logMessage(
+                chalk.magenta(`verbose`),
+                this.ensureString(message),
+                context,
+            );
         }
     }
 
     debug(message: string, context?: string): void {
         if (this.level >= LogLevel.Debug) {
-            this.logMessage(chalk.magenta(`debug`), this.ensureString(message), context);
+            this.logMessage(
+                chalk.magenta(`debug`),
+                this.ensureString(message),
+                context,
+            );
         }
     }
 
     private logMessage(prefix: string, message: string, context?: string) {
         process.stdout.write(
-            [prefix, this.logTimestamp(), this.logContext(context), message, '\n'].join(' '),
+            [
+                prefix,
+                this.logTimestamp(),
+                this.logContext(context),
+                message,
+                '\n',
+            ].join(' '),
         );
     }
 
@@ -133,7 +164,10 @@ export class DefaultLogger implements MyanChatLogger {
 
     private logTimestamp() {
         if (this.timestamp) {
-            const timestamp = new Date(Date.now()).toLocaleString(undefined, this.localeStringOptions);
+            const timestamp = new Date(Date.now()).toLocaleString(
+                undefined,
+                this.localeStringOptions,
+            );
             return chalk.gray(timestamp + ' -');
         } else {
             return '';
@@ -141,6 +175,8 @@ export class DefaultLogger implements MyanChatLogger {
     }
 
     private ensureString(message: string | object | any[]): string {
-        return typeof message === 'string' ? message : JSON.stringify(message, null, 2);
+        return typeof message === 'string'
+            ? message
+            : JSON.stringify(message, null, 2);
     }
 }
