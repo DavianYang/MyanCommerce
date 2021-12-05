@@ -1,5 +1,5 @@
 {
-  "name": "@myanchat/core",
+  "name": "@myancommerce/core",
   "version": "1.0.0",
   "main": "dist/main.js",
   "module": "dist/main.js",
@@ -25,10 +25,10 @@
     "dist/**/*"
   ],
   "keywords": [
-    "myanchat"
+    "myancommerce"
   ],
   "dependencies": {
-    "@myanchat/common": "workspace:*",
+    "@myancommerce/common": "workspace:*",
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/platform-express": "^7.6.15",
@@ -42,7 +42,6 @@
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.0",
     "@nestjs/testing": "^7.6.15",
-    "@types/chalk": "^2.2.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.36",

@@ -1,5 +1,5 @@
 {
-  "name": "@myanchat/common",
+  "name": "@myancommerce/common",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -18,6 +18,6 @@
     "dist/**/*"
   ],
   "keywords": [
-      "myanchat"
+      "myancommerce"
   ]
 }
