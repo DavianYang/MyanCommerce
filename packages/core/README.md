@@ -1,1 +1,1 @@
-# @myanchat/core
+# @myancommerce/core

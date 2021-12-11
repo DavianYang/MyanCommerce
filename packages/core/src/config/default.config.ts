@@ -12,7 +12,7 @@ export const defaultConfig: RuntimeMyanCommerceConfig = {
     apiOptions: {
         hostname: '',
         port: 3000,
-        channelTokenKey: 'myanchat-token',
+        channelTokenKey: 'myancommerce-token',
         cors: {
             origin: true,
             credentials: true,

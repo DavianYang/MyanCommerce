@@ -2,19 +2,19 @@ import chalk from 'chalk';
 
 import { Logger, LogLevel, MyanCommerceLogger } from './myancommerce.logger';
 
-const DEFAULT_CONTEXT = 'MyanChat Server';
+const DEFAULT_CONTEXT = 'MyanCommerce Server';
 
 /**
  * @description
  * The default logger, which logs to the console (stdout) with optional timestamps. Since this logger is part of the
- * default MyanChat configuration, you do not need to specify it explicitly in your server config. You would only need
+ * default MyanCommerce configuration, you do not need to specify it explicitly in your server config. You would only need
  * to specify it if you wish to change the log level (which defaults to `LogLevel.Info`) or remove the timestamp.
  *
  * @example
  * ```ts
- * import { DefaultLogger, LogLevel, MyanChatConfig } from '\@myanchat/core';
+ * import { DefaultLogger, LogLevel, MyanCommerceConfig } from '@myancommerce/core';
  *
- * export config: MyanChatConfig = {
+ * export config: MyanCommerceConfig = {
  *     // ...
  *     logger: new DefaultLogger({ level: LogLevel.Debug, timestamp: false }),
  * }

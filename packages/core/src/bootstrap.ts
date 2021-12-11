@@ -8,18 +8,18 @@ import {
 } from '@config/myancommerce';
 import { setConfig, getConfig } from '@config/config-helpers';
 
-export type MyanChatBootstrapFunction = (
+export type MyanCommerceBootstrapFunction = (
     config: JSON,
 ) => Promise<INestApplication>;
 
 /**
  * @description
- * Bootstraps the MyanChat server. This is the entry point to the application.
+ * Bootstraps the MyanCommerce server. This is the entry point to the application.
  *
  * @example
  * ```TypeScript
- * import { bootstrap } from '\@myanchat/core';
- * import { config } from './myanchat-config';
+ * import { bootstrap } from '\@MyanCommerce/core';
+ * import { config } from './MyanCommerce-config';
  *
  * bootstrap(config).catch(err => {
  *     console.log(err);
@@ -77,7 +77,7 @@ function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
 
     const { hostname, port } = config.apiOptions;
 
-    const title = `MyanChat server (v${version} now running on http://${
+    const title = `MyanCommerce server (v${version} now running on http://${
         hostname || 'localhost'
     }:${port})`;
     Logger.info(title.padStart(title.length));

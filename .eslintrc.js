@@ -1,4 +1,4 @@
-/* Copyright 2021, MyanChat */
+/* Copyright 2021, MyanCommerce */
 
 module.exports = {
     root: true,

@@ -1,4 +1,4 @@
-import { Type } from "@myanchat/common/dist/shared-types";
+import { Type } from '@myancommerce/common/dist/shared-types';
 
 export type MiddlewareHandler = Type<any> | Function;
 
@@ -9,7 +9,7 @@ export type MiddlewareHandler = Type<any> | Function;
  *
  * @docsCategory Common
  */
- export interface Middleware {
+export interface Middleware {
     /**
      * @description
      * The Express middleware function or NestJS `NestMiddleware` class.
