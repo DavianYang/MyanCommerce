@@ -1,9 +1,9 @@
 import { defaultConfig } from './default.config';
 import { mergeConfig } from './merge.config';
 import {
-    PartialMyanChatConfig,
-    RuntimeMyanChatConfig,
-} from './myanchat.config';
+    PartialMyanCommerceConfig,
+    RuntimeMyanCommerceConfig,
+} from './myancommerce';
 
 let activeConfig = defaultConfig;
 
@@ -11,7 +11,7 @@ let activeConfig = defaultConfig;
  * Override the default config by merging in the supplied values. Should only be used prior to
  * bootstrapping the app.
  */
-export function setConfig(userConfig: PartialMyanChatConfig): void {
+export function setConfig(userConfig: PartialMyanCommerceConfig): void {
     activeConfig = mergeConfig(activeConfig, userConfig);
 }
 
@@ -20,6 +20,6 @@ export function setConfig(userConfig: PartialMyanChatConfig): void {
  * used before bootstrapping the app. In all other contexts, the {@link ConfigService}
  * should be used to access config settings.
  */
-export function getConfig(): Readonly<RuntimeMyanChatConfig> {
+export function getConfig(): Readonly<RuntimeMyanCommerceConfig> {
     return activeConfig;
 }

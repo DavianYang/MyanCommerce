@@ -1,5 +1,5 @@
-import { RuntimeMyanChatConfig } from "./myanchat.config";
-import { DefaultLogger } from "./logger/default.logger";
+import { RuntimeMyanCommerceConfig } from './myancommerce';
+import { DefaultLogger } from './logger/default.logger';
 
 /**
  * @description
@@ -7,7 +7,7 @@ import { DefaultLogger } from "./logger/default.logger";
  *
  * @docsCategory configuration
  */
- export const defaultConfig: RuntimeMyanChatConfig = {
+export const defaultConfig: RuntimeMyanCommerceConfig = {
     logger: new DefaultLogger(),
     apiOptions: {
         hostname: '',
@@ -18,5 +18,5 @@ import { DefaultLogger } from "./logger/default.logger";
             credentials: true,
         },
         middleware: [],
-    }
+    },
 };

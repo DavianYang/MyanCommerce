@@ -1,10 +1,13 @@
-import { isClassInstance, isObject } from '@myanchat/common/dist/shared-utils';
-import { simpleDeepClone } from '@myanchat/common/dist/simple-deep-clone';
+import {
+    isClassInstance,
+    isObject,
+} from '@myancommerce/common/dist/shared-utils';
+import { simpleDeepClone } from '@myancommerce/common/dist/simple-deep-clone';
 
-import { MyanChatConfig, PartialMyanChatConfig } from './myanchat.config';
+import { MyanCommerceConfig, PartialMyanCommerceConfig } from './myancommerce';
 /**
  * @description
- * Performs a deep merge of two MyanChatConfig objects. Unlike `Object.assign()` the `target` object is
+ * Performs a deep merge of two MyanCommerceConfig objects. Unlike `Object.assign()` the `target` object is
  * not mutated, instead the function returns a new object which is the result of deeply merging the
  * values of `source` into `target`.
  *
@@ -19,7 +22,11 @@ import { MyanChatConfig, PartialMyanChatConfig } from './myanchat.config';
  *
  * @docsCategory configuration
  */
- export function mergeConfig<T extends MyanChatConfig>(target: T, source: PartialMyanChatConfig, depth = 0): T {
+export function mergeConfig<T extends MyanCommerceConfig>(
+    target: T,
+    source: PartialMyanCommerceConfig,
+    depth = 0,
+): T {
     if (!source) {
         return target;
     }
@@ -35,7 +42,11 @@ import { MyanChatConfig, PartialMyanChatConfig } from './myanchat.config';
                     Object.assign(target as any, { [key]: {} });
                 }
                 if (!isClassInstance((source as any)[key])) {
-                    mergeConfig((target as any)[key], (source as any)[key], depth + 1);
+                    mergeConfig(
+                        (target as any)[key],
+                        (source as any)[key],
+                        depth + 1,
+                    );
                 } else {
                     (target as any)[key] = (source as any)[key];
                 }

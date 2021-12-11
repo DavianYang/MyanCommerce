@@ -1,8 +1,8 @@
-import { MyanChatConfig } from '@config/myanchat.config';
+import { MyanCommerceConfig } from '@/config/myancommerce';
 import { DefaultLogger } from '@config/logger/default.logger';
-import { LogLevel } from '@config/logger/myanchat.logger';
+import { LogLevel } from '@/config/logger/myancommerce.logger';
 
-export const config: MyanChatConfig = {
+export const config: MyanCommerceConfig = {
     apiOptions: {
         port: 3000,
     },

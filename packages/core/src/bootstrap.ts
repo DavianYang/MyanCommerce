@@ -1,8 +1,11 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { Logger } from '@config/logger/myanchat.logger';
-import { MyanChatConfig, RuntimeMyanChatConfig } from '@config/myanchat.config';
+import { Logger } from '@/config/logger/myancommerce.logger';
+import {
+    MyanCommerceConfig,
+    RuntimeMyanCommerceConfig,
+} from '@config/myancommerce';
 import { setConfig, getConfig } from '@config/config-helpers';
 
 export type MyanChatBootstrapFunction = (
@@ -26,7 +29,7 @@ export type MyanChatBootstrapFunction = (
  * */
 
 export async function bootstrap(
-    userConfig: Partial<MyanChatConfig>,
+    userConfig: Partial<MyanCommerceConfig>,
 ): Promise<INestApplication> {
     const config = await preBootstrapConfig(userConfig);
 
@@ -52,8 +55,8 @@ export async function bootstrap(
  * Setting the global config must be done prior to loading the AppModule.
  */
 export async function preBootstrapConfig(
-    userConfig: Partial<MyanChatConfig>,
-): Promise<Readonly<RuntimeMyanChatConfig>> {
+    userConfig: Partial<MyanCommerceConfig>,
+): Promise<Readonly<RuntimeMyanCommerceConfig>> {
     if (userConfig) {
         setConfig(userConfig);
     }
@@ -63,7 +66,7 @@ export async function preBootstrapConfig(
     return config;
 }
 
-function logWelcomeMessage(config: RuntimeMyanChatConfig) {
+function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
     let version: string;
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires

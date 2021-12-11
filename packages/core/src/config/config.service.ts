@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { getConfig } from './config-helpers';
-import { MyanChatLogger } from './logger/myanchat.logger';
+import { MyanCommerceLogger } from './logger/myancommerce.logger';
 import {
     ApiOptions,
-    MyanChatConfig,
-    RuntimeMyanChatConfig,
-} from './myanchat.config';
+    MyanCommerceConfig,
+    RuntimeMyanCommerceConfig,
+} from './myancommerce';
 
 @Injectable()
-export class ConfigService implements MyanChatConfig {
-    private activeConfig: RuntimeMyanChatConfig;
+export class ConfigService implements MyanCommerceConfig {
+    private activeConfig: RuntimeMyanCommerceConfig;
 
     constructor() {
         this.activeConfig = getConfig();
@@ -19,7 +19,7 @@ export class ConfigService implements MyanChatConfig {
         return this.activeConfig.apiOptions;
     }
 
-    get logger(): MyanChatLogger {
+    get logger(): MyanCommerceLogger {
         return this.activeConfig.logger;
     }
 }

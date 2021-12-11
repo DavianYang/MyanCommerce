@@ -1,4 +1,4 @@
-import { LoggerService } from "@nestjs/common";
+import { LoggerService } from '@nestjs/common';
 
 /**
  * @description
@@ -6,7 +6,7 @@ import { LoggerService } from "@nestjs/common";
  *
  * @docsCategory Logger
  */
- export enum LogLevel {
+export enum LogLevel {
     /**
      * @description
      * Log Errors only.
@@ -18,15 +18,14 @@ import { LoggerService } from "@nestjs/common";
     Debug = 4,
 }
 
-
 /**
  * @description
- * The MyanChatLogger interface defines the shape of a logger service which may be provided in
+ * The MyanCommerceLogger interface defines the shape of a logger service which may be provided in
  * the config.
  *
  * @docsCategory Logger
  */
-export interface MyanChatLogger {
+export interface MyanCommerceLogger {
     error(message: string, context?: string, trace?: string): void;
     warn(message: string, context?: string): void;
     info(message: string, context?: string): void;
@@ -34,44 +33,54 @@ export interface MyanChatLogger {
     debug(message: string, context?: string): void;
 }
 
-const noopLogger: MyanChatLogger = {
-    error() { /* */ },
-    warn() { /* */ },
-    info() { /* */ },
-    verbose() { /* */ },
-    debug() { /* */ },
+const noopLogger: MyanCommerceLogger = {
+    error() {
+        /* */
+    },
+    warn() {
+        /* */
+    },
+    info() {
+        /* */
+    },
+    verbose() {
+        /* */
+    },
+    debug() {
+        /* */
+    },
 };
 
 /**
  * @description
- * The Logger is responsible for all logging in a MyanChat application.
+ * The Logger is responsible for all logging in a MyanCommerce application.
  *
  * It is intended to be used as a static class:
  *
  * @example
  * ```ts
- * import { Logger } from '\@myanchat/core';
+ * import { Logger } from '\@myancommerce/core';
  *
- * Logger.info(`Some log message`, 'My MyanChat Plugin');
+ * Logger.info(`Some log message`, 'My MyanCommerce Plugin');
  * ```
  *
- * The actual implementation - where the logs are written to - is defined by the {@link MyanChatLogger}
- * instance configured in the {@link MyanChatConfig}. By default, the {@link DefaultLogger} is used, which
+ * The actual implementation - where the logs are written to - is defined by the {@link MyanCommerceLogger}
+ * instance configured in the {@link MyanCommerceConfig}. By default, the {@link DefaultLogger} is used, which
  * logs to the console.
  *
  * ## Implementing a custom logger
  *
  * A custom logger can be passed to the `logger` config option by creating a class which implements the
- * {@link MyanChatLogger} interface. For example, here is how you might go about implementing a logger which
+ * {@link MyanCommerceLogger} interface. For example, here is how you might go about implementing a logger which
  * logs to a file:
  *
  * @example
  * ```ts
- * import { MyanChatLogger } from '\@myanchat/core';
+ * import { MyanCommerceLogger } from '\@myancommerce/core';
  * import fs from 'fs';
  *
  * // A simple custom logger which writes all logs to a file.
- * export class SimpleFileLogger implements MyanChatLogger {
+ * export class SimpleFileLogger implements MyanCommerceLogger {
  *     private logfile: fs.WriteStream;
  *
  *     constructor(logfileLocation: string) {
@@ -95,7 +104,7 @@ const noopLogger: MyanChatLogger = {
  *     }
  * }
  *
- * // in the MyanChatConfig
+ * // in the MyanCommerceConfig
  * export const config = {
  *     // ...
  *     logger: new SimpleFileLogger('server.log'),
@@ -107,9 +116,9 @@ const noopLogger: MyanChatLogger = {
 
 export class Logger implements LoggerService {
     private static _instance: typeof Logger = Logger;
-    private static _logger: MyanChatLogger;
+    private static _logger: MyanCommerceLogger;
 
-    static get logger(): MyanChatLogger {
+    static get logger(): MyanCommerceLogger {
         return this._logger || noopLogger;
     }
 
@@ -119,7 +128,7 @@ export class Logger implements LoggerService {
     }
 
     /** @internal */
-    static useLogger(logger: MyanChatLogger) {
+    static useLogger(logger: MyanCommerceLogger) {
         Logger._logger = logger;
     }
 

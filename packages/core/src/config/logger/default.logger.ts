@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { Logger, LogLevel, MyanChatLogger } from './myanchat.logger';
+import { Logger, LogLevel, MyanCommerceLogger } from './myancommerce.logger';
 
 const DEFAULT_CONTEXT = 'MyanChat Server';
 
@@ -22,7 +22,7 @@ const DEFAULT_CONTEXT = 'MyanChat Server';
  *
  * @docsCategory Logger
  */
-export class DefaultLogger implements MyanChatLogger {
+export class DefaultLogger implements MyanCommerceLogger {
     /** @internal */
     level: LogLevel = LogLevel.Info;
     private readonly timestamp: boolean;
