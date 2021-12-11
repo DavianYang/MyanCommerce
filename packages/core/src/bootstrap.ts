@@ -18,8 +18,8 @@ export type MyanCommerceBootstrapFunction = (
  *
  * @example
  * ```TypeScript
- * import { bootstrap } from '\@MyanCommerce/core';
- * import { config } from './MyanCommerce-config';
+ * import { bootstrap } from '@myancommerce/core';
+ * import { config } from './myancommerce-config';
  *
  * bootstrap(config).catch(err => {
  *     console.log(err);
