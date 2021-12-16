@@ -19,4 +19,7 @@ export const defaultConfig: RuntimeMyanCommerceConfig = {
         },
         middleware: [],
     },
+    dbConnectionOptions: {
+        type: 'postgres',
+    },
 };

@@ -1,5 +1,6 @@
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-import { Middleware } from '@common/types/common.types';
+import { Middleware } from '../common/types/common.types';
+import { ConnectionOptions } from 'typeorm';
 import { MyanCommerceLogger } from './logger/myancommerce.logger';
 import { Type } from '@myancommerce/common/dist/shared-types';
 
@@ -63,6 +64,13 @@ export interface MyanCommerceConfig {
      * middleware etc.
      */
     apiOptions: ApiOptions;
+    /**
+     * @description
+     * The connection options used by TypeORM to connect to the database
+     * See the [TypeORM documentation](https://typeorm.io/#/connection-options) for a
+     * full description of all available options.
+     */
+    dbConnectionOptions: ConnectionOptions;
     /**
      * @description
      * Provide a logging service which implements the {@link MyanCommerceLogger} interface.

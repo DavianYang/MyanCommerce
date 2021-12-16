@@ -1,12 +1,12 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { Logger } from '@/config/logger/myancommerce.logger';
+import { Logger } from './config/logger/myancommerce.logger';
 import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
-} from '@config/myancommerce';
-import { setConfig, getConfig } from '@config/config-helpers';
+} from './config/myancommerce';
+import { setConfig, getConfig } from './config/config-helpers';
 
 export type MyanCommerceBootstrapFunction = (
     config: JSON,

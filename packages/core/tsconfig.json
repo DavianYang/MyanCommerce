@@ -4,11 +4,6 @@
         "rootDir": "src",
         "outDir": "dist",
         "baseUrl": "src",
-        "paths": {
-            "@/*": ["*"],
-            "@config/*": ["config/*"],
-            "@common/*": ["common/*"],
-        }
     },
     "include": ["src"],
     "exclude": ["src/**/*.spec.ts"],

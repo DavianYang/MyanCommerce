@@ -31,12 +31,18 @@
     "@myancommerce/common": "workspace:*",
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
+    "@nestjs/graphql": "^9.1.2",
     "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/typeorm": "^8.0.2",
+    "apollo-server-express": "^3.5.0",
     "chalk": "4.1.2",
+    "dotenv": "^10.0.0",
+    "graphql": "^15",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "typeorm": "^0.2.41"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",

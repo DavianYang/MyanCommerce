@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConnectionOptions } from 'typeorm';
 import { getConfig } from './config-helpers';
 import { MyanCommerceLogger } from './logger/myancommerce.logger';
 import {
@@ -21,5 +22,9 @@ export class ConfigService implements MyanCommerceConfig {
 
     get logger(): MyanCommerceLogger {
         return this.activeConfig.logger;
+    }
+
+    get dbConnectionOptions(): ConnectionOptions {
+        return this.activeConfig.dbConnectionOptions;
     }
 }

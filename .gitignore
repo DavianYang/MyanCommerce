@@ -397,3 +397,7 @@ Temporary Items
 
 packages/*/tsconfig.build.tsbuildinfo
 packages/*/tsconfig.tsbuildinfo
+
+.env.development
+.env.development.local
+.env.production
