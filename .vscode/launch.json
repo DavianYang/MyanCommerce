@@ -1,0 +1,35 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Dev MyanCommerce",
+            "command": "pnpm run start:dev"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Start MyanCommerce",
+            "command": "pnpm run start"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Test MyanCommerce",
+            "command": "pnpm run test"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Lint MyanCommerce",
+            "command": "pnpm run lint"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Lint:Fix MyanCommerce",
+            "command": "pnpm run lint:fix"
+        }
+    ]
+}
