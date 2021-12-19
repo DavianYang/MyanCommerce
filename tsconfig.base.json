@@ -19,7 +19,7 @@
         "pretty": true,
 
         "strict": true,
-        "strictPropertyInitialization": true,
+        "strictPropertyInitialization": false,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "noImplicitOverride": true,
@@ -29,7 +29,6 @@
 
         "resolveJsonModule": true,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
-
+        "experimentalDecorators": true,
     }
 }

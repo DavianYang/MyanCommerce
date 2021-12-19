@@ -1,12 +1,13 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
+import { Type } from '@myancommerce/common/dist/shared-types';
 import { Logger } from './config/logger/myancommerce.logger';
 import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
 } from './config/myancommerce';
 import { setConfig, getConfig } from './config/config-helpers';
+import { coreEntitiesMap } from './entity/entity';
 
 export type MyanCommerceBootstrapFunction = (
     config: JSON,
@@ -61,6 +62,14 @@ export async function preBootstrapConfig(
         setConfig(userConfig);
     }
 
+    const entities = await getAllEntities();
+
+    setConfig({
+        dbConnectionOptions: {
+            entities,
+        },
+    });
+
     const config = getConfig();
 
     return config;
@@ -81,4 +90,15 @@ function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
         hostname || 'localhost'
     }:${port})`;
     Logger.info(title.padStart(title.length));
+}
+
+/**
+ * Returns an array of core entities and any additional entities defined in plugins.
+ */
+export async function getAllEntities(): Promise<Array<Type<any>>> {
+    const coreEntities = Object.values(coreEntitiesMap) as Array<Type<any>>;
+
+    const allEntities: Array<Type<any>> = coreEntities;
+
+    return allEntities;
 }
