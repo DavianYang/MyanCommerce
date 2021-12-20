@@ -9,6 +9,20 @@ dotenv.config({ path: __dirname + `./.env.${process.env.NODE_ENV}` });
 export const config: MyanCommerceConfig = {
     apiOptions: {
         port: 3000,
+        adminApiPath: 'admin-api',
+        adminApiPlayground: {
+            settings: {
+                'request.credentials': 'include',
+            } as any,
+        }, // turn this off for production
+        adminApiDebug: true, // turn this off for production
+        shopApiPath: 'shop-api',
+        shopApiPlayground: {
+            settings: {
+                'request.credentials': 'include',
+            } as any,
+        }, // turn this off for production
+        shopApiDebug: true, // turn this off for production
     },
     dbConnectionOptions: {
         type: 'postgres',

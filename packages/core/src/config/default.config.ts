@@ -12,6 +12,14 @@ export const defaultConfig: RuntimeMyanCommerceConfig = {
     apiOptions: {
         hostname: '',
         port: 3000,
+        adminApiPath: 'admin-api',
+        adminApiPlayground: false,
+        adminApiDebug: false,
+        adminListQueryLimit: 1000,
+        shopApiPath: 'shop-api',
+        shopApiPlayground: false,
+        shopApiDebug: false,
+        shopListQueryLimit: 100,
         channelTokenKey: 'myancommerce-token',
         cors: {
             origin: true,

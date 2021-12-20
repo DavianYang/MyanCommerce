@@ -28,6 +28,68 @@ export interface ApiOptions {
     port: number;
     /**
      * @description
+     * The path to the admin GraphQL API.
+     *
+     * @default 'admin-api'
+     */
+    adminApiPath?: string;
+    /**
+     * @description
+     * The path to the shop GraphQL API.
+     *
+     * @default 'shop-api'
+     */
+    shopApiPath?: string;
+    /**
+     * @description
+     * The playground config to the admin GraphQL API
+     * [ApolloServer playground](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#constructoroptions-apolloserver).
+     *
+     * @default false
+     */
+    adminApiPlayground?: boolean | any;
+    /**
+     * @description
+     * The playground config to the shop GraphQL API
+     * [ApolloServer playground](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#constructoroptions-apolloserver).
+     *
+     * @default false
+     */
+    shopApiPlayground?: boolean | any;
+    /**
+     * @description
+     * The debug config to the admin GraphQL API
+     * [ApolloServer playground](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#constructoroptions-apolloserver).
+     *
+     * @default false
+     */
+    adminApiDebug?: boolean;
+    /**
+     * @description
+     * The debug config to the shop GraphQL API
+     * [ApolloServer playground](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#constructoroptions-apolloserver).
+     *
+     * @default false
+     */
+    shopApiDebug?: boolean;
+    /**
+     * @description
+     * The maximum number of items that may be returned by a query which returns a `PaginatedList` response. In other words,
+     * this is the upper limit of the `take` input option.
+     *
+     * @default 100
+     */
+    shopListQueryLimit?: number;
+    /**
+     * @description
+     * The maximum number of items that may be returned by a query which returns a `PaginatedList` response. In other words,
+     * this is the upper limit of the `take` input option.
+     *
+     * @default 1000
+     */
+    adminListQueryLimit?: number;
+    /**
+     * @description
      * The name of the property which contains the token of the
      * active channel. This property can be included either in
      * the request header or as a query string.
