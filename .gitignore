@@ -24,7 +24,6 @@ docs/content/graphql-api/*
 !docs/content/graphql-api/_index.md
 !docs/content/graphql-api/shop/_index.md
 !docs/content/graphql-api/admin/_index.md
-.vscode/
 yarn-error.log
 e2e-common/ports.json
 
