@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { RequestContext } from 'api/common/request-context';
-import { Customer } from 'entity/customer/customer.entity';
+import { RequestContext } from '../../api/common/request-context';
+import { Customer } from '../../entity/customer/customer.entity';
 import { UserService } from './user.service';
-import { TransactionalConnection } from 'connection/transactional-connection';
+import { TransactionalConnection } from '../../connection/transactional-connection';
 
 /**
  * @description
@@ -28,7 +28,7 @@ export class CustomerService {
      *
      * This method is intended to be used in admin-created Customer flows.
      */
-    async create(ctx: RequestContext, input) {
+    async create(ctx: RequestContext, input: any) {
         const customer = new Customer(input);
 
         customer.user = await this.userService.createCustomerUser(

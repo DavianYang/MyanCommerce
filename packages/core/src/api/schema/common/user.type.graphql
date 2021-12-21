@@ -1,0 +1,8 @@
+type User implements Node {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    identifier: String!
+    verified: Boolean!
+    lastLogin: DateTime
+}

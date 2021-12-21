@@ -1,0 +1,18 @@
+scalar DateTime
+
+interface Node {
+    id: ID!
+}
+
+interface ErrorResult {
+    errorCode: ErrorCode!
+    message: String!
+}
+
+input CreateCustomerInput {
+    title: String
+    firstName: String!
+    lastName: String!
+    phoneNumber: String
+    emailAddress: String
+}

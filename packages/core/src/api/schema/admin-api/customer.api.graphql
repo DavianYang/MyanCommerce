@@ -1,0 +1,10 @@
+type Query {
+    customer(id: ID!): Customer
+}
+
+type Mutation {
+    "Create a new Customer"
+    createCustomer(input: CreateCustomerInput): CreateCustomerResult!
+}
+
+union CreateCustomerResult = Customer

@@ -8,7 +8,7 @@ import {
     getRepository,
 } from 'typeorm';
 
-import { RequestContext } from 'api/common/request-context';
+import { RequestContext } from '../api/common/request-context';
 
 /**
  * @description

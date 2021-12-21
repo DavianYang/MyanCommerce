@@ -10,11 +10,7 @@ export const config: MyanCommerceConfig = {
     apiOptions: {
         port: 3000,
         adminApiPath: 'admin-api',
-        adminApiPlayground: {
-            settings: {
-                'request.credentials': 'include',
-            } as any,
-        }, // turn this off for production
+        adminApiPlayground: true, // turn this off for production
         adminApiDebug: true, // turn this off for production
         shopApiPath: 'shop-api',
         shopApiPlayground: {
@@ -26,7 +22,7 @@ export const config: MyanCommerceConfig = {
     },
     dbConnectionOptions: {
         type: 'postgres',
-        synchronize: true, // turn off for production
+        synchronize: false, // turn off for production
         logging: false,
         database: process.env.DATABASE_NAME,
         host: process.env.DATABASE_HOST,

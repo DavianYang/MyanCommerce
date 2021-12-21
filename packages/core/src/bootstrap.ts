@@ -84,12 +84,41 @@ function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
         version = 'unknown';
     }
 
-    const { hostname, port } = config.apiOptions;
+    const { hostname, port, shopApiPath, adminApiPath } = config.apiOptions;
 
     const title = `MyanCommerce server (v${version} now running on http://${
         hostname || 'localhost'
     }:${port})`;
-    Logger.info(title.padStart(title.length));
+
+    const apiCliGreetings: Array<readonly [string, string]> = [];
+    const pathToUrl = (path: string) =>
+        `http://${hostname || 'localhost'}:${port}/${path}`;
+    apiCliGreetings.push(['Shop API', pathToUrl(shopApiPath)]);
+    apiCliGreetings.push(['Admin API', pathToUrl(adminApiPath)]);
+
+    const columnGreetings = arrageCliGreetingInColumns(apiCliGreetings);
+
+    const maxLineLength = Math.max(
+        title.length,
+        ...columnGreetings.map(l => l.length),
+    );
+    const titlePadLength =
+        title.length < maxLineLength
+            ? Math.floor((maxLineLength - title.length) / 2)
+            : 0;
+
+    Logger.info(`=`.repeat(maxLineLength));
+    Logger.info(title.padStart(title.length + titlePadLength));
+    Logger.info('-'.repeat(maxLineLength).padStart(titlePadLength));
+    columnGreetings.forEach(line => Logger.info(line));
+    Logger.info(`=`.repeat(maxLineLength));
+}
+
+function arrageCliGreetingInColumns(
+    lines: Array<readonly [string, string]>,
+): string[] {
+    const columnWidth = Math.max(...lines.map(l => l[0].length)) + 2;
+    return lines.map(l => `${(l[0] + ':').padEnd(columnWidth)}${l[1]}`);
 }
 
 /**

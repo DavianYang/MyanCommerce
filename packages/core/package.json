@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
+    "gulp:watch": "gulp -f ./build/gulpfile.ts watch",
     "build": "nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -28,6 +29,7 @@
     "myancommerce"
   ],
   "dependencies": {
+    "@apollo/gateway": "^0.44.1",
     "@myancommerce/common": "workspace:*",
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
@@ -38,9 +40,11 @@
     "chalk": "4.1.2",
     "dotenv": "^10.0.0",
     "graphql": "^15",
+    "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6",
+    "rxjs": "^7",
+    "ts-morph": "^13.0.2",
     "tslib": "^2.3.1",
     "typeorm": "^0.2.41",
     "yn": "^5.0.0"
@@ -53,6 +57,7 @@
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.36",
     "@types/supertest": "^2.0.10",
+    "@types/ws": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
     "eslint": "^7.22.0",

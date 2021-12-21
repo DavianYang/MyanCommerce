@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConnectionModule } from 'connection/connection.module';
+import { ConnectionModule } from '../connection/connection.module';
 
 /**
  * The ServiceCoreModule is imported internally by the ServiceModule. It is arranged in this way so that

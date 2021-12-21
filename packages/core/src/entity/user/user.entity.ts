@@ -19,7 +19,7 @@ export class User extends MyanCommerceEntity {
     @Column({ type: Date, nullable: true })
     deletedAt: Date | null;
 
-    @Column()
+    @Column({ type: String, nullable: true })
     identifier: string;
 
     @Column({ default: false })
