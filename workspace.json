@@ -1,0 +1,7 @@
+{
+    "version": 2,
+    "projects": {
+        "core": "apps/core",
+        "shared": "libs/shared"
+    }
+}
