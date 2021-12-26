@@ -3,9 +3,8 @@
     "compilerOptions": {
         "rootDir": "src",
         "outDir": "dist",
-        "baseUrl": "src",
     },
-    "include": ["src"],
+    "include": ["src", "main.ts"],
     "exclude": ["src/**/*.spec.ts"],
     "references": [
         {

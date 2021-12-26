@@ -7,4 +7,4 @@ type Mutation {
     createCustomer(input: CreateCustomerInput): CreateCustomerResult!
 }
 
-union CreateCustomerResult = Customer
+union CreateCustomerResult = Customer | EmailAddressConflictError

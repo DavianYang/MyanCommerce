@@ -13,6 +13,8 @@ export type MyanCommerceBootstrapFunction = (
     config: JSON,
 ) => Promise<INestApplication>;
 
+declare const module: any;
+
 /**
  * @description
  * Bootstraps the MyanCommerce server. This is the entry point to the application.
@@ -47,6 +49,12 @@ export async function bootstrap(
     app.useLogger(new Logger());
 
     await app.listen(port, hostname || '');
+
+    if (module.hot) {
+        module.hot.accept();
+        module.hot.dispose(() => app.close());
+    }
+
     app.enableShutdownHooks();
     logWelcomeMessage(config);
     return app;

@@ -13,6 +13,7 @@ export class CustomerResolver {
         @Args() args: any,
     ): Promise<any> {
         const { input } = args;
+
         return this.customerService.create(ctx, input);
     }
 }
