@@ -1,5 +1,7 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
+        "rootDir": ".",
         "target": "es2017",
         "module": "commonjs",
         "lib": ["es2017", "esnext.asynciterable"],
@@ -14,7 +16,6 @@
 
         "allowSyntheticDefaultImports": true,
         "importHelpers": true,
-        "composite": true,
 
         "pretty": true,
 
@@ -30,5 +31,11 @@
         "resolveJsonModule": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-    }
+        "baseUrl": ".",
+        "paths": {
+            "@myancommerce/shared": ["libs/shared/src/index.ts"]
+        }
+    },
+    "include": ["apps", "libs"],
+    "exclude": ["node_modules", "tmp"]
 }
