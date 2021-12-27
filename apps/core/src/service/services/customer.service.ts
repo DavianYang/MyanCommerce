@@ -29,6 +29,7 @@ export class CustomerService {
      * This method is intended to be used in admin-created Customer flows.
      */
     async create(ctx: RequestContext, input: any) {
+        console.log(input);
         const customer = new Customer(input);
 
         customer.user = await this.userService.createCustomerUser(
