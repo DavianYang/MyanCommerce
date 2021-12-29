@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConnectionModule } from '../connection/connection.module';
+import { CustomerService } from './services/customer.service';
+import { UserService } from './services/user.service';
+
+const services = [CustomerService, UserService];
 
 /**
  * The ServiceCoreModule is imported internally by the ServiceModule. It is arranged in this way so that
@@ -8,6 +12,8 @@ import { ConnectionModule } from '../connection/connection.module';
  */
 @Module({
     imports: [ConnectionModule],
+    providers: [...services],
+    exports: [...services],
 })
 export class ServiceCoreModule {}
 

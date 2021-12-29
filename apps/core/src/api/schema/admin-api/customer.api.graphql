@@ -4,7 +4,7 @@ type Query {
 
 type Mutation {
     "Create a new Customer"
-    createCustomer(input: CreateCustomerInput): CreateCustomerResult!
+    createCustomer(input: CreateCustomerInput): Customer
 }
 
 union CreateCustomerResult = Customer | EmailAddressConflictError

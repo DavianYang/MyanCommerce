@@ -7,7 +7,7 @@ import {
     RuntimeMyanCommerceConfig,
 } from '../config/myancommerce';
 import { setConfig, getConfig } from '../config/config-helpers';
-import { coreEntitiesMap } from '../entity/entity';
+import { coreEntitiesMap } from '../entity/entities';
 
 export type MyanCommerceBootstrapFunction = (
     config: JSON,
@@ -79,6 +79,7 @@ export async function preBootstrapConfig(
     });
 
     const config = getConfig();
+    console.log(config);
 
     return config;
 }

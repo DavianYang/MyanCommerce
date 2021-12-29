@@ -45,6 +45,7 @@
         "@changesets/cli": "^2.16.0",
         "@commitlint/cli": "^12.1.1",
         "@commitlint/config-conventional": "^12.1.1",
+        "@graphql-codegen/cli": "^2.3.0",
         "@nestjs/schematics": "^8.0.0",
         "@nestjs/testing": "^8.0.0",
         "@nrwl/cli": "13.4.1",

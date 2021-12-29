@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RequestContext } from '../../api/common/request-context';
 import { Customer } from '../../entity/customer/customer.entity';
-import { UserService } from './user.service';
 import { TransactionalConnection } from '../../connection/transactional-connection';
 
 /**
@@ -12,10 +11,7 @@ import { TransactionalConnection } from '../../connection/transactional-connecti
  */
 @Injectable()
 export class CustomerService {
-    constructor(
-        private connection: TransactionalConnection,
-        private userService: UserService,
-    ) {}
+    constructor(private connection: TransactionalConnection) {}
 
     /**
      * @description
@@ -29,18 +25,11 @@ export class CustomerService {
      * This method is intended to be used in admin-created Customer flows.
      */
     async create(ctx: RequestContext, input: any) {
-        console.log(input);
         const customer = new Customer(input);
-
-        customer.user = await this.userService.createCustomerUser(
-            ctx,
-            input.emailAddress,
-        );
-
         const createdCustomer = await this.connection
             .getRepository(ctx, Customer)
             .save(customer);
-
+        console.log('created customer', createdCustomer);
         return createdCustomer;
     }
 }

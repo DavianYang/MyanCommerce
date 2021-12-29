@@ -22,7 +22,7 @@ export const config: MyanCommerceConfig = {
     },
     dbConnectionOptions: {
         type: 'postgres',
-        synchronize: false, // turn off for production
+        synchronize: true, // turn off for production
         logging: false,
         database: process.env.DATABASE_NAME,
         host: process.env.DATABASE_HOST,

@@ -6,9 +6,11 @@ import {
     ObjectType,
     Repository,
     getRepository,
+    EntityManager,
 } from 'typeorm';
 
 import { RequestContext } from '../api/common/request-context';
+import { TRANSACTION_MANAGER_KEY } from '../common/constants';
 
 /**
  * @description
@@ -65,11 +67,26 @@ export class TransactionalConnection {
         maybeTarget?: ObjectType<Entity> | EntitySchema<Entity> | string,
     ): Repository<Entity> {
         if (ctxOrTarget instanceof RequestContext) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            return getRepository(maybeTarget!);
+            const transactionManager = this.getTransactionManager(ctxOrTarget);
+            if (
+                transactionManager &&
+                maybeTarget &&
+                !transactionManager.queryRunner?.isReleased
+            ) {
+                return transactionManager.getRepository(maybeTarget);
+            } else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return getRepository(maybeTarget!);
+            }
         } else {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             return getRepository(ctxOrTarget ?? maybeTarget!);
         }
+    }
+
+    private getTransactionManager(
+        ctx: RequestContext,
+    ): EntityManager | undefined {
+        return (ctx as any)(TRANSACTION_MANAGER_KEY);
     }
 }

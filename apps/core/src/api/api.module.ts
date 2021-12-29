@@ -15,6 +15,7 @@ import { AdminAPIModule } from './api-internal-modules';
     imports: [
         ServiceModule,
         ConnectionModule.forRoot(),
+        AdminAPIModule,
         configureGraphQLModule(configService => ({
             apiType: 'admin',
             apiPath: configService.apiOptions.adminApiPath,
