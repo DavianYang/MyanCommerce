@@ -1,7 +1,10 @@
 import { isClassInstance, isObject } from '@myancommerce/shared';
 import { simpleDeepClone } from '@myancommerce/shared';
 
-import { MyanCommerceConfig, PartialMyanCommerceConfig } from './myancommerce';
+import {
+    MyanCommerceConfig,
+    PartialMyanCommerceConfig,
+} from './config.interface';
 /**
  * @description
  * Performs a deep merge of two MyanCommerceConfig objects. Unlike `Object.assign()` the `target` object is

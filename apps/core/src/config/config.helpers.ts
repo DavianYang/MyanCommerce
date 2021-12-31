@@ -1,9 +1,9 @@
 import { defaultConfig } from './default.config';
-import { mergeConfig } from './merge.config';
+import { mergeConfig } from './merge-configs';
 import {
     PartialMyanCommerceConfig,
     RuntimeMyanCommerceConfig,
-} from './myancommerce';
+} from './config.interface';
 
 let activeConfig = defaultConfig;
 

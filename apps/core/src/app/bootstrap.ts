@@ -5,8 +5,8 @@ import { Logger } from '../config/logger/myancommerce.logger';
 import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
-} from '../config/myancommerce';
-import { setConfig, getConfig } from '../config/config-helpers';
+} from '../config/config.interface';
+import { setConfig, getConfig } from '../config/config.helpers';
 import { coreEntitiesMap } from '../entity/entities';
 
 export type MyanCommerceBootstrapFunction = (

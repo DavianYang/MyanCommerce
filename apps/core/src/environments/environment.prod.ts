@@ -1,6 +1,6 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
-import { MyanCommerceConfig } from '../config/myancommerce';
+import { MyanCommerceConfig } from '../config/config.interface';
 import { DefaultLogger } from '../config/logger/default.logger';
 import { LogLevel } from '../config/logger/myancommerce.logger';
 

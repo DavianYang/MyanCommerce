@@ -1,10 +1,10 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
-import { MyanCommerceConfig } from '../config/myancommerce';
+import { MyanCommerceConfig } from '../config/config.interface';
 import { DefaultLogger } from '../config/logger/default.logger';
 import { LogLevel } from '../config/logger/myancommerce.logger';
 
-dotenv.config({ path: __dirname + `./.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: __dirname + `./.env` });
 
 export const config: MyanCommerceConfig = {
     apiOptions: {
