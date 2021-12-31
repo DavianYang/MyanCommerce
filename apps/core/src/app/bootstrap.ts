@@ -79,7 +79,6 @@ export async function preBootstrapConfig(
     });
 
     const config = getConfig();
-    console.log(config);
 
     return config;
 }

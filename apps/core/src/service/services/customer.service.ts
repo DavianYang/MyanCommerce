@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { RequestContext } from '../../api/common/request-context';
 import { Customer } from '../../entity/customer/customer.entity';
 import { TransactionalConnection } from '../../connection/transactional-connection';
+import { UserService } from './user.service';
 
 /**
  * @description
@@ -11,7 +12,10 @@ import { TransactionalConnection } from '../../connection/transactional-connecti
  */
 @Injectable()
 export class CustomerService {
-    constructor(private connection: TransactionalConnection) {}
+    constructor(
+        private connection: TransactionalConnection,
+        private userService: UserService,
+    ) {}
 
     /**
      * @description
@@ -26,10 +30,16 @@ export class CustomerService {
      */
     async create(ctx: RequestContext, input: any) {
         const customer = new Customer(input);
+
+        customer.user = await this.userService.createCustomerUser(
+            ctx,
+            input.emailAddress,
+        );
+
         const createdCustomer = await this.connection
             .getRepository(ctx, Customer)
             .save(customer);
-        console.log('created customer', createdCustomer);
+
         return createdCustomer;
     }
 }

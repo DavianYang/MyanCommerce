@@ -1,7 +1,8 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { DeepPartial } from '@myancommerce/shared';
 import { MyanCommerceEntity } from '../base/base.entity';
+import { User } from '../user/user.entity';
 
 /**
  * @description
@@ -31,4 +32,8 @@ export class Customer extends MyanCommerceEntity {
 
     @Column()
     emailAddress: string;
+
+    @OneToOne(() => User)
+    @JoinColumn()
+    user?: User;
 }

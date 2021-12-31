@@ -2,14 +2,6 @@ type Query {
     customer(id: ID!): Customer
 }
 
-input CreateCustomerInput {
-    title: String
-    firstName: String!
-    lastName: String!
-    phoneNumber: String
-    emailAddress: String
-}
-
 type Mutation {
     "Create a new Customer"
     createCustomer(input: CreateCustomerInput!): Customer
