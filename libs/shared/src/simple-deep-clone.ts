@@ -1,4 +1,4 @@
-import { isClassInstance } from './shared-utils';
+import { isClassInstance } from './utils/shared-utils';
 
 /**
  * An extremely fast function for deep-cloning an object which only contains simple
