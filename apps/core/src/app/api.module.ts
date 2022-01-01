@@ -2,9 +2,9 @@ import path from 'path';
 import { Module } from '@nestjs/common';
 
 import { ConnectionModule } from '../connection/connection.module';
-import { ServiceModule } from '../service/service.module';
-import { configureGraphQLModule } from './config/configure-graphql-module';
-import { AdminAPIModule } from './api-internal-modules';
+import { ServiceModule } from './service.module';
+import { configureGraphQLModule } from '../api/config/configure-graphql-module';
+import { AdminAPIModule } from '../api/api-internal-modules';
 
 /**
  * The ApiModule is responsible for the public API of the application. This is where requests
@@ -21,8 +21,8 @@ import { AdminAPIModule } from './api-internal-modules';
             apiPath: configService.apiOptions.adminApiPath,
             playground: configService.apiOptions.adminApiPlayground,
             debug: configService.apiOptions.adminApiDebug,
-            typePaths: ['customer', 'user', 'admin-api', 'common'].map(p =>
-                path.join(__dirname, 'api', 'schema', p, '*.graphql'),
+            typePaths: ['customer', 'user', 'common'].map(p =>
+                path.join(__dirname, 'graphql', p, '*.graphql'),
             ),
             resolverModule: AdminAPIModule,
         })),

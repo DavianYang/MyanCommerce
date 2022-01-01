@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { DeepPartial } from '@myancommerce/shared';
-import { MyanCommerceEntity } from '../base/base.entity';
-import { User } from '../user/user.entity';
+import { MyanCommerceEntity } from '../../entity/base.entity';
+import { User } from '../../user/entities/user.entity';
 
 /**
  * @description

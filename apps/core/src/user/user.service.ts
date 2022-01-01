@@ -1,8 +1,8 @@
 import { ID } from '@myancommerce/shared';
 import { Injectable } from '@nestjs/common';
-import { RequestContext } from '../../api/common/request-context';
-import { TransactionalConnection } from '../../connection/transactional-connection';
-import { User } from '../../entity/user/user.entity';
+import { RequestContext } from '../api/common/request-context';
+import { TransactionalConnection } from '../connection/transactional-connection';
+import { User } from './entities/user.entity';
 
 /**
  * @description

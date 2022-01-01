@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '../config/config.module';
 import { ConnectionModule } from '../connection/connection.module';
-import { ServiceModule } from '../service/service.module';
+import { ServiceModule } from '../app/service.module';
 
-import { CustomerResolver } from './resolvers/admin/customer.resolver';
+import { CustomerResolver } from '../customer/customer.resolver';
 
 const adminResolvers = [CustomerResolver];
 

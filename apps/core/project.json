@@ -10,7 +10,7 @@
                 "outputPath": "dist/apps/core",
                 "main": "apps/core/src/main.ts",
                 "tsConfig": "apps/core/tsconfig.app.json",
-                "assets": ["apps/core/src/api/schema"]
+                "assets": ["apps/core/src/graphql"]
             },
             "configurations": {
                 "production": {

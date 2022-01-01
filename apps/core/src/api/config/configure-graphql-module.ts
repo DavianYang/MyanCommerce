@@ -6,7 +6,7 @@ import {
 } from '@nestjs/graphql';
 import { GraphQLSchema, buildSchema, printSchema } from 'graphql';
 import { ConfigModule } from '../../config/config.module';
-import { ServiceModule } from '../../service/service.module';
+import { ServiceModule } from '../../app/service.module';
 import { ConfigService } from '../../config/config.service';
 
 export interface GraphQLApiOptions {

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConnectionModule } from '../connection/connection.module';
-import { CustomerService } from './services/customer.service';
-import { UserService } from './services/user.service';
+import { CustomerService } from '../customer/customer.service';
+import { UserService } from '../user/user.service';
 
 const services = [CustomerService, UserService];
 

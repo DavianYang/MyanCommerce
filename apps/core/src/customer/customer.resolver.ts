@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { RequestContext } from '../../common/request-context';
-import { Ctx } from '../../decorators/request-context.decorator';
-import { CustomerService } from '../../../service/services/customer.service';
+import { RequestContext } from '../api/common/request-context';
+import { Ctx } from '../api/decorators/request-context.decorator';
+import { CustomerService } from './customer.service';
 
 @Resolver('Customer')
 export class CustomerResolver {

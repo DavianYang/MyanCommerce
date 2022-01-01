@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { MyanCommerceEntity } from '../base/base.entity';
+import { MyanCommerceEntity } from '../../entity/base.entity';
 
 import { DeepPartial } from '@myancommerce/shared';
 
