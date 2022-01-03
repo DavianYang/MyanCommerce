@@ -21,7 +21,7 @@ import { AdminAPIModule } from '../api/api-internal-modules';
             apiPath: configService.apiOptions.adminApiPath,
             playground: configService.apiOptions.adminApiPlayground,
             debug: configService.apiOptions.adminApiDebug,
-            typePaths: ['customer', 'user', 'common'].map(p =>
+            typePaths: ['customer', 'user', 'role', 'common'].map(p =>
                 path.join(__dirname, 'graphql', p, '*.graphql'),
             ),
             resolverModule: AdminAPIModule,

@@ -4,8 +4,9 @@ import { ConnectionModule } from '../connection/connection.module';
 import { ServiceModule } from '../app/service.module';
 
 import { CustomerResolver } from '../customer/customer.resolver';
+import { RoleResolver } from '../role/role.resolver';
 
-const adminResolvers = [CustomerResolver];
+const adminResolvers = [CustomerResolver, RoleResolver];
 
 /**
  * The internal module containing some shared providers used by more than

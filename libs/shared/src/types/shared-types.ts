@@ -25,6 +25,17 @@ export type DeepPartial<T> = {
  * An entity ID. Depending on the configured {@link EntityIdStrategy}, it will be either
  * a `string` or a `number`;
  *
- * @docsCategory common
+ * @docsCategory shared
  */
 export type ID = string | number;
+
+/**
+ * @description
+ * A type describing the shape of a paginated list response.
+ *
+ * @docsCategory shared
+ */
+export type PaginatedList<T> = {
+    items: T[];
+    totalItems: number;
+};
