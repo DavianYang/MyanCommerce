@@ -8,3 +8,13 @@ interface ErrorResult {
     errorCode: ErrorCode!
     message: String!
 }
+
+interface PaginatedList {
+    items: [Node!]!
+    totalItems: Int!
+}
+
+type DeletionResponse {
+    result: DeletionResult!
+    message: String
+}
