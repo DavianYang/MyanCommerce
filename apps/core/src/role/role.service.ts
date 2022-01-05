@@ -1,3 +1,4 @@
+import { DeletionResponse, DeletionResult } from '@myancommerce/generated';
 import { CUSTOMER_ROLE_CODE, ID, PaginatedList } from '@myancommerce/shared';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { EntityNotFoundError } from 'typeorm';
@@ -50,7 +51,7 @@ export class RoleService {
         return updatedRole;
     }
 
-    async delete(ctx: RequestContext, id: ID): Promise<any> {
+    async delete(ctx: RequestContext, id: ID): Promise<DeletionResponse> {
         const role = await this.findOne(ctx, id);
         if (!role) {
             throw new EntityNotFoundError('Role', role);
@@ -59,7 +60,7 @@ export class RoleService {
         await this.connection.getRepository(ctx, Role).remove(role);
 
         return {
-            result: 'DELETED',
+            result: DeletionResult.Deleted,
         };
     }
 

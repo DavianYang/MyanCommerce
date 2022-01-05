@@ -4,6 +4,12 @@ import { Ctx } from '../api/decorators/request-context.decorator';
 import { RoleService } from './role.service';
 import { Role } from './entities/role.entity';
 import { ID, PaginatedList } from '@myancommerce/shared';
+import {
+    CreateRoleInput,
+    DeletionResponse,
+    QueryRoleArgs,
+    UpdateRoleInput,
+} from '@myancommerce/generated';
 
 @Resolver('Role')
 export class RoleResolver {
@@ -17,7 +23,7 @@ export class RoleResolver {
     @Query()
     role(
         @Ctx() ctx: RequestContext,
-        @Args() args: any,
+        @Args() args: QueryRoleArgs,
     ): Promise<Role | undefined> {
         return this.roleService.findOne(ctx, args.id);
     }
@@ -25,7 +31,7 @@ export class RoleResolver {
     @Mutation()
     createRole(
         @Ctx() ctx: RequestContext,
-        @Args('input') input: any,
+        @Args('input') input: CreateRoleInput,
     ): Promise<Role> {
         return this.roleService.create(ctx, input);
     }
@@ -33,13 +39,16 @@ export class RoleResolver {
     @Mutation()
     updateRole(
         @Ctx() ctx: RequestContext,
-        @Args('input') input: any,
+        @Args('input') input: UpdateRoleInput,
     ): Promise<Role> {
         return this.roleService.update(ctx, input);
     }
 
     @Mutation()
-    deleteRole(@Ctx() ctx: RequestContext, @Args('id') id: ID): Promise<any> {
+    deleteRole(
+        @Ctx() ctx: RequestContext,
+        @Args('id') id: ID,
+    ): Promise<DeletionResponse> {
         return this.roleService.delete(ctx, id);
     }
 }

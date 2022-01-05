@@ -1,6 +1,6 @@
 type Query {
     roles: RoleList!
-    role(id: ID): Role
+    role(id: ID!): Role
 }
 
 type Mutation {
