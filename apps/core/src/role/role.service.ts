@@ -1,11 +1,23 @@
 import { DeletionResponse, DeletionResult } from '@myancommerce/generated';
-import { CUSTOMER_ROLE_CODE, ID, PaginatedList } from '@myancommerce/shared';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { EntityNotFoundError } from 'typeorm';
+import {
+    CUSTOMER_ROLE_CODE,
+    ID,
+    PaginatedList,
+    SUPERADMIN_ROLE_CODE,
+} from '@myancommerce/shared';
+import { Injectable } from '@nestjs/common';
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
+import { EntityNotFoundError } from '../error/entitiy-not-found.error';
+import { InternalServerError } from '../error/internal-server.error';
 import { Role } from './entities/role.entity';
 
+/**
+ * @description
+ * Contains methods relating to {@link Role} entities.
+ *
+ * @docsCategory services
+ */
 @Injectable()
 export class RoleService {
     constructor(private connection: TransactionalConnection) {}
@@ -54,7 +66,7 @@ export class RoleService {
     async delete(ctx: RequestContext, id: ID): Promise<DeletionResponse> {
         const role = await this.findOne(ctx, id);
         if (!role) {
-            throw new EntityNotFoundError('Role', role);
+            throw new EntityNotFoundError('Role', id);
         }
 
         await this.connection.getRepository(ctx, Role).remove(role);
@@ -71,8 +83,21 @@ export class RoleService {
     getCustomerRole(): Promise<Role> {
         return this.getRoleByCode(CUSTOMER_ROLE_CODE).then(role => {
             if (!role) {
-                throw new InternalServerErrorException(
-                    'error.customer-role-not-found',
+                throw new InternalServerError('error.customer-role-not-found');
+            }
+            return role;
+        });
+    }
+
+    /**
+     * @description
+     * Returns SuperAdmin Role which is prior defined by special code in MyanCommerce
+     */
+    getSuperAdminRole(): Promise<Role> {
+        return this.getRoleByCode(SUPERADMIN_ROLE_CODE).then(role => {
+            if (!role) {
+                throw new InternalServerError(
+                    'error.super-admin-role-not-found',
                 );
             }
             return role;
