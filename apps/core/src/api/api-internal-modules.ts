@@ -3,10 +3,11 @@ import { ConfigModule } from '../config/config.module';
 import { ConnectionModule } from '../connection/connection.module';
 import { ServiceModule } from '../app/service.module';
 
+import { AdministratorResolver } from '../administrator/administrator.resolver';
 import { CustomerResolver } from '../customer/customer.resolver';
 import { RoleResolver } from '../role/role.resolver';
 
-const adminResolvers = [CustomerResolver, RoleResolver];
+const adminResolvers = [AdministratorResolver, CustomerResolver, RoleResolver];
 
 /**
  * The internal module containing some shared providers used by more than
