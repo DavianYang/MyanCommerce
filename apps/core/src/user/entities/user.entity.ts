@@ -1,7 +1,8 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { MyanCommerceEntity } from '../../entity/base.entity';
 
 import { DeepPartial } from '@myancommerce/shared';
+import { Role } from '../../role/entities/role.entity';
 
 /**
  * @description
@@ -27,4 +28,8 @@ export class User extends MyanCommerceEntity {
 
     @Column({ type: Date, nullable: true })
     lastLogin: Date | null;
+
+    @ManyToMany(() => Role)
+    @JoinTable()
+    roles: Role[];
 }

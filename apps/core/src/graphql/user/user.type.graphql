@@ -4,5 +4,6 @@ type User implements Node {
     updatedAt: DateTime!
     identifier: String!
     verified: Boolean!
+    roles: [Role!]!
     lastLogin: DateTime
 }
