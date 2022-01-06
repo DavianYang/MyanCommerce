@@ -13,6 +13,30 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Administrator = Node & {
+  __typename?: 'Administrator';
+  createdAt: Scalars['DateTime'];
+  emailAddress: Scalars['String'];
+  firstName: Scalars['String'];
+  id: Scalars['ID'];
+  lastName: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+  user: User;
+};
+
+export type AdministratorList = PaginatedList & {
+  __typename?: 'AdministratorList';
+  items: Array<Administrator>;
+  totalItems: Scalars['Int'];
+};
+
+export type CreateAdministratorInput = {
+  emailAddress: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  roleIds: Array<Scalars['ID']>;
+};
+
 export type CreateCustomerInput = {
   emailAddress?: InputMaybe<Scalars['String']>;
   firstName: Scalars['String'];
@@ -72,14 +96,25 @@ export type ErrorResult = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create a new Administrator */
+  createAdministrator: Administrator;
   /** Create a new Customer */
   createCustomer?: Maybe<Customer>;
   /** Create a new Role */
   createRole: Role;
+  /** Delete an existing Administrator */
+  deleteAdministrator: DeletionResponse;
   /** Delete an existing Role */
   deleteRole: DeletionResponse;
+  /** Update an existing Administrator */
+  updateAdministrator: Administrator;
   /** Update an existing Role */
   updateRole: Role;
+};
+
+
+export type MutationCreateAdministratorArgs = {
+  input: CreateAdministratorInput;
 };
 
 
@@ -93,8 +128,18 @@ export type MutationCreateRoleArgs = {
 };
 
 
+export type MutationDeleteAdministratorArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationDeleteRoleArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationUpdateAdministratorArgs = {
+  input: UpdateAdministratorInput;
 };
 
 
@@ -113,9 +158,17 @@ export type PaginatedList = {
 
 export type Query = {
   __typename?: 'Query';
+  activeAdministrator?: Maybe<Administrator>;
+  administrator?: Maybe<Administrator>;
+  administrators: AdministratorList;
   customer?: Maybe<Customer>;
   role?: Maybe<Role>;
   roles: RoleList;
+};
+
+
+export type QueryAdministratorArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -141,6 +194,14 @@ export type RoleList = PaginatedList & {
   totalItems: Scalars['Int'];
 };
 
+export type UpdateAdministratorInput = {
+  emailAddress?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastName?: InputMaybe<Scalars['String']>;
+  roleIds: Array<Scalars['ID']>;
+};
+
 export type UpdateRoleInput = {
   code?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
@@ -153,6 +214,7 @@ export type User = Node & {
   id: Scalars['ID'];
   identifier: Scalars['String'];
   lastLogin?: Maybe<Scalars['DateTime']>;
+  roles: Array<Role>;
   updatedAt: Scalars['DateTime'];
   verified: Scalars['Boolean'];
 };
