@@ -1,0 +1,25 @@
+{
+    "root": "apps/testing",
+    "sourceRoot": "apps/testing/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/testing",
+                "main": "apps/testing/src/index.ts",
+                "tsConfig": "apps/testing/tsconfig.app.json",
+                "assets": ["apps/testing/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/testing/**/*.ts"]
+            }
+        }
+    },
+    "tags": []
+}
