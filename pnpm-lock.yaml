@@ -14,7 +14,7 @@ importers:
       '@nestjs/graphql': 9.1.2
       '@nestjs/platform-express': 7.6.18
       '@nestjs/schematics': 8.0.5
-      '@nestjs/testing': 8.2.4
+      '@nestjs/testing': 8.2.5
       '@nestjs/typeorm': 8.0.2
       '@nrwl/cli': 13.4.4
       '@nrwl/eslint-plugin-nx': 13.4.4
@@ -65,10 +65,10 @@ importers:
       '@apollo/gateway': 0.44.1_graphql@15.8.0
       '@nestjs/common': 7.6.18_88a789cb3f20cca25c3f70fe96f41643
       '@nestjs/core': 7.6.18_6b3555cc21175003adea857855cb8380
-      '@nestjs/graphql': 9.1.2_59734983cec7690c07fcdac53d7b0f33
+      '@nestjs/graphql': 9.1.2_f48922ee75739e43231fb9bc4f186b78
       '@nestjs/platform-express': 7.6.18_2664420588e0901c7943acb4693cbaf4
       '@nestjs/typeorm': 8.0.2_d64761c4abc1dd90fdf49f2275fb65ba
-      apollo-server-express: 3.5.0_graphql@15.8.0
+      apollo-server-express: 3.6.1_graphql@15.8.0
       chalk: 4.1.2
       dotenv: 10.0.0
       graphql: 15.8.0
@@ -86,7 +86,7 @@ importers:
       '@commitlint/config-conventional': 12.1.4
       '@graphql-codegen/cli': 2.3.1_graphql@15.8.0+typescript@4.5.4
       '@nestjs/schematics': 8.0.5_typescript@4.5.4
-      '@nestjs/testing': 8.2.4_9cd0f963ae6f35bf288217e4f1c45cb4
+      '@nestjs/testing': 8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4
       '@nrwl/cli': 13.4.4
       '@nrwl/eslint-plugin-nx': 13.4.4_668410e98b7fd86362baa7f20949d5db
       '@nrwl/jest': 13.4.4
@@ -1996,8 +1996,8 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/testing/8.2.4_9cd0f963ae6f35bf288217e4f1c45cb4:
-    resolution: {integrity: sha512-kRpLbb/y4TFzqP7iuQd3qiCg+auwdnj4qWeBDIW5ugqdnfCjgk/TzlbeTZF08mPYyjvHscg+0bMHri6r0Pm3sQ==}
+  /@nestjs/testing/8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4:
+    resolution: {integrity: sha512-M0uGfmPb5hc3k8jEHW2/Ilia+BYnxZoZ4MmqrWlLND/zTNSSJZJXUISLDtukka9/GAzGTlyQ3yQJMGL+GjnqXA==}
     peerDependencies:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
