@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@apollo/gateway': ^0.44.1
+      '@apollo/gateway': 0.44.1
       '@changesets/cli': ^2.16.0
       '@commitlint/cli': ^12.1.1
       '@commitlint/config-conventional': ^12.1.1
@@ -29,7 +29,7 @@ importers:
       '@types/jest': ^26.0.22
       '@typescript-eslint/eslint-plugin': ^4.31.0
       '@typescript-eslint/parser': ^4.33.0
-      apollo-server-express: ^3.5.0
+      apollo-server-express: 3.6.1
       chalk: 4.1.2
       concurrently: ^6.2.0
       cross-env: ^7.0.3
@@ -65,10 +65,10 @@ importers:
       '@apollo/gateway': 0.44.1_graphql@15.8.0
       '@nestjs/common': 7.6.18_ad16f1f28877c5242670873e13562245
       '@nestjs/core': 7.6.18_9c33563c8577d8506c63ecc8818f31a3
-      '@nestjs/graphql': 9.1.2_59734983cec7690c07fcdac53d7b0f33
+      '@nestjs/graphql': 9.1.2_f48922ee75739e43231fb9bc4f186b78
       '@nestjs/platform-express': 7.6.18_2664420588e0901c7943acb4693cbaf4
       '@nestjs/typeorm': 8.0.2_698eed60c11f3ae4c87f4f36a5a5b530
-      apollo-server-express: 3.5.0_graphql@15.8.0
+      apollo-server-express: 3.6.1_graphql@15.8.0
       chalk: 4.1.2
       dotenv: 10.0.0
       graphql: 15.8.0
@@ -94,7 +94,7 @@ importers:
       '@nrwl/linter': 13.4.1_typescript@4.4.4
       '@nrwl/nest': 13.4.1_prettier@2.4.1+typescript@4.4.4
       '@nrwl/node': 13.4.1_prettier@2.4.1+typescript@4.4.4
-      '@nrwl/nx-cloud': 13.0.1
+      '@nrwl/nx-cloud': 13.0.2
       '@nrwl/tao': 13.4.1
       '@nrwl/workspace': 13.4.1_prettier@2.4.1+typescript@4.4.4
       '@types/jest': 26.0.24
@@ -170,7 +170,7 @@ packages:
     dependencies:
       '@apollo/subgraph': 0.1.5_graphql@15.8.0
       apollo-graphql: 0.9.5_graphql@15.8.0
-      apollo-server-types: 3.4.0_graphql@15.8.0
+      apollo-server-types: 3.5.0_graphql@15.8.0
       graphql: 15.8.0
       lodash.xorby: 4.7.0
     dev: false
@@ -189,10 +189,10 @@ packages:
       apollo-graphql: 0.9.5_graphql@15.8.0
       apollo-reporting-protobuf: 3.2.0
       apollo-server-caching: 3.3.0
-      apollo-server-core: 3.5.0_graphql@15.8.0
+      apollo-server-core: 3.6.1_graphql@15.8.0
       apollo-server-env: 4.2.0
       apollo-server-errors: 3.3.0_graphql@15.8.0
-      apollo-server-types: 3.4.0_graphql@15.8.0
+      apollo-server-types: 3.5.0_graphql@15.8.0
       graphql: 15.8.0
       loglevel: 1.8.0
       make-fetch-happen: 8.0.14
@@ -916,6 +916,7 @@ packages:
   /@commitlint/load/15.0.0:
     resolution: {integrity: sha512-Ak1YPeOhvxmY3ioe0o6m1yLGvUAYb4BdfGgShU8jiTCmU3Mnmms0Xh/kfQz8AybhezCC3AmVTyBLaBZxOHR8kg==}
     engines: {node: '>=v12'}
+    requiresBuild: true
     dependencies:
       '@commitlint/execute-rule': 15.0.0
       '@commitlint/resolve-extends': 15.0.0
@@ -1047,7 +1048,7 @@ packages:
     engines: {node: ^10.12.0 || >=12.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.2
+      debug: 4.3.3
       espree: 7.3.1
       globals: 13.12.0
       ignore: 4.0.6
@@ -1464,7 +1465,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.2
+      debug: 4.3.3
       minimatch: 3.0.4
     transitivePeerDependencies:
       - supports-color
@@ -1510,7 +1511,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       chalk: 4.1.2
       jest-message-util: 26.6.2
       jest-util: 26.6.2
@@ -1575,7 +1576,7 @@ packages:
     dependencies:
       '@jest/fake-timers': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       jest-mock: 26.6.2
     dev: true
 
@@ -1585,7 +1586,7 @@ packages:
     dependencies:
       '@jest/fake-timers': 27.4.2
       '@jest/types': 27.4.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       jest-mock: 27.4.2
     dev: true
 
@@ -1595,7 +1596,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       '@sinonjs/fake-timers': 6.0.1
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       jest-message-util: 26.6.2
       jest-mock: 26.6.2
       jest-util: 26.6.2
@@ -1607,7 +1608,7 @@ packages:
     dependencies:
       '@jest/types': 27.4.2
       '@sinonjs/fake-timers': 8.1.0
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       jest-message-util: 27.4.2
       jest-mock: 27.4.2
       jest-util: 27.4.2
@@ -1841,7 +1842,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.3
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       '@types/yargs': 16.0.4
       chalk: 4.1.2
 
@@ -1947,7 +1948,7 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /@nestjs/graphql/9.1.2_59734983cec7690c07fcdac53d7b0f33:
+  /@nestjs/graphql/9.1.2_f48922ee75739e43231fb9bc4f186b78:
     resolution: {integrity: sha512-ncxmkKmrswnHJ+jLgc6tbkRET6HAyC3gK6WKt1CdPLjvMnXVpFVpyQMFSenNXxAndInw9IgaiSyiJFdRYZVD/w==}
     peerDependencies:
       '@apollo/federation': ^0.26.0 || ^0.27.0 || ^0.29.0 || ^0.33.0
@@ -1984,7 +1985,7 @@ packages:
       '@nestjs/common': 7.6.18_ad16f1f28877c5242670873e13562245
       '@nestjs/core': 7.6.18_9c33563c8577d8506c63ecc8818f31a3
       '@nestjs/mapped-types': 1.0.0_f68191e5ff76da46b0e7001b964108a3
-      apollo-server-express: 3.5.0_graphql@15.8.0
+      apollo-server-express: 3.6.1_graphql@15.8.0
       chokidar: 3.5.2
       fast-glob: 3.2.7
       graphql: 15.8.0
@@ -2342,8 +2343,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/nx-cloud/13.0.1:
-    resolution: {integrity: sha512-xjsGTOoYR8SXdca6qRLrxLa3mySLXFOR9+sVA6+ODVXKYZsKJOoxAJNAQO46Pvi4YtKn2woxFJDFFB/lTFWpqQ==}
+  /@nrwl/nx-cloud/13.0.2:
+    resolution: {integrity: sha512-Y29iEks9Yb7VoY1RsuoCGsFtbnWP3J256haqTDx/SMYNYJBuZ0p7Cgg9EBjf5AHusnqT/YxE47iuv6CKNzd7Wg==}
     hasBin: true
     dependencies:
       axios: 0.21.4
@@ -2610,7 +2611,7 @@ packages:
   /@types/accepts/1.3.5:
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: false
 
   /@types/babel__core/7.1.16:
@@ -2642,17 +2643,17 @@ packages:
       '@babel/types': 7.16.0
     dev: true
 
-  /@types/body-parser/1.19.1:
-    resolution: {integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==}
+  /@types/body-parser/1.19.2:
+    resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: false
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: false
 
   /@types/cors/2.8.12:
@@ -2677,10 +2678,10 @@ packages:
     resolution: {integrity: sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw==}
     dev: true
 
-  /@types/express-serve-static-core/4.17.24:
-    resolution: {integrity: sha512-3UJuW+Qxhzwjq3xhwXm2onQcFHn76frIYVbTu+kn24LFxI+dEhdfISDFovPB8VpEgW8oQCTpRuCe+0zJxB7NEA==}
+  /@types/express-serve-static-core/4.17.27:
+    resolution: {integrity: sha512-e/sVallzUTPdyOTiqi8O8pMdBBphscvI6E4JYaKlja4Lm+zh7UFSSdW5VMkRbhDtmrONqOUHOXRguPsDckzxNA==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: false
@@ -2688,8 +2689,8 @@ packages:
   /@types/express/4.17.13:
     resolution: {integrity: sha512-6bSZTPaTIACxn48l50SR+axgrqm6qXFIxrdAKaG6PaJk3+zuUr35hBlgT7vOmJcum+OEaIBLtHV/qloEAFITeA==}
     dependencies:
-      '@types/body-parser': 1.19.1
-      '@types/express-serve-static-core': 4.17.24
+      '@types/body-parser': 1.19.2
+      '@types/express-serve-static-core': 4.17.27
       '@types/qs': 6.9.7
       '@types/serve-static': 1.13.10
     dev: false
@@ -2697,7 +2698,7 @@ packages:
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.3:
@@ -2757,7 +2758,7 @@ packages:
   /@types/node-fetch/2.5.12:
     resolution: {integrity: sha512-MKgC4dlq4kKNa/mYrwpKfzQMB5X3ee5U6fSprkKpToBqBmX4nFZL9cW5jl6sWn+xpRJ7ypWh2yyqqr8UUCstSw==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       form-data: 3.0.1
     dev: false
 
@@ -2774,7 +2775,6 @@ packages:
 
   /@types/node/17.0.5:
     resolution: {integrity: sha512-w3mrvNXLeDYV1GKTZorGJQivK6XLCoGwpnyJFbJVK/aTBQUxOCaa/GlFAAN3OTDFcb7h5tiFG+YXCO2By+riZw==}
-    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2804,7 +2804,7 @@ packages:
     resolution: {integrity: sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: false
 
   /@types/source-list-map/0.1.2:
@@ -2818,7 +2818,7 @@ packages:
   /@types/webpack-sources/0.1.9:
     resolution: {integrity: sha512-bvzMnzqoK16PQIC8AYHNdW45eREJQMd6WG/msQWX5V2+vZmODCOPb4TJcbgRljTZZTwTM4wUMcsI8FftNA7new==}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       '@types/source-list-map': 0.1.2
       source-map: 0.6.1
     dev: true
@@ -3402,6 +3402,12 @@ packages:
       '@apollo/protobufjs': 1.2.2
     dev: false
 
+  /apollo-reporting-protobuf/3.3.0:
+    resolution: {integrity: sha512-51Jwrg0NvHJfKz7TIGU8+Os3rUAqWtXeKRsRtKYtTeMSBPNhzz8UoGjAB3XyVmUXRE3IRmLtDPDRFL7qbxMI/w==}
+    dependencies:
+      '@apollo/protobufjs': 1.2.2
+    dev: false
+
   /apollo-server-caching/3.3.0:
     resolution: {integrity: sha512-Wgcb0ArjZ5DjQ7ID+tvxUcZ7Yxdbk5l1MxZL8D8gkyjooOkhPNzjRVQ7ubPoXqO54PrOMOTm1ejVhsF+AfIirQ==}
     engines: {node: '>=12.0'}
@@ -3409,8 +3415,8 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /apollo-server-core/3.5.0_graphql@15.8.0:
-    resolution: {integrity: sha512-c3wEnPSnzvWvYvRJq1B+yIpa+vBvm0kq0tvD4j/IOw/F1s3sadu43Xr4FiLw++UfeLyh3aS5Wk68hjvrW1ceiQ==}
+  /apollo-server-core/3.6.1_graphql@15.8.0:
+    resolution: {integrity: sha512-V2Us5x7d+w8dVdyFLxEygMgaQ3KZ6Z59HpaQBNHQ7C5wVZhjUXIsgbehBtfzQbMpyMx0z5/8Z8eIrC4zNoGJDw==}
     engines: {node: '>=12.0'}
     peerDependencies:
       graphql: ^15.3.0 || ^16.0.0
@@ -3422,17 +3428,17 @@ packages:
       '@graphql-tools/utils': 8.5.5_graphql@15.8.0
       '@josephg/resolvable': 1.0.1
       apollo-datasource: 3.3.0
-      apollo-graphql: 0.9.5_graphql@15.8.0
-      apollo-reporting-protobuf: 3.2.0
+      apollo-reporting-protobuf: 3.3.0
       apollo-server-caching: 3.3.0
       apollo-server-env: 4.2.0
       apollo-server-errors: 3.3.0_graphql@15.8.0
-      apollo-server-plugin-base: 3.4.0_graphql@15.8.0
-      apollo-server-types: 3.4.0_graphql@15.8.0
+      apollo-server-plugin-base: 3.5.0_graphql@15.8.0
+      apollo-server-types: 3.5.0_graphql@15.8.0
       async-retry: 1.3.3
       fast-json-stable-stringify: 2.1.0
       graphql: 15.8.0
       graphql-tag: 2.12.6_graphql@15.8.0
+      lodash.sortby: 4.7.0
       loglevel: 1.8.0
       lru-cache: 6.0.0
       sha.js: 2.4.11
@@ -3455,44 +3461,44 @@ packages:
       graphql: 15.8.0
     dev: false
 
-  /apollo-server-express/3.5.0_graphql@15.8.0:
-    resolution: {integrity: sha512-eFyBC4ate/g5GrvxM+HrtiElxCEbvG+CiJ0/R1i62L+wzXDhgD6MU0SW17ceS1mpBJgDxURu/VS5hUSNyWMa3Q==}
+  /apollo-server-express/3.6.1_graphql@15.8.0:
+    resolution: {integrity: sha512-29imWvRPn5GsQq02Akt0+jejpWzpOIZfUmgoiFm4YB7somvhDNw15Pu7fv4sISK8ehNIDF68IpLd2cpY8sCkYQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
       express: ^4.17.1
       graphql: ^15.3.0 || ^16.0.0
     dependencies:
       '@types/accepts': 1.3.5
-      '@types/body-parser': 1.19.1
+      '@types/body-parser': 1.19.2
       '@types/cors': 2.8.12
       '@types/express': 4.17.13
-      '@types/express-serve-static-core': 4.17.24
+      '@types/express-serve-static-core': 4.17.27
       accepts: 1.3.7
-      apollo-server-core: 3.5.0_graphql@15.8.0
-      apollo-server-types: 3.4.0_graphql@15.8.0
+      apollo-server-core: 3.6.1_graphql@15.8.0
+      apollo-server-types: 3.5.0_graphql@15.8.0
       body-parser: 1.19.0
       cors: 2.8.5
       graphql: 15.8.0
       parseurl: 1.3.3
     dev: false
 
-  /apollo-server-plugin-base/3.4.0_graphql@15.8.0:
-    resolution: {integrity: sha512-Z9musk7Z/1v+Db6aOoxcHfmsgej2yEBzBz5kVGOc81/XAtdv6bjasKSLC3RiySAUzWSLBJRUeEGIEVhhk/j2Zg==}
+  /apollo-server-plugin-base/3.5.0_graphql@15.8.0:
+    resolution: {integrity: sha512-dpi+W6wexT4H3cjIhxC9SJABkR8TCfxycoHK+U4jxQXUdg50da+KnMgoWlQbF1tuXtUs4gnJtij1RjuGtKwBhw==}
     engines: {node: '>=12.0'}
     peerDependencies:
       graphql: ^15.3.0 || ^16.0.0
     dependencies:
-      apollo-server-types: 3.4.0_graphql@15.8.0
+      apollo-server-types: 3.5.0_graphql@15.8.0
       graphql: 15.8.0
     dev: false
 
-  /apollo-server-types/3.4.0_graphql@15.8.0:
-    resolution: {integrity: sha512-iFNRENtxDoFWoY+KxpGP+TYyRnqUPqUTubMJVgiXPDvOPFL8dzqGGmqq1g/VCeWFHRJTPBLWhOfQU7ktwDEjnQ==}
+  /apollo-server-types/3.5.0_graphql@15.8.0:
+    resolution: {integrity: sha512-4JaZNu1kjrzIbppgc78hhIe2DFe+XONf8grprcjTOe0v8dIsuV0tFUnl+awTvTpHU1sdjRCKwnj382BebiL+qw==}
     engines: {node: '>=12.0'}
     peerDependencies:
       graphql: ^15.3.0 || ^16.0.0
     dependencies:
-      apollo-reporting-protobuf: 3.2.0
+      apollo-reporting-protobuf: 3.3.0
       apollo-server-caching: 3.3.0
       apollo-server-env: 4.2.0
       graphql: 15.8.0
@@ -5070,6 +5076,7 @@ packages:
 
   /encoding/0.1.13:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    requiresBuild: true
     dependencies:
       iconv-lite: 0.6.3
     dev: false
@@ -7411,7 +7418,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       '@types/graceful-fs': 4.1.5
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       anymatch: 3.1.2
       fb-watchman: 2.0.1
       graceful-fs: 4.2.8
@@ -7432,7 +7439,7 @@ packages:
     dependencies:
       '@jest/types': 27.4.2
       '@types/graceful-fs': 4.1.5
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       anymatch: 3.1.2
       fb-watchman: 2.0.1
       graceful-fs: 4.2.8
@@ -7573,7 +7580,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: true
 
   /jest-mock/27.4.2:
@@ -7581,7 +7588,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.4.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
     dev: true
 
   /jest-pnp-resolver/1.2.2_jest-resolve@26.6.2:
@@ -7693,7 +7700,7 @@ packages:
       '@jest/environment': 26.6.2
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       chalk: 4.1.2
       emittery: 0.7.2
       exit: 0.1.2
@@ -7828,7 +7835,7 @@ packages:
     resolution: {integrity: sha512-S5wqyz0DXnNJPd/xfIzZ5Xnp1HrJWBczg8mMfMpN78OJ5eDxXyf+Ygld9wX1DnUWbIbhM1YDY95NjR4CBXkb2g==}
     engines: {node: '>= 10.14.2'}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       graceful-fs: 4.2.8
     dev: true
 
@@ -7836,7 +7843,7 @@ packages:
     resolution: {integrity: sha512-RDhpcn5f1JYTX2pvJAGDcnsNTnsV9bjYPU8xcV+xPwOXnUPOQwf4ZEuiU6G9H1UztH+OapMgu/ckEVwO87PwnQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       graceful-fs: 4.2.8
     dev: true
 
@@ -7899,7 +7906,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       chalk: 4.1.2
       graceful-fs: 4.2.8
       is-ci: 2.0.0
@@ -7923,7 +7930,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/types': 27.4.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       chalk: 4.1.2
       ci-info: 3.3.0
       graceful-fs: 4.2.8
@@ -7960,7 +7967,7 @@ packages:
     dependencies:
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       jest-util: 26.6.2
@@ -7971,7 +7978,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -7980,7 +7987,7 @@ packages:
     resolution: {integrity: sha512-f2s8kEdy15cv9r7q4KkzGXvlY0JTcmCbMHZBfSQDwW77REr45IDWwd0lksDFeVHH2jJ5pqb90T77XscrjeGzzg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.11.7
+      '@types/node': 17.0.5
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
