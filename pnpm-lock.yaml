@@ -14,7 +14,7 @@ importers:
       '@nestjs/graphql': 9.1.2
       '@nestjs/platform-express': 7.6.18
       '@nestjs/schematics': 8.0.5
-      '@nestjs/testing': 8.2.4
+      '@nestjs/testing': 8.2.5
       '@nestjs/typeorm': 8.0.2
       '@nrwl/cli': 13.4.5
       '@nrwl/eslint-plugin-nx': 13.4.5
@@ -86,14 +86,14 @@ importers:
       '@commitlint/config-conventional': 12.1.4
       '@graphql-codegen/cli': 2.3.1_graphql@15.8.0+typescript@4.5.4
       '@nestjs/schematics': 8.0.5_typescript@4.5.4
-      '@nestjs/testing': 8.2.4_9cd0f963ae6f35bf288217e4f1c45cb4
-      '@nrwl/cli': 13.4.5
-      '@nrwl/eslint-plugin-nx': 13.4.5_668410e98b7fd86362baa7f20949d5db
-      '@nrwl/jest': 13.4.5
-      '@nrwl/js': 13.4.5_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/linter': 13.4.5_typescript@4.5.4
-      '@nrwl/nest': 13.4.5_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/node': 13.4.5_prettier@2.5.1+typescript@4.5.4
+      '@nestjs/testing': 8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4
+      '@nrwl/cli': 13.4.4
+      '@nrwl/eslint-plugin-nx': 13.4.4_668410e98b7fd86362baa7f20949d5db
+      '@nrwl/jest': 13.4.4
+      '@nrwl/js': 13.4.4_prettier@2.5.1+typescript@4.5.4
+      '@nrwl/linter': 13.4.4_typescript@4.5.4
+      '@nrwl/nest': 13.4.4_prettier@2.5.1+typescript@4.5.4
+      '@nrwl/node': 13.4.4_prettier@2.5.1+typescript@4.5.4
       '@nrwl/nx-cloud': 13.0.2
       '@nrwl/tao': 13.4.5
       '@nrwl/workspace': 13.4.5_prettier@2.5.1+typescript@4.5.4
@@ -1895,8 +1895,8 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/testing/8.2.4_9cd0f963ae6f35bf288217e4f1c45cb4:
-    resolution: {integrity: sha512-kRpLbb/y4TFzqP7iuQd3qiCg+auwdnj4qWeBDIW5ugqdnfCjgk/TzlbeTZF08mPYyjvHscg+0bMHri6r0Pm3sQ==}
+  /@nestjs/testing/8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4:
+    resolution: {integrity: sha512-M0uGfmPb5hc3k8jEHW2/Ilia+BYnxZoZ4MmqrWlLND/zTNSSJZJXUISLDtukka9/GAzGTlyQ3yQJMGL+GjnqXA==}
     peerDependencies:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
