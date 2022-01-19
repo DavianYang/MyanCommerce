@@ -40,7 +40,7 @@ importers:
       eslint-plugin-header: 3.1.1
       eslint-plugin-import: 2.25.4
       eslint-plugin-prettier: 4.0.0
-      eslint-plugin-promise: 4.3.1
+      eslint-plugin-promise: 6.0.0
       eslint-plugin-simple-import-sort: 7.0.0
       eslint-plugin-tsdoc: 0.2.14
       git-cz: 4.8.0
@@ -94,7 +94,7 @@ importers:
       '@nrwl/linter': 13.4.4_typescript@4.5.4
       '@nrwl/nest': 13.4.4_prettier@2.5.1+typescript@4.5.4
       '@nrwl/node': 13.4.4_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/nx-cloud': 13.0.2
+      '@nrwl/nx-cloud': 13.0.3
       '@nrwl/tao': 13.4.5
       '@nrwl/workspace': 13.4.5_prettier@2.5.1+typescript@4.5.4
       '@types/jest': 27.4.0
@@ -108,7 +108,7 @@ importers:
       eslint-plugin-header: 3.1.1_eslint@7.32.0
       eslint-plugin-import: 2.25.4_eslint@7.32.0
       eslint-plugin-prettier: 4.0.0_6e6a25a49a944db0fa38418c3ba4bc86
-      eslint-plugin-promise: 4.3.1
+      eslint-plugin-promise: 6.0.0_eslint@7.32.0
       eslint-plugin-simple-import-sort: 7.0.0_eslint@7.32.0
       eslint-plugin-tsdoc: 0.2.14
       git-cz: 4.8.0
@@ -2359,8 +2359,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/nx-cloud/13.0.2:
-    resolution: {integrity: sha512-Y29iEks9Yb7VoY1RsuoCGsFtbnWP3J256haqTDx/SMYNYJBuZ0p7Cgg9EBjf5AHusnqT/YxE47iuv6CKNzd7Wg==}
+  /@nrwl/nx-cloud/13.0.3:
+    resolution: {integrity: sha512-oE050JeFQjuU4rM9siGmBuH1UEk7Dbxud8uQj82fTCuXO5l3pS45OBe+0oyw+3Wf2ghPHwlptm22HGPqgYm4sA==}
     hasBin: true
     dependencies:
       axios: 0.21.4
@@ -5324,9 +5324,13 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
-  /eslint-plugin-promise/4.3.1:
-    resolution: {integrity: sha512-bY2sGqyptzFBDLh/GMbAxfdJC+b0f23ME63FOE4+Jao0oZ3E1LEwFtWJX/1pGMJLiTtrSSern2CRM/g+dfc0eQ==}
-    engines: {node: '>=6'}
+  /eslint-plugin-promise/6.0.0_eslint@7.32.0:
+    resolution: {integrity: sha512-7GPezalm5Bfi/E22PnQxDWH2iW9GTvAlUNTztemeHb6c1BniSyoeTrM87JkC0wYdi6aQrZX9p2qEiAno8aTcbw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 7.32.0
     dev: true
 
   /eslint-plugin-simple-import-sort/7.0.0_eslint@7.32.0:
