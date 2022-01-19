@@ -31,7 +31,7 @@ importers:
       '@typescript-eslint/parser': 4.33.0
       apollo-server-express: ^3.5.0
       chalk: 4.1.2
-      concurrently: 6.5.1
+      concurrently: 7.0.0
       cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       dotenv: 10.0.0
@@ -94,13 +94,13 @@ importers:
       '@nrwl/linter': 13.4.4_typescript@4.5.4
       '@nrwl/nest': 13.4.4_prettier@2.5.1+typescript@4.5.4
       '@nrwl/node': 13.4.4_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/nx-cloud': 13.0.2
+      '@nrwl/nx-cloud': 13.0.3
       '@nrwl/tao': 13.4.5
       '@nrwl/workspace': 13.4.5_prettier@2.5.1+typescript@4.5.4
       '@types/jest': 27.4.0
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
-      concurrently: 6.5.1
+      concurrently: 7.0.0
       cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       eslint: 7.32.0
@@ -2359,8 +2359,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/nx-cloud/13.0.2:
-    resolution: {integrity: sha512-Y29iEks9Yb7VoY1RsuoCGsFtbnWP3J256haqTDx/SMYNYJBuZ0p7Cgg9EBjf5AHusnqT/YxE47iuv6CKNzd7Wg==}
+  /@nrwl/nx-cloud/13.0.3:
+    resolution: {integrity: sha512-oE050JeFQjuU4rM9siGmBuH1UEk7Dbxud8uQj82fTCuXO5l3pS45OBe+0oyw+3Wf2ghPHwlptm22HGPqgYm4sA==}
     hasBin: true
     dependencies:
       axios: 0.21.4
@@ -4482,9 +4482,9 @@ packages:
       typedarray: 0.0.6
     dev: false
 
-  /concurrently/6.5.1:
-    resolution: {integrity: sha512-FlSwNpGjWQfRwPLXvJ/OgysbBxPkWpiVjy1042b0U7on7S7qwwMIILRj7WTN1mTgqa582bG6NFuScOoh6Zgdag==}
-    engines: {node: '>=10.0.0'}
+  /concurrently/7.0.0:
+    resolution: {integrity: sha512-WKM7PUsI8wyXpF80H+zjHP32fsgsHNQfPLw/e70Z5dYkV7hF+rf8q3D+ScWJIEr57CpkO3OWBko6hwhQLPR8Pw==}
+    engines: {node: ^12.20.0 || ^14.13.0 || >=16.0.0}
     hasBin: true
     dependencies:
       chalk: 4.1.2
