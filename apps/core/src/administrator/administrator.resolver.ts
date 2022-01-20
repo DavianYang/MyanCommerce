@@ -40,9 +40,10 @@ export class AdministratorResolver {
     @Mutation()
     updateAdministrator(
         @Ctx() ctx: RequestContext,
+        @Args('id') id: ID,
         @Args('input') input: UpdateAdministratorInput,
     ): Promise<Administrator> {
-        return this.administratorService.update(ctx, input);
+        return this.administratorService.update(ctx, id, input);
     }
 
     @Mutation()

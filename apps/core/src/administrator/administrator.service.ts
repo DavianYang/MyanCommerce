@@ -80,13 +80,13 @@ export class AdministratorService {
         ctx: RequestContext,
         input: UpdateAdministratorInput,
     ): Promise<Administrator> {
-        const administrator = await this.findOne(ctx, input.id);
+        let administrator = await this.findOne(ctx, id);
 
         if (!administrator) {
-            throw new EntityNotFoundError('Administrator', input.id);
+            throw new EntityNotFoundError('Administrator', id);
         }
 
-        const update = Object.assign(input, administrator);
+        const update = Object.assign(administrator, input);
         const updatedAdministrator = this.connection
             .getRepository(ctx, Administrator)
             .save(update);
