@@ -22,7 +22,7 @@ export class Administrator extends MyanCommerceEntity {
 
     @Column() lastName: string;
 
-    @Column({ unique: true }) emailAddres: string;
+    @Column({ unique: true }) emailAddress: string;
 
     @OneToOne(() => User)
     @JoinColumn()
