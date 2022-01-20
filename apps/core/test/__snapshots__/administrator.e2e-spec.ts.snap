@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Adminstrator resolver create administrator 1`] = `
+Object {
+  "emailAddress": "hello@test.com",
+  "firstName": "Mg",
+  "id": "2",
+  "lastName": "Mg",
+}
+`;
+
+exports[`Adminstrator resolver update administrator 1`] = `
+Object {
+  "emailAddress": "testemail@gmail.com",
+  "firstName": "New First",
+  "id": "2",
+  "lastName": "New Last",
+}
+`;
