@@ -30,7 +30,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 4.33.0
       '@typescript-eslint/parser': 4.33.0
       apollo-server-express: ^3.5.0
-      chalk: 4.1.2
+      chalk: 5.0.0
       concurrently: 6.5.1
       cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
@@ -69,9 +69,9 @@ importers:
       '@nestjs/platform-express': 7.6.18_2664420588e0901c7943acb4693cbaf4
       '@nestjs/typeorm': 8.0.2_d64761c4abc1dd90fdf49f2275fb65ba
       apollo-server-express: 3.6.1_graphql@16.2.0
-      chalk: 4.1.2
-      dotenv: 14.2.0
-      graphql: 15.8.0
+      chalk: 5.0.0
+      dotenv: 10.0.0
+      graphql: 16.2.0
       pg: 8.7.1
       reflect-metadata: 0.1.13
       rimraf: 3.0.2
@@ -87,16 +87,16 @@ importers:
       '@graphql-codegen/cli': 2.3.1_graphql@16.2.0+typescript@4.5.4
       '@nestjs/schematics': 8.0.5_typescript@4.5.4
       '@nestjs/testing': 8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4
-      '@nrwl/cli': 13.4.6
-      '@nrwl/eslint-plugin-nx': 13.4.6_668410e98b7fd86362baa7f20949d5db
-      '@nrwl/jest': 13.4.6
-      '@nrwl/js': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
-      '@nrwl/linter': 13.4.6_eslint@7.32.0+typescript@4.5.4
-      '@nrwl/nest': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
-      '@nrwl/node': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
+      '@nrwl/cli': 13.4.4
+      '@nrwl/eslint-plugin-nx': 13.4.4_668410e98b7fd86362baa7f20949d5db
+      '@nrwl/jest': 13.4.4
+      '@nrwl/js': 13.4.4_prettier@2.5.1+typescript@4.5.4
+      '@nrwl/linter': 13.4.4_typescript@4.5.4
+      '@nrwl/nest': 13.4.4_prettier@2.5.1+typescript@4.5.4
+      '@nrwl/node': 13.4.4_prettier@2.5.1+typescript@4.5.4
       '@nrwl/nx-cloud': 13.0.3
-      '@nrwl/tao': 13.4.6
-      '@nrwl/workspace': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
+      '@nrwl/tao': 13.4.5
+      '@nrwl/workspace': 13.4.5_prettier@2.5.1+typescript@4.5.4
       '@types/jest': 27.4.0
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
@@ -4045,6 +4045,11 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  /chalk/5.0.0:
+    resolution: {integrity: sha512-/duVOqst+luxCQRKEo4bNxinsOQtMP80ZYm7mMqzuh5PociNL0PvmHFvREJ9ueYL2TxlHjBcmLCdmocx9Vg+IQ==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
 
   /change-case-all/1.0.14:
     resolution: {integrity: sha512-CWVm2uT7dmSHdO/z1CXT/n47mWonyypzBbuCy5tN7uMg22BsfkhwT6oHmFCAk+gL1LOOxhdbB9SZz3J1KTY3gA==}
