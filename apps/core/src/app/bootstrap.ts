@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Type } from '@myancommerce/shared';
-import { Logger } from '../config/logger/myancommerce.logger';
+import { Logger } from '../logger/myancommerce.logger';
 import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
@@ -83,11 +83,11 @@ export async function preBootstrapConfig(
     return config;
 }
 
-function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
+export function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
     let version: string;
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        version = require('../package.json').version;
+        version = require('../../project.json').version;
     } catch (err) {
         version = 'unknown';
     }

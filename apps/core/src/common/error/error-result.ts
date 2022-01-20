@@ -43,3 +43,19 @@ export type ErrorResultUnion<
     E extends MyanCommerceEntity,
     U = any,
 > = JustErrorResults<T> | E;
+
+export function isGraphqlErrorResult<T extends GraphQLErrorResult | U, U = any>(
+    input: T,
+): input is JustErrorResults<T>;
+export function isGraphqlErrorResult<T, E extends MyanCommerceEntity>(
+    input: ErrorResultUnion<T, E>,
+): input is JustErrorResults<ErrorResultUnion<T, E>> {
+    return (
+        input &&
+        !!(
+            (input as unknown as GraphQLErrorResult).errorCode &&
+            (input as unknown as GraphQLErrorResult).message !== null
+        ) &&
+        (input as any).__typename
+    );
+}

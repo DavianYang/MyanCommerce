@@ -61,8 +61,6 @@ export class UserService {
         identifier: string,
     ): Promise<User> {
         const user = new User({ identifier, verified: true });
-        const adminRole = await this.roleService.getSuperAdminRole();
-        user.roles = [adminRole];
         return this.connection.getRepository(ctx, User).save(user);
     }
 }

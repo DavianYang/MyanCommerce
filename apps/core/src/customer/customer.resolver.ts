@@ -13,7 +13,6 @@ export class CustomerResolver {
         @Ctx() ctx: RequestContext,
         @Args('input') input: CreateCustomerInput,
     ): Promise<any> {
-        console.log(input);
         return this.customerService.create(ctx, input);
     }
 }

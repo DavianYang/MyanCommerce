@@ -6,9 +6,8 @@ input CreateAdministratorInput {
 }
 
 input UpdateAdministratorInput {
-    id: ID!
     firstName: String
     lastName: String
     emailAddress: String
-    roleIds: [ID!]!
+    roleIds: [ID!]
 }

@@ -4,6 +4,8 @@ import { Customer } from './entities/customer.entity';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { UserService } from '../user/user.service';
 import { ID } from '@myancommerce/shared';
+import { ErrorResultUnion } from '../common';
+import { CreateCustomerResult } from '@myancommerce/generated';
 
 /**
  * @description
@@ -63,7 +65,10 @@ export class CustomerService {
      * @description
      * Creates a new Customer
      */
-    async create(ctx: RequestContext, input: any) {
+    async create(
+        ctx: RequestContext,
+        input: any,
+    ): Promise<ErrorResultUnion<CreateCustomerResult, Customer>> {
         const customer = new Customer(input);
 
         customer.user = await this.userService.createCustomerUser(

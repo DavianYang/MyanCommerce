@@ -1,8 +1,11 @@
 overwrite: true
 schema:
   - 'apps/core/src/graphql/**/*.graphql'
-documents: null
+documents:
+  - 'apps/core/test/*.ts'
 generates:
   libs/generated/src/types/generated-graphql.ts:
     plugins:
       - "typescript"
+      - "typescript-operations"
+      - "typescript-compatibility"

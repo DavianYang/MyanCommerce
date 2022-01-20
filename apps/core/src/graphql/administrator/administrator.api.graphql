@@ -8,7 +8,7 @@ type Mutation {
     "Create a new Administrator"
     createAdministrator(input: CreateAdministratorInput!): Administrator!
     "Update an existing Administrator"
-    updateAdministrator(input: UpdateAdministratorInput!): Administrator!
+    updateAdministrator(id: ID!, input: UpdateAdministratorInput!): Administrator!
     "Delete an existing Administrator"
     deleteAdministrator(id: ID!): DeletionResponse!
 }

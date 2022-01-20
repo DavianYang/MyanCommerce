@@ -1,8 +1,8 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
 import { MyanCommerceConfig } from '../config/config.interface';
-import { DefaultLogger } from '../config/logger/default.logger';
-import { LogLevel } from '../config/logger/myancommerce.logger';
+import { DefaultLogger } from '../logger/default.logger';
+import { LogLevel } from '../logger/myancommerce.logger';
 
 dotenv.config({ path: __dirname + `./.env` });
 
@@ -24,11 +24,11 @@ export const config: MyanCommerceConfig = {
         type: 'postgres',
         synchronize: true, // turn off for production
         logging: false,
-        database: process.env.DATABASE_NAME,
-        host: process.env.DATABASE_HOST,
+        database: process.env['DATABASE_NAME'],
+        host: process.env['DATABASE_HOST'],
         port: 5433,
-        username: process.env.DATABASE_USER,
-        password: process.env.DATABASE_PASSWORD,
+        username: process.env['DATABASE_USER'],
+        password: process.env['DATABASE_PASSWORD'],
         migrations: [path.join(__dirname, '../migrations/*.ts')],
     },
     logger: new DefaultLogger({ level: LogLevel.Info, timestamp: false }),
