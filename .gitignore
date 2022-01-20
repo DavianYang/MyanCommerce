@@ -9,6 +9,8 @@ pnpm-lock.yaml
 .idea/**/tasks.xml
 .idea/dictionaries
 .env
+.env.production
+.env.test
 lerna-debug.log
 dist
 e2e/__data__/*
@@ -397,7 +399,3 @@ Temporary Items
 
 packages/*/tsconfig.build.tsbuildinfo
 packages/*/tsconfig.tsbuildinfo
-
-.env.development
-.env.development.local
-.env.production

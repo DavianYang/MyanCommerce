@@ -139,6 +139,7 @@ export type MutationDeleteRoleArgs = {
 
 
 export type MutationUpdateAdministratorArgs = {
+  id: Scalars['ID'];
   input: UpdateAdministratorInput;
 };
 
@@ -197,9 +198,8 @@ export type RoleList = PaginatedList & {
 export type UpdateAdministratorInput = {
   emailAddress?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
   lastName?: InputMaybe<Scalars['String']>;
-  roleIds: Array<Scalars['ID']>;
+  roleIds?: InputMaybe<Array<Scalars['ID']>>;
 };
 
 export type UpdateRoleInput = {
@@ -218,3 +218,74 @@ export type User = Node & {
   updatedAt: Scalars['DateTime'];
   verified: Scalars['Boolean'];
 };
+
+export type AdministratorFragment = { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string };
+
+export type GetAdministratorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAdministratorsQuery = { __typename?: 'Query', administrators: { __typename?: 'AdministratorList', totalItems: number, items: Array<{ __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string }> } };
+
+export type GetAdministratorQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetAdministratorQuery = { __typename?: 'Query', administrator?: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } | null | undefined };
+
+export type CreateAdministratorMutationVariables = Exact<{
+  input: CreateAdministratorInput;
+}>;
+
+
+export type CreateAdministratorMutation = { __typename?: 'Mutation', createAdministrator: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } };
+
+export type UpdateAdministratorMutationVariables = Exact<{
+  id: Scalars['ID'];
+  input: UpdateAdministratorInput;
+}>;
+
+
+export type UpdateAdministratorMutation = { __typename?: 'Mutation', updateAdministrator: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } };
+
+export type DeleteAdministratorMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteAdministratorMutation = { __typename?: 'Mutation', deleteAdministrator: { __typename?: 'DeletionResponse', message?: string | null | undefined, result: DeletionResult } };
+
+export namespace Administrator {
+  export type Fragment = AdministratorFragment;
+}
+
+export namespace GetAdministrators {
+  export type Variables = GetAdministratorsQueryVariables;
+  export type Query = GetAdministratorsQuery;
+  export type Administrators = GetAdministratorsQuery['administrators'];
+  export type Items = GetAdministratorsQuery['administrators']['items'][number];
+}
+
+export namespace GetAdministrator {
+  export type Variables = GetAdministratorQueryVariables;
+  export type Query = GetAdministratorQuery;
+  export type Administrator = GetAdministratorQuery['administrator'];
+}
+
+export namespace CreateAdministrator {
+  export type Variables = CreateAdministratorMutationVariables;
+  export type Mutation = CreateAdministratorMutation;
+  export type CreateAdministrator = CreateAdministratorMutation['createAdministrator'];
+}
+
+export namespace UpdateAdministrator {
+  export type Variables = UpdateAdministratorMutationVariables;
+  export type Mutation = UpdateAdministratorMutation;
+  export type UpdateAdministrator = UpdateAdministratorMutation['updateAdministrator'];
+}
+
+export namespace DeleteAdministrator {
+  export type Variables = DeleteAdministratorMutationVariables;
+  export type Mutation = DeleteAdministratorMutation;
+  export type DeleteAdministrator = DeleteAdministratorMutation['deleteAdministrator'];
+}
