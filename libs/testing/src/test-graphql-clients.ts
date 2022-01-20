@@ -1,4 +1,4 @@
-import fetch, { RequestInit, Response } from 'node-fetch';
+import fetch from 'node-fetch';
 import { stringify } from 'querystring';
 import { DocumentNode } from 'graphql';
 import { print } from 'graphql/language/printer';
@@ -27,6 +27,7 @@ export class TestGraphQLClient {
         } else {
             const errorResult =
                 typeof result === 'string' ? { error: result } : result;
+
             throw new ClientError(
                 { ...errorResult, status: response.status },
                 { query: print(query), variables },
@@ -34,7 +35,7 @@ export class TestGraphQLClient {
         }
     }
 
-    async fetch(url: string, options: RequestInit): Promise<Response> {
+    async fetch(url: string, options: any): Promise<any> {
         const headers = {
             'Content-Type': 'application/json',
             ...this.headers,
@@ -48,7 +49,7 @@ export class TestGraphQLClient {
         query: DocumentNode,
         variables?: { [key: string]: any },
         queryParams?: QueryParams,
-    ): Promise<Response> {
+    ): Promise<any> {
         const queryString = print(query);
         const body = JSON.stringify({
             query: queryString,
@@ -65,7 +66,7 @@ export class TestGraphQLClient {
         });
     }
 
-    private async getResult(response: Response): Promise<any> {
+    private async getResult(response: any): Promise<any> {
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.startsWith('application/json')) {
             return response.json();
