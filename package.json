@@ -23,10 +23,10 @@
     },
     "dependencies": {
         "@apollo/gateway": "^0.44.1",
-        "@nestjs/common": "7.6.18",
-        "@nestjs/core": "7.6.18",
+        "@nestjs/common": "8.2.6",
+        "@nestjs/core": "8.2.6",
         "@nestjs/graphql": "9.1.2",
-        "@nestjs/platform-express": "7.6.18",
+        "@nestjs/platform-express": "8.2.6",
         "@nestjs/typeorm": "8.0.3",
         "apollo-server-express": "^3.5.0",
         "chalk": "5.0.0",
