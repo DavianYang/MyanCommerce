@@ -45,8 +45,8 @@ importers:
       eslint-plugin-tsdoc: 0.2.14
       git-cz: 4.8.0
       graphql: 16.2.0
-      jest: 27.4.7
-      lint-staged: 12.1.7
+      jest: 26.6.3
+      lint-staged: 12.2.1
       pg: 8.7.1
       prettier: 2.5.1
       reflect-metadata: 0.1.13
@@ -87,16 +87,16 @@ importers:
       '@graphql-codegen/cli': 2.3.1_graphql@16.2.0+typescript@4.5.4
       '@nestjs/schematics': 8.0.5_typescript@4.5.4
       '@nestjs/testing': 8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4
-      '@nrwl/cli': 13.4.4
-      '@nrwl/eslint-plugin-nx': 13.4.4_668410e98b7fd86362baa7f20949d5db
-      '@nrwl/jest': 13.4.4
-      '@nrwl/js': 13.4.4_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/linter': 13.4.4_typescript@4.5.4
-      '@nrwl/nest': 13.4.4_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/node': 13.4.4_prettier@2.5.1+typescript@4.5.4
-      '@nrwl/nx-cloud': 13.0.3
-      '@nrwl/tao': 13.4.5
-      '@nrwl/workspace': 13.4.5_prettier@2.5.1+typescript@4.5.4
+      '@nrwl/cli': 13.4.6
+      '@nrwl/eslint-plugin-nx': 13.4.6_668410e98b7fd86362baa7f20949d5db
+      '@nrwl/jest': 13.4.6
+      '@nrwl/js': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
+      '@nrwl/linter': 13.4.6_eslint@7.32.0+typescript@4.5.4
+      '@nrwl/nest': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
+      '@nrwl/node': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
+      '@nrwl/nx-cloud': 13.1.2
+      '@nrwl/tao': 13.4.6
+      '@nrwl/workspace': 13.4.6_18dc79504a18ff3305cc19a8d9c638fd
       '@types/jest': 27.4.0
       '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
@@ -112,8 +112,8 @@ importers:
       eslint-plugin-simple-import-sort: 7.0.0_eslint@7.32.0
       eslint-plugin-tsdoc: 0.2.14
       git-cz: 4.8.0
-      jest: 27.4.7
-      lint-staged: 12.1.7
+      jest: 26.6.3
+      lint-staged: 12.2.1
       prettier: 2.5.1
       run-script-webpack-plugin: 0.0.11
       ts-jest: 27.1.3_9364f2ad0b7b67f00a4d081c662c6871
@@ -2275,8 +2275,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/nx-cloud/13.0.3:
-    resolution: {integrity: sha512-oE050JeFQjuU4rM9siGmBuH1UEk7Dbxud8uQj82fTCuXO5l3pS45OBe+0oyw+3Wf2ghPHwlptm22HGPqgYm4sA==}
+  /@nrwl/nx-cloud/13.1.2:
+    resolution: {integrity: sha512-0MzPYtnt63ZoiWCN6B4zpDprkM+/+/opGV1g8evXb5GbMpLQIeAkyABt49RlNuBPhhmUUYvte4WwyzEmyWZSRQ==}
     hasBin: true
     dependencies:
       axios: 0.21.4
@@ -8178,8 +8178,8 @@ packages:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=}
     dev: true
 
-  /lint-staged/12.1.7:
-    resolution: {integrity: sha512-bltv/ejiLWtowExpjU+s5z8j1Byjg9AlmaAjMmqNbIicY69u6sYIwXGg0dCn0TlkrrY2CphtHIXAkbZ+1VoWQQ==}
+  /lint-staged/12.2.1:
+    resolution: {integrity: sha512-VCVcA9C2Vt5HHxSR4EZVZFJcQRJH984CGBeY+cJ/xed4mBd+JidbM/xbKcCq5ASaygAV0iITtdsCTnID7h/1OQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
