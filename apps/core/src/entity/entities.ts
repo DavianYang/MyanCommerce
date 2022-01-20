@@ -1,5 +1,5 @@
 import { User } from '../user/entities/user.entity';
-import { Administrator } from '../administrator/entities/administrator.entities';
+import { Administrator } from '../administrator/entities/administrator.entity';
 import { Customer } from '../customer/entities/customer.entity';
 import { Role } from '../role/entities/role.entity';
 

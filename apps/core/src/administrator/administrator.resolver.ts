@@ -8,7 +8,7 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { RequestContext } from '../api/common/request-context';
 import { Ctx } from '../api/decorators/request-context.decorator';
 import { AdministratorService } from './administrator.service';
-import { Administrator } from './entities/administrator.entities';
+import { Administrator } from './entities/administrator.entity';
 
 @Resolver('Administrator')
 export class AdministratorResolver {

@@ -10,7 +10,7 @@ import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { EntityNotFoundError } from '../error/entitiy-not-found.error';
 import { UserService } from '../user/user.service';
-import { Administrator } from './entities/administrator.entities';
+import { Administrator } from './entities/administrator.entity';
 
 /**
  * @description
