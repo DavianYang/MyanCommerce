@@ -1,4 +1,3 @@
-import path from 'path';
 import { Module } from '@nestjs/common';
 
 import { ConnectionModule } from '../connection/connection.module';
@@ -21,9 +20,8 @@ import { AdminAPIModule } from '../api/api-internal-modules';
             apiPath: configService.apiOptions.adminApiPath,
             playground: configService.apiOptions.adminApiPlayground,
             debug: configService.apiOptions.adminApiDebug,
-            typePaths: ['customer', 'user', 'role', 'common'].map(p =>
-                path.join(__dirname, 'graphql', p, '*.graphql'),
-            ),
+            // typePaths: path.join(__dirname, 'graphql', '**', '*.graphql'),
+            typePaths: 'apps/core/src/graphql/**/*.graphql',
             resolverModule: AdminAPIModule,
         })),
     ],

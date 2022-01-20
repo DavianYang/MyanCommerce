@@ -1,4 +1,3 @@
-import path from 'path';
 import {
     GqlModuleOptions,
     GraphQLModule,
@@ -11,7 +10,7 @@ import { ConfigService } from '../../config/config.service';
 
 export interface GraphQLApiOptions {
     apiType: 'shop' | 'admin';
-    typePaths: string[];
+    typePaths: string | string[];
     apiPath: string;
     debug: boolean;
     playground: boolean | any;
@@ -59,12 +58,9 @@ async function createGraphQLOptions(
      * 3. any schema extensions defined by plugins
      */
     async function buildSchemaForAPI(): Promise<GraphQLSchema> {
-        // Paths must be normalized to use forward-slash separators.
-        // See https://github.com/nestjs/graphql/issues/336
-        const normalizedPaths = options.typePaths.map(p =>
-            p.split(path.sep).join('/'),
-        );
-        const typeDefs = await typesLoader.mergeTypesByPaths(normalizedPaths);
+        let { typePaths } = options;
+
+        const typeDefs = await typesLoader.mergeTypesByPaths(typePaths);
         const schema = buildSchema(typeDefs);
 
         return schema;

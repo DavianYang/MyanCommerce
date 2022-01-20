@@ -9,8 +9,11 @@ import { Injectable } from '@nestjs/common';
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { EntityNotFoundError } from '../error/entitiy-not-found.error';
+import { User } from '../user/entities/user.entity';
+import { RoleService } from '../role/role.service';
 import { UserService } from '../user/user.service';
 import { Administrator } from './entities/administrator.entity';
+import { ErrorResultUnion } from '../common';
 
 /**
  * @description
@@ -23,6 +26,7 @@ export class AdministratorService {
     constructor(
         private connection: TransactionalConnection,
         private userService: UserService,
+        private roleService: RoleService,
     ) {}
 
     findAll(ctx: RequestContext): Promise<PaginatedList<Administrator>> {
@@ -69,15 +73,24 @@ export class AdministratorService {
             input.emailAddress,
         );
 
-        const createdAdministrator = await this.connection
+        let createdAdministrator = await this.connection
             .getRepository(ctx, Administrator)
             .save(administrator);
+
+        for (const roleId of input.roleIds) {
+            createdAdministrator = await this.assignRole(
+                ctx,
+                createdAdministrator.id,
+                roleId,
+            );
+        }
 
         return createdAdministrator;
     }
 
     async update(
         ctx: RequestContext,
+        id: ID,
         input: UpdateAdministratorInput,
     ): Promise<Administrator> {
         let administrator = await this.findOne(ctx, id);
@@ -87,6 +100,7 @@ export class AdministratorService {
         }
 
         const update = Object.assign(administrator, input);
+
         const updatedAdministrator = this.connection
             .getRepository(ctx, Administrator)
             .save(update);
@@ -108,5 +122,31 @@ export class AdministratorService {
         return {
             result: DeletionResult.Deleted,
         };
+    }
+
+    async assignRole(
+        ctx: RequestContext,
+        administratorId: ID,
+        roleId: ID,
+    ): Promise<Administrator> {
+        const administrator = await this.findOne(ctx, administratorId);
+
+        if (!administrator) {
+            throw new EntityNotFoundError('Administrator', administratorId);
+        }
+
+        const role = await this.roleService.findOne(ctx, roleId);
+
+        if (!role) {
+            throw new EntityNotFoundError('Role', roleId);
+        }
+
+        administrator.user.roles.push(role);
+
+        await this.connection
+            .getRepository(ctx, User)
+            .save(administrator.user, { reload: false });
+
+        return administrator;
     }
 }

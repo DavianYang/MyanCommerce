@@ -87,6 +87,6 @@ export class TransactionalConnection {
     private getTransactionManager(
         ctx: RequestContext,
     ): EntityManager | undefined {
-        return (ctx as any)(TRANSACTION_MANAGER_KEY);
+        return (ctx as any)[TRANSACTION_MANAGER_KEY];
     }
 }

@@ -1,5 +1,5 @@
 import { RuntimeMyanCommerceConfig } from './config.interface';
-import { DefaultLogger } from './logger/default.logger';
+import { DefaultLogger } from '../logger/default.logger';
 
 /**
  * @description
