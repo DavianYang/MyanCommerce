@@ -15,14 +15,14 @@ importers:
       '@nestjs/platform-express': 7.6.18
       '@nestjs/schematics': 8.0.5
       '@nestjs/testing': 8.2.5
-      '@nestjs/typeorm': 8.0.2
-      '@nrwl/cli': 13.4.6
-      '@nrwl/eslint-plugin-nx': 13.4.6
-      '@nrwl/jest': 13.4.6
-      '@nrwl/js': 13.4.6
-      '@nrwl/linter': 13.4.6
-      '@nrwl/nest': 13.4.6
-      '@nrwl/node': 13.4.6
+      '@nestjs/typeorm': 8.0.3
+      '@nrwl/cli': 13.4.4
+      '@nrwl/eslint-plugin-nx': 13.4.4
+      '@nrwl/jest': 13.4.4
+      '@nrwl/js': 13.4.4
+      '@nrwl/linter': 13.4.4
+      '@nrwl/nest': 13.4.4
+      '@nrwl/node': 13.4.4
       '@nrwl/nx-cloud': latest
       '@nrwl/tao': 13.4.6
       '@nrwl/workspace': 13.4.6
@@ -67,7 +67,7 @@ importers:
       '@nestjs/core': 7.6.18_6b3555cc21175003adea857855cb8380
       '@nestjs/graphql': 9.1.2_24cae54da09c15ebc6ebda28ccf213d2
       '@nestjs/platform-express': 7.6.18_2664420588e0901c7943acb4693cbaf4
-      '@nestjs/typeorm': 8.0.2_d64761c4abc1dd90fdf49f2275fb65ba
+      '@nestjs/typeorm': 8.0.3_d64761c4abc1dd90fdf49f2275fb65ba
       apollo-server-express: 3.6.1_graphql@16.2.0
       chalk: 5.0.0
       dotenv: 10.0.0
@@ -1998,8 +1998,8 @@ packages:
       tslib: 2.3.1
     dev: true
 
-  /@nestjs/typeorm/8.0.2_d64761c4abc1dd90fdf49f2275fb65ba:
-    resolution: {integrity: sha512-UHn4IsRkzm22eNDir/uI+x8gmgo66EO7SxWfVOiPpeLSdrTfZHKYz6q/P9KRgYbwXs8TrywVdIbJhp+4C0tzjQ==}
+  /@nestjs/typeorm/8.0.3_d64761c4abc1dd90fdf49f2275fb65ba:
+    resolution: {integrity: sha512-tf9rTXP6LeFInkwd+tktQhtLRsKp4RRYImprqT8gcHcJDx+xMP1IygnXELOKwF5vo2/mnhrGtBlRQ/iiS6170g==}
     peerDependencies:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
