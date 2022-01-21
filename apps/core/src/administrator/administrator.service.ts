@@ -13,7 +13,6 @@ import { User } from '../user/entities/user.entity';
 import { RoleService } from '../role/role.service';
 import { UserService } from '../user/user.service';
 import { Administrator } from './entities/administrator.entity';
-import { ErrorResultUnion } from '../common';
 
 /**
  * @description
