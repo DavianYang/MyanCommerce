@@ -2,6 +2,8 @@
     "version": 2,
     "projects": {
         "core": "apps/core",
+        "testing": "libs/testing",
+        "generated": "libs/generated",
         "shared": "libs/shared"
     }
 }

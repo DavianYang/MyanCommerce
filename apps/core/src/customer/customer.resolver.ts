@@ -1,3 +1,4 @@
+import { CreateCustomerInput } from '@myancommerce/generated';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { RequestContext } from '../api/common/request-context';
 import { Ctx } from '../api/decorators/request-context.decorator';
@@ -10,9 +11,8 @@ export class CustomerResolver {
     @Mutation()
     async createCustomer(
         @Ctx() ctx: RequestContext,
-        @Args('input') input: any,
+        @Args('input') input: CreateCustomerInput,
     ): Promise<any> {
-        console.log(input);
         return this.customerService.create(ctx, input);
     }
 }

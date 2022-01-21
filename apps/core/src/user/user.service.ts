@@ -2,6 +2,7 @@ import { ID } from '@myancommerce/shared';
 import { Injectable } from '@nestjs/common';
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
+import { RoleService } from '../role/role.service';
 import { User } from './entities/user.entity';
 
 /**
@@ -12,7 +13,10 @@ import { User } from './entities/user.entity';
  */
 @Injectable()
 export class UserService {
-    constructor(private connection: TransactionalConnection) {}
+    constructor(
+        private connection: TransactionalConnection,
+        private roleService: RoleService,
+    ) {}
 
     async getUserById(
         ctx: RequestContext,
@@ -33,12 +37,30 @@ export class UserService {
         });
     }
 
+    /**
+     * @description
+     * Create a new User with the special code `customer` Role
+     */
     async createCustomerUser(
         ctx: RequestContext,
         identifier: string,
     ): Promise<User> {
         const user = new User();
         user.identifier = identifier;
+        const customerRole = await this.roleService.getCustomerRole();
+        user.roles = [customerRole];
+        return this.connection.getRepository(ctx, User).save(user);
+    }
+
+    /**
+     * @description
+     * Create a new User with the special code `admmin` Role
+     */
+    async createAdminUser(
+        ctx: RequestContext,
+        identifier: string,
+    ): Promise<User> {
+        const user = new User({ identifier, verified: true });
         return this.connection.getRepository(ctx, User).save(user);
     }
 }

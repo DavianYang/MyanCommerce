@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConnectionModule } from '../connection/connection.module';
+import { AdministratorService } from '../administrator/administrator.service';
 import { CustomerService } from '../customer/customer.service';
+import { RoleService } from '../role/role.service';
 import { UserService } from '../user/user.service';
 
-const services = [CustomerService, UserService];
+const services = [
+    AdministratorService,
+    CustomerService,
+    UserService,
+    RoleService,
+];
 
 /**
  * The ServiceCoreModule is imported internally by the ServiceModule. It is arranged in this way so that

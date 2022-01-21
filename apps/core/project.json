@@ -1,6 +1,7 @@
 {
     "root": "apps/core",
     "sourceRoot": "apps/core/src",
+    "version": "0.0.1",
     "projectType": "application",
     "targets": {
         "build": {
