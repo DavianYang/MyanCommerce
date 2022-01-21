@@ -14,7 +14,7 @@ importers:
       '@nestjs/graphql': 9.1.2
       '@nestjs/platform-express': 8.2.6
       '@nestjs/schematics': 8.0.5
-      '@nestjs/testing': 8.2.5
+      '@nestjs/testing': 8.2.6
       '@nestjs/typeorm': 8.0.3
       '@nrwl/cli': 13.4.6
       '@nrwl/eslint-plugin-nx': 13.4.6
@@ -34,7 +34,7 @@ importers:
       concurrently: 6.5.1
       cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
-      dotenv: 10.0.0
+      dotenv: 14.2.0
       eslint: 7.32.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-header: 3.1.1
@@ -86,7 +86,7 @@ importers:
       '@commitlint/config-conventional': 12.1.4
       '@graphql-codegen/cli': 2.3.1_graphql@16.2.0+typescript@4.5.4
       '@nestjs/schematics': 8.0.5_typescript@4.5.4
-      '@nestjs/testing': 8.2.5_b893ca8083ee374883b6d648098a9aeb
+      '@nestjs/testing': 8.2.6_b893ca8083ee374883b6d648098a9aeb
       '@nrwl/cli': 13.4.6
       '@nrwl/eslint-plugin-nx': 13.4.6_da789d6d42444e12a74bf40968482e33
       '@nrwl/jest': 13.4.6
@@ -1969,8 +1969,8 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/testing/8.2.5_b893ca8083ee374883b6d648098a9aeb:
-    resolution: {integrity: sha512-M0uGfmPb5hc3k8jEHW2/Ilia+BYnxZoZ4MmqrWlLND/zTNSSJZJXUISLDtukka9/GAzGTlyQ3yQJMGL+GjnqXA==}
+  /@nestjs/testing/8.2.6_b893ca8083ee374883b6d648098a9aeb:
+    resolution: {integrity: sha512-Cg8tM7yxlLDBO+CTNjk6X/UkxGRsprFc8gDHGEGesiE9wLErxNnslFugfUnYWJaSzmLZSqcFFig7mThc8VSxrw==}
     peerDependencies:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
@@ -4929,6 +4929,12 @@ packages:
   /dotenv/10.0.0:
     resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
+    dev: true
+
+  /dotenv/14.2.0:
+    resolution: {integrity: sha512-05POuPJyPpO6jqzTNweQFfAyMSD4qa4lvsMOWyTRTdpHKy6nnnN+IYWaXF+lHivhBH/ufDKlR4IWCAN3oPnHuw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /dotenv/8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
