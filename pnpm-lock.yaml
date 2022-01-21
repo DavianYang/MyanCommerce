@@ -6,9 +6,9 @@ importers:
     specifiers:
       '@apollo/gateway': ^0.44.1
       '@changesets/cli': 2.19.0
-      '@commitlint/cli': 16.1.0
-      '@commitlint/config-conventional': 16.0.0
-      '@graphql-codegen/cli': 2.3.1
+      '@commitlint/cli': 12.1.4
+      '@commitlint/config-conventional': 12.1.4
+      '@graphql-codegen/cli': 2.4.0
       '@nestjs/common': 8.2.6
       '@nestjs/core': 8.2.6
       '@nestjs/graphql': 9.1.2
@@ -82,11 +82,11 @@ importers:
       yn: 5.0.0
     devDependencies:
       '@changesets/cli': 2.19.0
-      '@commitlint/cli': 16.1.0
-      '@commitlint/config-conventional': 16.0.0
-      '@graphql-codegen/cli': 2.3.1_graphql@16.2.0+typescript@4.5.4
-      '@nestjs/schematics': 8.0.5_typescript@4.5.4
-      '@nestjs/testing': 8.2.5_9cd0f963ae6f35bf288217e4f1c45cb4
+      '@commitlint/cli': 12.1.4
+      '@commitlint/config-conventional': 12.1.4
+      '@graphql-codegen/cli': 2.4.0_graphql@16.2.0+typescript@4.5.5
+      '@nestjs/schematics': 8.0.5_typescript@4.5.5
+      '@nestjs/testing': 8.2.5_b893ca8083ee374883b6d648098a9aeb
       '@nrwl/cli': 13.4.6
       '@nrwl/eslint-plugin-nx': 13.4.6_8b61e6089260ec8841ac78694fc170c7
       '@nrwl/jest': 13.4.6
@@ -1004,8 +1004,8 @@ packages:
     resolution: {integrity: sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==}
     dev: false
 
-  /@graphql-codegen/cli/2.3.1_graphql@16.2.0+typescript@4.5.5:
-    resolution: {integrity: sha512-xMSvYqFtnRXOp/sVJSyqiFTm70X8ouLXiq5o/R/D3yQtA6NNudAC+Q4oxg9/LZKnRDL6pehwdC8CNnQk0Tf7Sw==}
+  /@graphql-codegen/cli/2.4.0_graphql@16.2.0+typescript@4.5.5:
+    resolution: {integrity: sha512-4iiHH2AxBE17lX5cFdFg6+kh7I6uKQLYG0IZRalRbW/grKL7kuVp/RDUjmVB2GNJTJEhjxYLMJFJZocUmAUBlw==}
     hasBin: true
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
