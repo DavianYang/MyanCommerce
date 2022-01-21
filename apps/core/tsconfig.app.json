@@ -6,6 +6,6 @@
         "types": ["node"],
         "target": "es2015"
     },
-    "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+    "exclude": ["**/*.e2e-spec.ts", "**/*.spec.ts", "**/*.test.ts"],
     "include": ["**/*.ts", "src/entity/entities"]
 }
