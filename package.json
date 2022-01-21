@@ -43,8 +43,8 @@
     },
     "devDependencies": {
         "@changesets/cli": "2.19.0",
-        "@commitlint/cli": "12.1.4",
-        "@commitlint/config-conventional": "12.1.4",
+        "@commitlint/cli": "16.1.0",
+        "@commitlint/config-conventional": "16.0.0",
         "@graphql-codegen/cli": "2.3.1",
         "@nestjs/schematics": "8.0.5",
         "@nestjs/testing": "8.2.5",
