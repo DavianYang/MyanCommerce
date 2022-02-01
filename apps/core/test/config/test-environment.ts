@@ -1,13 +1,9 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
 import { ConnectionOptions } from 'typeorm';
+import { mergeConfig, MyanCommerceConfig } from '@myancommerce/core';
+import { LogLevel, DefaultLogger } from '@myancommerce/nsx-logger';
 import { registerServer, PostgresServer } from '@myancommerce/testing';
-import {
-    mergeConfig,
-    LogLevel,
-    DefaultLogger,
-    MyanCommerceConfig,
-} from '@myancommerce/core';
 
 dotenv.config({ path: __dirname + `./.env.test}` });
 

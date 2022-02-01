@@ -1,5 +1,4 @@
 import {
-    DefaultLogger,
     logWelcomeMessage,
     MyanCommerceConfig,
     preBootstrapConfig,
@@ -75,8 +74,6 @@ export class PostgresServer implements TestDBServer<PostgresConnectionOptions> {
         const { hostname, port, cors } = config.apiOptions;
 
         try {
-            DefaultLogger.hideNestBoostrapLogs();
-
             const app = await NestFactory.create(AppModule, {
                 cors: cors,
                 logger: new Logger(),
@@ -85,8 +82,6 @@ export class PostgresServer implements TestDBServer<PostgresConnectionOptions> {
             await app.listen(port, hostname || '');
 
             logWelcomeMessage(config);
-
-            DefaultLogger.restoreOriginalLogLevel();
 
             return app;
         } catch (e) {
