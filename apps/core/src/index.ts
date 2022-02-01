@@ -3,8 +3,6 @@ export * from './app/bootstrap';
 export { AppModule } from './app/app.module';
 // Config
 export * from './config/index';
-// Logger
-export * from './logger/index';
 // API
 export * from './api/index';
 // Connection

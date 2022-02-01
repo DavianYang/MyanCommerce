@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Type } from '@myancommerce/shared';
-import { Logger } from '../logger/myancommerce.logger';
+import { Logger } from '@myancommerce/nsx-logger';
 import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
@@ -37,14 +37,14 @@ export async function bootstrap(
     const config = await preBootstrapConfig(userConfig);
 
     Logger.useLogger(config.logger);
-    Logger.info(`Bootstrapping Vendure Server (pid: ${process.pid})...`);
+    Logger.info(`Bootstrapping MyanCommerce Server (pid: ${process.pid})...`);
 
     // tslint:disable-next-line:whitespace
     const { AppModule } = await import('./app.module');
 
     const { hostname, port } = config.apiOptions;
 
-    const app = await NestFactory.create(AppModule, { logger: new Logger() });
+    const app = await NestFactory.create(AppModule, { bufferLogs: true });
 
     app.useLogger(new Logger());
 

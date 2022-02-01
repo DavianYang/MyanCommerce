@@ -28,10 +28,10 @@
         "baseUrl": ".",
         "paths": {
             "@myancommerce/core": ["apps/core/src/index.ts"],
-
-            "@myancommerce/testing": ["libs/testing/src/index.ts"],
             "@myancommerce/generated": ["libs/generated/src/index.ts"],
-            "@myancommerce/shared": ["libs/shared/src/index.ts"]
+            "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
+            "@myancommerce/shared": ["libs/shared/src/index.ts"],
+            "@myancommerce/testing": ["libs/testing/src/index.ts"]
         }
     },
     "include": ["apps", "libs"],
