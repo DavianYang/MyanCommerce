@@ -1,7 +1,8 @@
-import { MyanCommerceConfig } from '@myancommerce/core';
+import { BaseConnectionOptions } from 'typeorm/connection/BaseConnectionOptions';
+
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 import { getServer } from './server/servers';
 import { TestDBServer, TestServerOptions } from './server/server.interface';
-import { BaseConnectionOptions } from 'typeorm/connection/BaseConnectionOptions';
 
 /**
  * @description

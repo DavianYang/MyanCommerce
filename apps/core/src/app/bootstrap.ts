@@ -3,10 +3,11 @@ import { NestFactory } from '@nestjs/core';
 import { Type } from '@myancommerce/shared';
 import { Logger } from '@myancommerce/nsx-logger';
 import {
+    setConfig,
+    getConfig,
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
-} from '../config/config.interface';
-import { setConfig, getConfig } from '../config/config.helpers';
+} from '@myancommerce/nsx-config';
 import { coreEntitiesMap } from '../entity/entities';
 
 export type MyanCommerceBootstrapFunction = (

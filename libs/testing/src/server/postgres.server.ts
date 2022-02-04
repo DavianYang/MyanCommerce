@@ -1,12 +1,10 @@
-import {
-    logWelcomeMessage,
-    MyanCommerceConfig,
-    preBootstrapConfig,
-} from '@myancommerce/core';
 import { INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Client } from 'pg';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+
+import { logWelcomeMessage, preBootstrapConfig } from '@myancommerce/core';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 import { populateForTesting } from '../population/populate-for-testing';
 import { TestDBServer, TestServerOptions } from './server.interface';
 

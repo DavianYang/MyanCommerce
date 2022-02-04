@@ -1,4 +1,4 @@
-import { MyanCommerceConfig } from '@myancommerce/core';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 import { TestGraphQLClient } from './test-graphql-clients';
 import { TestServer } from './test-server';
 

@@ -1,8 +1,6 @@
 // App
 export * from './app/bootstrap';
 export { AppModule } from './app/app.module';
-// Config
-export * from './config/index';
 // API
 export * from './api/index';
 // Connection
