@@ -3,6 +3,7 @@
     "projects": {
         "core": "apps/core",
         "generated": "libs/generated",
+        "nox-common": "libs/nox-common",
         "nsx-config": "libs/nsx-config",
         "nsx-logger": "libs/nsx-logger",
         "shared": "libs/shared",

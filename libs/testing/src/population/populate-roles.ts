@@ -1,9 +1,6 @@
 import { INestApplication } from '@nestjs/common';
-import {
-    isGraphqlErrorResult,
-    RequestContext,
-    RoleService,
-} from '@myancommerce/core';
+import { RequestContext, RoleService } from '@myancommerce/core';
+import { isGraphqlErrorResult } from '@myancommerce/nox-common';
 import { initialData } from '../data/e2e-initial-data';
 
 export async function populateRoles(app: INestApplication) {

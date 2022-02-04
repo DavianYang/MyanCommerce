@@ -3,7 +3,7 @@ import {
     createParamDecorator,
     ExecutionContext,
 } from '@nestjs/common';
-import { REQUEST_CONTEXT_KEY } from '../../common/constants';
+import { REQUEST_CONTEXT_KEY } from '@myancommerce/nox-common';
 
 /**
  * @description
