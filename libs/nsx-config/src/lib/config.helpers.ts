@@ -1,4 +1,4 @@
-import { defaultConfig } from './default.config';
+import { defaultConfig } from './config.default';
 import { mergeConfig } from './merge-configs';
 import {
     PartialMyanCommerceConfig,

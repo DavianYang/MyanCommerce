@@ -2,11 +2,10 @@ import path from 'path';
 import { Module } from '@nestjs/common';
 
 import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule, ConfigService } from '@myancommerce/nsx-config';
 import { ConnectionModule } from '../connection/connection.module';
 import { ServiceModule } from './service.module';
-import { ConfigModule } from '../config/config.module';
 import { AdminAPIModule } from '../api/api-internal-modules';
-import { ConfigService } from '../config/config.service';
 
 /**
  * The ApiModule is responsible for the public API of the application. This is where requests

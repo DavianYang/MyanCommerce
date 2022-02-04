@@ -1,7 +1,7 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
 import { ConnectionOptions } from 'typeorm';
-import { mergeConfig, MyanCommerceConfig } from '@myancommerce/core';
+import { mergeConfig, MyanCommerceConfig } from '@myancommerce/nsx-config';
 import { LogLevel, DefaultLogger } from '@myancommerce/nsx-logger';
 import { registerServer, PostgresServer } from '@myancommerce/testing';
 

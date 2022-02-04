@@ -2,7 +2,7 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 import { DefaultLogger } from '@myancommerce/nsx-logger';
 import { LogLevel } from '@myancommerce/nsx-logger';
-import { MyanCommerceConfig } from '../config/config.interface';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 
 dotenv.config({ path: __dirname + `./.env` });
 

@@ -1,7 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '../config/config.module';
-import { ConfigService } from '../config/config.service';
+import { ConfigModule, ConfigService } from '@myancommerce/nsx-config';
 import { TransactionalConnection } from './transactional-connection';
 
 let defaultTypeOrmModule: DynamicModule;

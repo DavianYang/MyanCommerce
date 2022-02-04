@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '../config/config.module';
+import { ConfigModule } from '@myancommerce/nsx-config';
 import { ConnectionModule } from '../connection/connection.module';
 import { ServiceModule } from '../app/service.module';
 
