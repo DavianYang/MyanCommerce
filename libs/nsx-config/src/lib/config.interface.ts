@@ -1,8 +1,8 @@
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ConnectionOptions } from 'typeorm';
-import { Middleware } from '@myancommerce/nox-common';
+
+import { Middleware, Type } from '@myancommerce/nox-common';
 import { NSXLogger } from '@myancommerce/nsx-logger';
-import { Type } from '@myancommerce/shared';
 
 /**
  * @description

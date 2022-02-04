@@ -32,7 +32,6 @@
             "@myancommerce/nox-common": ["libs/nox-common/src/index.ts"],
             "@myancommerce/nsx-config": ["libs/nsx-config/src/index.ts"],
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
-            "@myancommerce/shared": ["libs/shared/src/index.ts"],
             "@myancommerce/testing": ["libs/testing/src/index.ts"]
         }
     },

@@ -1,9 +1,12 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+
+import { ID, PaginatedList } from '@myancommerce/nox-common';
+
 import { RequestContext } from '../api/common/request-context';
 import { Ctx } from '../api/decorators/request-context.decorator';
 import { RoleService } from './role.service';
 import { Role } from './entities/role.entity';
-import { ID, PaginatedList } from '@myancommerce/shared';
+
 import {
     CreateRoleInput,
     DeletionResponse,

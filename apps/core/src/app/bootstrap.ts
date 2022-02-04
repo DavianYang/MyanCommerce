@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { Type } from '@myancommerce/shared';
+
+import { Type } from '@myancommerce/nox-common';
 import { Logger } from '@myancommerce/nsx-logger';
 import {
     setConfig,
@@ -8,6 +9,7 @@ import {
     MyanCommerceConfig,
     RuntimeMyanCommerceConfig,
 } from '@myancommerce/nsx-config';
+
 import { coreEntitiesMap } from '../entity/entities';
 
 export type MyanCommerceBootstrapFunction = (

@@ -1,5 +1,7 @@
-import { ID } from '@myancommerce/shared';
 import { Injectable } from '@nestjs/common';
+
+import { ID } from '@myancommerce/nox-common';
+
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { RoleService } from '../role/role.service';

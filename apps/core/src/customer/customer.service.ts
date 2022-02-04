@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ID } from '@myancommerce/shared';
-import { ErrorResultUnion } from '@myancommerce/nox-common';
+
+import { ErrorResultUnion, ID } from '@myancommerce/nox-common';
 import { CreateCustomerResult } from '@myancommerce/generated';
 
 import { RequestContext } from '../api/common/request-context';

@@ -3,7 +3,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { DeepPartial, ID } from '@myancommerce/shared';
+import { DeepPartial, ID } from '@myancommerce/nox-common';
 
 /**
  * @description
