@@ -1,8 +1,5 @@
-import {
-    CustomerService,
-    RequestContext,
-    isGraphqlErrorResult,
-} from '@myancommerce/core';
+import { CustomerService, RequestContext } from '@myancommerce/core';
+import { isGraphqlErrorResult } from '@myancommerce/nox-common';
 import { INestApplication } from '@nestjs/common';
 import { MockDataService } from './mock-data.service';
 

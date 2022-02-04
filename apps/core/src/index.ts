@@ -3,10 +3,11 @@ export * from './app/bootstrap';
 export { AppModule } from './app/app.module';
 // API
 export * from './api/index';
+// Entity
+export * from './entity/base.entity';
+export * from './entity/entities';
 // Connection
 export * from './connection/index';
-// Common
-export * from './common/index';
 // Administrator
 export * from './administrator/administrator.service';
 export * from './administrator/entities/administrator.entity';

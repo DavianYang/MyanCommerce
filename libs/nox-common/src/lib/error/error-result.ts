@@ -1,4 +1,4 @@
-import { MyanCommerceEntity } from '../../entity/base.entity';
+import { MyanCommerceEntity } from '@myancommerce/core';
 
 export type GraphQLErrorResult = {
     errorCode: string;
