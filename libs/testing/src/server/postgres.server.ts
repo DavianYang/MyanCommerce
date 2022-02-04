@@ -1,13 +1,10 @@
-import {
-    DefaultLogger,
-    logWelcomeMessage,
-    MyanCommerceConfig,
-    preBootstrapConfig,
-} from '@myancommerce/core';
 import { INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Client } from 'pg';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+
+import { logWelcomeMessage, preBootstrapConfig } from '@myancommerce/core';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 import { populateForTesting } from '../population/populate-for-testing';
 import { TestDBServer, TestServerOptions } from './server.interface';
 
@@ -75,8 +72,6 @@ export class PostgresServer implements TestDBServer<PostgresConnectionOptions> {
         const { hostname, port, cors } = config.apiOptions;
 
         try {
-            DefaultLogger.hideNestBoostrapLogs();
-
             const app = await NestFactory.create(AppModule, {
                 cors: cors,
                 logger: new Logger(),
@@ -85,8 +80,6 @@ export class PostgresServer implements TestDBServer<PostgresConnectionOptions> {
             await app.listen(port, hostname || '');
 
             logWelcomeMessage(config);
-
-            DefaultLogger.restoreOriginalLogLevel();
 
             return app;
         } catch (e) {

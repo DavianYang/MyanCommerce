@@ -1,5 +1,5 @@
-import { MyanCommerceConfig } from '@myancommerce/core';
 import { BaseConnectionOptions } from 'typeorm/connection/BaseConnectionOptions';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 
 export interface TestDBServer<T extends BaseConnectionOptions> {
     init(testConfig: Partial<MyanCommerceConfig>, ConnectionOptions: T): void;

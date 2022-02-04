@@ -2,8 +2,10 @@
     "version": 2,
     "projects": {
         "core": "apps/core",
-        "testing": "libs/testing",
         "generated": "libs/generated",
-        "shared": "libs/shared"
+        "nsx-config": "libs/nsx-config",
+        "nsx-logger": "libs/nsx-logger",
+        "shared": "libs/shared",
+        "testing": "libs/testing"
     }
 }

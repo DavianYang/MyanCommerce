@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConnectionOptions } from 'typeorm';
 import { getConfig } from './config.helpers';
-import { MyanCommerceLogger } from '../logger/myancommerce.logger';
+import { NSXLogger } from '@myancommerce/nsx-logger';
 import {
     ApiOptions,
     MyanCommerceConfig,
@@ -20,7 +20,7 @@ export class ConfigService implements MyanCommerceConfig {
         return this.activeConfig.apiOptions;
     }
 
-    get logger(): MyanCommerceLogger {
+    get logger(): NSXLogger {
         return this.activeConfig.logger;
     }
 

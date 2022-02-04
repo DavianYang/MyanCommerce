@@ -1,8 +1,8 @@
 import path from 'path';
 import * as dotenv from 'dotenv';
-import { MyanCommerceConfig } from '../config/config.interface';
-import { DefaultLogger } from '../logger/default.logger';
-import { LogLevel } from '../logger/myancommerce.logger';
+import { DefaultLogger } from '@myancommerce/nsx-logger';
+import { LogLevel } from '@myancommerce/nsx-logger';
+import { MyanCommerceConfig } from '@myancommerce/nsx-config';
 
 dotenv.config({ path: __dirname + `./.env` });
 
@@ -31,5 +31,9 @@ export const config: MyanCommerceConfig = {
         password: process.env['DATABASE_PASSWORD'],
         migrations: [path.join(__dirname, '../migrations/*.ts')],
     },
-    logger: new DefaultLogger({ level: LogLevel.Info, timestamp: false }),
+    logger: new DefaultLogger({
+        level: LogLevel.Info,
+        timestamp: true,
+        defaultContext: 'MyanCommerce Server',
+    }),
 };

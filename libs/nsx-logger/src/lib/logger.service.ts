@@ -1,39 +1,8 @@
 import { LoggerService } from '@nestjs/common';
 
-/**
- * @description
- * An enum of valid logging levels.
- *
- * @docsCategory Logger
- */
-export enum LogLevel {
-    /**
-     * @description
-     * Log Errors only.
-     */
-    Error = 0,
-    Warn = 1,
-    Info = 2,
-    Verbose = 3,
-    Debug = 4,
-}
+import { NSXLogger } from './logger.interface';
 
-/**
- * @description
- * The MyanCommerceLogger interface defines the shape of a logger service which may be provided in
- * the config.
- *
- * @docsCategory Logger
- */
-export interface MyanCommerceLogger {
-    error(message: string, context?: string, trace?: string): void;
-    warn(message: string, context?: string): void;
-    info(message: string, context?: string): void;
-    verbose(message: string, context?: string): void;
-    debug(message: string, context?: string): void;
-}
-
-const noopLogger: MyanCommerceLogger = {
+const noopLogger: NSXLogger = {
     error() {
         /* */
     },
@@ -53,34 +22,34 @@ const noopLogger: MyanCommerceLogger = {
 
 /**
  * @description
- * The Logger is responsible for all logging in a MyanCommerce application.
+ * The Logger is responsible for all logging in a CometX application.
  *
  * It is intended to be used as a static class:
  *
  * @example
  * ```ts
- * import { Logger } from '\@myancommerce/core';
+ * import { Logger } from '\@cometx/api';
  *
- * Logger.info(`Some log message`, 'My MyanCommerce Plugin');
+ * Logger.info(`Some log message`, 'My CometX Plugin');
  * ```
  *
- * The actual implementation - where the logs are written to - is defined by the {@link MyanCommerceLogger}
- * instance configured in the {@link MyanCommerceConfig}. By default, the {@link DefaultLogger} is used, which
+ * The actual implementation - where the logs are written to - is defined by the {@link NSXLogger}
+ * instance configured in the {@link CometXConfig}. By default, the {@link DefaultLogger} is used, which
  * logs to the console.
  *
  * ## Implementing a custom logger
  *
  * A custom logger can be passed to the `logger` config option by creating a class which implements the
- * {@link MyanCommerceLogger} interface. For example, here is how you might go about implementing a logger which
+ * {@link NSXLogger} interface. For example, here is how you might go about implementing a logger which
  * logs to a file:
  *
  * @example
  * ```ts
- * import { MyanCommerceLogger } from '\@myancommerce/core';
+ * import { NSXLogger } from '\@cometx/api';
  * import fs from 'fs';
  *
  * // A simple custom logger which writes all logs to a file.
- * export class SimpleFileLogger implements MyanCommerceLogger {
+ * export class SimpleFileLogger implements NSXLogger {
  *     private logfile: fs.WriteStream;
  *
  *     constructor(logfileLocation: string) {
@@ -104,7 +73,7 @@ const noopLogger: MyanCommerceLogger = {
  *     }
  * }
  *
- * // in the MyanCommerceConfig
+ * // in the CometXConfig
  * export const config = {
  *     // ...
  *     logger: new SimpleFileLogger('server.log'),
@@ -116,9 +85,9 @@ const noopLogger: MyanCommerceLogger = {
 
 export class Logger implements LoggerService {
     private static _instance: typeof Logger = Logger;
-    private static _logger: MyanCommerceLogger;
+    private static _logger: NSXLogger;
 
-    static get logger(): MyanCommerceLogger {
+    static get logger(): NSXLogger {
         return this._logger || noopLogger;
     }
 
@@ -128,7 +97,7 @@ export class Logger implements LoggerService {
     }
 
     /** @internal */
-    static useLogger(logger: MyanCommerceLogger) {
+    static useLogger(logger: NSXLogger) {
         Logger._logger = logger;
     }
 

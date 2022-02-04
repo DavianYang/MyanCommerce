@@ -1,8 +1,10 @@
+import path from 'path';
 import { Module } from '@nestjs/common';
 
+import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule, ConfigService } from '@myancommerce/nsx-config';
 import { ConnectionModule } from '../connection/connection.module';
 import { ServiceModule } from './service.module';
-import { configureGraphQLModule } from '../api/config/configure-graphql-module';
 import { AdminAPIModule } from '../api/api-internal-modules';
 
 /**
@@ -15,15 +17,19 @@ import { AdminAPIModule } from '../api/api-internal-modules';
         ServiceModule,
         ConnectionModule.forRoot(),
         AdminAPIModule,
-        configureGraphQLModule(configService => ({
-            apiType: 'admin',
-            apiPath: configService.apiOptions.adminApiPath,
-            playground: configService.apiOptions.adminApiPlayground,
-            debug: configService.apiOptions.adminApiDebug,
-            // typePaths: path.join(__dirname, 'graphql', '**', '*.graphql'),
-            typePaths: 'apps/core/src/graphql/**/*.graphql',
-            resolverModule: AdminAPIModule,
-        })),
+        GraphQLModule.forRootAsync({
+            useFactory: (config: ConfigService) => ({
+                path: '/' + 'admin',
+                typePaths: [path.join(__dirname, 'graphql', '**', '*.graphql')],
+                include: [AdminAPIModule],
+                playground: config.apiOptions.adminApiPlayground || false,
+                debug: config.apiOptions.adminApiDebug || false,
+                context: (req: any) => req,
+                cors: false,
+            }),
+            inject: [ConfigService],
+            imports: [ConfigModule, ServiceModule],
+        }),
     ],
 })
 export class ApiModule {

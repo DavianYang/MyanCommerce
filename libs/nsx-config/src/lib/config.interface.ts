@@ -1,7 +1,7 @@
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-import { Middleware } from '../common/types/common.types';
 import { ConnectionOptions } from 'typeorm';
-import { MyanCommerceLogger } from '../logger/myancommerce.logger';
+import { Middleware } from '@myancommerce/core';
+import { NSXLogger } from '@myancommerce/nsx-logger';
 import { Type } from '@myancommerce/shared';
 
 /**
@@ -141,7 +141,7 @@ export interface MyanCommerceConfig {
      *
      * @default DefaultLogger
      */
-    logger?: MyanCommerceLogger;
+    logger?: NSXLogger;
 }
 
 export interface RuntimeMyanCommerceConfig
