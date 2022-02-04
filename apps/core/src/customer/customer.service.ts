@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ID } from '@myancommerce/shared';
+import { ErrorResultUnion } from '@myancommerce/nox-common';
+import { CreateCustomerResult } from '@myancommerce/generated';
+
 import { RequestContext } from '../api/common/request-context';
 import { Customer } from './entities/customer.entity';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { UserService } from '../user/user.service';
-import { ID } from '@myancommerce/shared';
-import { ErrorResultUnion } from '../common';
-import { CreateCustomerResult } from '@myancommerce/generated';
 
 /**
  * @description

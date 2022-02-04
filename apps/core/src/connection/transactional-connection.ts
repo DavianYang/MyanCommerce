@@ -9,8 +9,8 @@ import {
     EntityManager,
 } from 'typeorm';
 
+import { TRANSACTION_MANAGER_KEY } from '@myancommerce/nox-common';
 import { RequestContext } from '../api/common/request-context';
-import { TRANSACTION_MANAGER_KEY } from '../common/constants';
 
 /**
  * @description
