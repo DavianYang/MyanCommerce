@@ -1,7 +1,8 @@
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
-import { MyanCommerceEntity } from '../../entity/base.entity';
 
-import { DeepPartial } from '@myancommerce/shared';
+import { DeepPartial } from '@myancommerce/nox-common';
+
+import { MyanCommerceEntity } from '../../entity/base.entity';
 import { Role } from '../../role/entities/role.entity';
 
 /**

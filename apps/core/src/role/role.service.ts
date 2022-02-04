@@ -1,11 +1,13 @@
-import { DeletionResponse, DeletionResult } from '@myancommerce/generated';
+import { Injectable } from '@nestjs/common';
+
 import {
     CUSTOMER_ROLE_CODE,
     ID,
     PaginatedList,
     SUPERADMIN_ROLE_CODE,
-} from '@myancommerce/shared';
-import { Injectable } from '@nestjs/common';
+} from '@myancommerce/nox-common';
+import { DeletionResponse, DeletionResult } from '@myancommerce/generated';
+
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { EntityNotFoundError } from '../error/entitiy-not-found.error';

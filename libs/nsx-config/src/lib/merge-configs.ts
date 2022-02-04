@@ -1,5 +1,8 @@
-import { isClassInstance, isObject } from '@myancommerce/shared';
-import { simpleDeepClone } from '@myancommerce/shared';
+import {
+    isClassInstance,
+    isObject,
+    simpleDeepClone,
+} from '@myancommerce/nox-common';
 
 import {
     MyanCommerceConfig,

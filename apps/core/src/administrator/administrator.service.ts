@@ -1,11 +1,13 @@
+import { Injectable } from '@nestjs/common';
+
 import {
     CreateAdministratorInput,
     DeletionResponse,
     DeletionResult,
     UpdateAdministratorInput,
 } from '@myancommerce/generated';
-import { ID, PaginatedList } from '@myancommerce/shared';
-import { Injectable } from '@nestjs/common';
+import { ID, PaginatedList } from '@myancommerce/nox-common';
+
 import { RequestContext } from '../api/common/request-context';
 import { TransactionalConnection } from '../connection/transactional-connection';
 import { EntityNotFoundError } from '../error/entitiy-not-found.error';

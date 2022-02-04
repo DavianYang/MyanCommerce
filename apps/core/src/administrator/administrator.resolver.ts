@@ -1,11 +1,13 @@
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+
 import {
     CreateAdministratorInput,
     DeletionResponse,
     UpdateAdministratorInput,
 } from '@myancommerce/generated';
-import { ID, PaginatedList } from '@myancommerce/shared';
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { ID, PaginatedList } from '@myancommerce/nox-common';
 import { RequestContext } from '../api/common/request-context';
+
 import { Ctx } from '../api/decorators/request-context.decorator';
 import { AdministratorService } from './administrator.service';
 import { Administrator } from './entities/administrator.entity';

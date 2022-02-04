@@ -1,4 +1,5 @@
-import { ID } from '@myancommerce/shared';
+import { ID } from '@myancommerce/nox-common';
+
 import { coreEntitiesMap } from '../entity/entities';
 import ApiError from './base.error';
 

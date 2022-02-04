@@ -1,4 +1,4 @@
-import { DeepPartial } from '@myancommerce/shared';
+import { DeepPartial } from '@myancommerce/nox-common';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { MyanCommerceEntity } from '../../entity/base.entity';
 import { User } from '../../user/entities/user.entity';

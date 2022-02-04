@@ -1,4 +1,4 @@
-import { Type } from '@myancommerce/shared';
+import { Type } from './shared.types';
 
 export type MiddlewareHandler = Type<any> | Function;
 
