@@ -1,4 +1,3 @@
-import path from 'path';
 import { Module } from '@nestjs/common';
 
 import { GraphQLModule } from '@nestjs/graphql';
@@ -19,8 +18,9 @@ import { AdminAPIModule } from '../api/api-internal-modules';
         AdminAPIModule,
         GraphQLModule.forRootAsync({
             useFactory: (config: ConfigService) => ({
-                path: '/' + 'admin',
-                typePaths: [path.join(__dirname, 'graphql', '**', '*.graphql')],
+                path: '/' + 'admin-api',
+                // path.join(__dirname, 'graphql', '**', '*.graphql'
+                typePaths: ['apps/core/src/graphql/**/*.graphql'],
                 include: [AdminAPIModule],
                 playground: config.apiOptions.adminApiPlayground || false,
                 debug: config.apiOptions.adminApiDebug || false,
