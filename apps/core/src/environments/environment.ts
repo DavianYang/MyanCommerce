@@ -1,39 +1,55 @@
-import path from 'path';
 import * as dotenv from 'dotenv';
+import { ConfigModuleOptions } from '@nestjs/config';
 import { DefaultLogger } from '@myancommerce/nsx-logger';
 import { LogLevel } from '@myancommerce/nsx-logger';
-import { MyanCommerceConfig } from '@myancommerce/nsx-config';
+import {
+    ApiOptions,
+    CometXConfig,
+    GraphQLOptions,
+} from './envrionment.interface';
 
 dotenv.config({ path: __dirname + `./.env` });
 
-export const config: MyanCommerceConfig = {
-    apiOptions: {
-        port: 3000,
-        adminApiPath: 'admin-api',
-        adminApiPlayground: true, // turn this off for production
-        adminApiDebug: true, // turn this off for production
-        shopApiPath: 'shop-api',
-        shopApiPlayground: {
-            settings: {
-                'request.credentials': 'include',
-            } as any,
-        }, // turn this off for production
-        shopApiDebug: true, // turn this off for production
+const appConfig: ConfigModuleOptions = {
+    isGlobal: true,
+};
+
+const apiConfig: ApiOptions = {
+    hostname: process.env['DATABASE_HOST'],
+    port: 3000,
+
+    adminApiPath: 'admin-api',
+    adminApiPlayground: true, // turn this off for production
+    adminApiDebug: true, // turn this off for production
+
+    shopApiPath: 'shop-api',
+    shopApiPlayground: {
+        settings: {
+            'request.credentials': 'include',
+        } as any,
+    }, // turn this off for production
+    shopApiDebug: true, // turn this off for production
+};
+
+const graphqlConfig: GraphQLOptions = {
+    sortSchema: true,
+    autoSchemaFile: 'apps/core/src/schema.gql',
+    buildSchemaOptions: {
+        numberScalarMode: 'integer',
     },
-    dbConnectionOptions: {
-        type: 'postgres',
-        synchronize: true, // turn off for production
-        logging: false,
-        database: process.env['DATABASE_NAME'],
-        host: process.env['DATABASE_HOST'],
-        port: 5433,
-        username: process.env['DATABASE_USER'],
-        password: process.env['DATABASE_PASSWORD'],
-        migrations: [path.join(__dirname, '../migrations/*.ts')],
+    cors: {
+        credentials: true,
+        origin: 'http://localhost:4200',
     },
+};
+
+export const environment: CometXConfig = {
+    appConfig,
+    apiConfig,
+    graphqlConfig,
     logger: new DefaultLogger({
         level: LogLevel.Info,
         timestamp: true,
-        defaultContext: 'MyanCommerce Server',
+        defaultContext: 'CometX Server',
     }),
 };
