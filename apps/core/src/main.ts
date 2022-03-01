@@ -1,6 +1,5 @@
 import { bootstrap } from './app/bootstrap';
-import { config } from './environments/environment';
 
-bootstrap(config).catch(err => {
+bootstrap().catch(err => {
     console.log(err);
 });
