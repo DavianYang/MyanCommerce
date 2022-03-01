@@ -39,8 +39,7 @@
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
             "@myancommerce/nsx-prisma": ["libs/nsx-prisma/src/index.ts"],
             "@myancommerce/nsx-role": ["libs/nsx-role/src/index.ts"],
-            "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"],
-            "@myancommerce/testing": ["libs/testing/src/index.ts"]
+            "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"]
         }
     },
     "include": ["apps", "libs"],
