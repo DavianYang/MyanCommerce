@@ -1,9 +1,9 @@
 overwrite: true
 schema:
-  - 'apps/core/src/graphql/**/*.graphql'
+  - 'apps/core/src/schema.gql'
 documents:
-  # - 'apps/core/test/*.ts'
-  - 'apps/core/test/*.e2e-spec.ts'
+  - '*.spec.ts'
+  - 'libs/**/src/lib/*.spec.ts'
 generates:
   libs/generated/src/types/generated-graphql.ts:
     plugins:
