@@ -1,0 +1,13 @@
+input CreateAdministratorInput {
+    firstName: String!
+    lastName: String!
+    emailAddress: String!
+    roleIds: [ID!]!
+}
+
+input UpdateAdministratorInput {
+    firstName: String
+    lastName: String
+    emailAddress: String
+    roleIds: [ID!]
+}
