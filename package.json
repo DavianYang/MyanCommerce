@@ -6,6 +6,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
+        "build": "nx build",
         "lint": "eslint **/*.{js,ts}",
         "lint:fix": "pnpm run lint -- --fix",
         "test": "jest",
@@ -18,8 +19,6 @@
         "build:packs": "tsc --build --force --verbose",
         "changeset": "changeset",
         "release": "changeset publish",
-        "clear": "rimraf packages/*/{lib,tsconfig.tsbuildinfo,node_modules} && rimraf node_modules",
-        "cz": "git-cz",
         "codegen": "graphql-codegen --config codegen.yml"
     },
     "dependencies": {
