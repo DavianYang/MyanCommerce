@@ -9,8 +9,16 @@ type AdministratorDto {
   id: ID!
   lastName: String!
   updatedAt: DateTime!
-  user: User!
+  user: UserDto!
 }
+
+type AuthUserResponse {
+  id: ID!
+  identifier: String!
+  token: String!
+}
+
+union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
 
 input CreateAdministratorInput {
   emailAddress: String!
@@ -19,39 +27,72 @@ input CreateAdministratorInput {
   roleIds: [Int!]!
 }
 
+input CreateRoleInput {
+  code: String!
+  description: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
+enum ErrorCode {
+  UNKNOwN_ERROR
+}
+
+"""Returned if the user authentication credentials are not valid"""
+type InvalidCredentialsError {
+  authenticationError: String!
+  errorCode: ErrorCode!
+  message: String!
+}
+
+input LoginSocialInput {
+  accessToken: String!
+  provider: SocialAuthProviders!
+}
+
 type Mutation {
   createAdministrator(input: CreateAdministratorInput!): AdministratorDto!
-  createRole(input: RoleWhereInput!): Role!
+  createRole(input: CreateRoleInput!): RoleDto!
+  deleteRole(id: Int!): RoleDto!
+  login(identifier: String!): AuthenticationResult!
+  loginSocial(input: LoginSocialInput!): AuthenticationResult!
   updateAdministrator: AdministratorDto!
+  updateRole(id: Int!, input: UpdateRoleInput!): RoleDto!
 }
 
 type Query {
   administrator(id: String!): AdministratorDto!
   administrators(cursor: String, skip: Int, take: Int): [AdministratorDto!]!
+  me: UserDto!
+  role(id: Int!): RoleDto!
+  roles(cursor: String, skip: Int, take: Int): [RoleDto!]!
 }
 
-type Role {
+type RoleDto {
   code: String!
   description: String!
   id: ID!
 }
 
-input RoleWhereInput {
+enum SocialAuthProviders {
+  FACEBOOK
+  GOOGLE
+}
+
+input UpdateRoleInput {
   code: String!
   description: String!
 }
 
-type User {
+type UserDto {
   createdAt: DateTime!
   id: ID!
   identifier: String!
   lastLogin: DateTime
-  roles: [Role!]!
+  roles: [RoleDto!]!
   updatedAt: DateTime!
   verified: Boolean!
 }
