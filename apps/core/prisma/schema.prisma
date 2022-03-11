@@ -14,7 +14,7 @@ model User {
   updatedAt     DateTime       @updatedAt
   identifier    String         @unique
   verified      Boolean        @default(false)
-  role          Role[]
+  roles          Role[]
   administrator Administrator?
   customer      Customer?
 }
