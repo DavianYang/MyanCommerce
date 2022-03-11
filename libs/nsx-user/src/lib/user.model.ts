@@ -1,17 +1,17 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { BaseModel } from '@myancommerce/nsx-common';
-import { Role } from '@myancommerce/nsx-role';
+import { RoleDto } from '@myancommerce/nsx-role';
 
 @ObjectType()
-export class User extends BaseModel {
+export class UserDto extends BaseModel {
     @Field()
     identifier: string;
 
     @Field()
     verified: boolean;
 
-    @Field(() => [Role])
-    roles: Role[];
+    @Field(() => [RoleDto])
+    roles: RoleDto[];
 
     @Field({ nullable: true })
     lastLogin: Date;
