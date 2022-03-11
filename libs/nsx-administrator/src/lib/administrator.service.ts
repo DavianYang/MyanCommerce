@@ -26,6 +26,7 @@ export class AdministratorService {
     ): Promise<Administrator> {
         return await prisma.$transaction(async (_prisma: any) => {
             const user = await this.userService.createAdminUser(
+                _prisma,
                 data.emailAddress,
             );
 

@@ -2,16 +2,19 @@ import { Request as HttpRequest, Response as HttpResponse } from 'express';
 import gql from 'graphql-tag';
 import { INestApplication, Logger } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule } from '@nestjs/config';
 
 import { UserModule } from '@myancommerce/nsx-user';
 import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
 import { RoleModule } from '@myancommerce/nsx-role';
-import { TestGraphQLClient } from './test-graphql-client';
 import { CreateAdministrator } from '@myancommerce/generated';
-import { ConfigModule } from '@nestjs/config';
-import { testEnvironment } from './test-environment';
-import { testConfiguration } from './test.config';
-import { GraphQLModule } from '@nestjs/graphql';
+import {
+    TestGraphQLClient,
+    testEnvironment,
+    testConfiguration,
+} from '@myancommerce/nsx-testing';
+
 import { AdministratorModule } from './administrator.module';
 
 export const ADMINISTRATOR_FRAGMENT = gql`
