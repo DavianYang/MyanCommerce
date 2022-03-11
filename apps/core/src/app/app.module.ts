@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
 import { environment } from '../environments/environment';
 import { appConfiguration } from './app.config';
+import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { RoleModule } from '@myancommerce/nsx-role';
 import { UserModule } from '@myancommerce/nsx-user';
@@ -23,7 +24,6 @@ import { UserModule } from '@myancommerce/nsx-user';
                 path: environment.apiConfig.adminApiPath,
                 debug: environment.apiConfig.adminApiDebug,
                 playground: environment.apiConfig.adminApiPlayground,
-                include: [AdministratorModule, UserModule, RoleModule],
                 context: ({ req, res }: any) => ({
                     request: req as HttpRequest,
                     response: res as HttpResponse,
@@ -33,6 +33,7 @@ import { UserModule } from '@myancommerce/nsx-user';
             inject: [PrismaService],
         }),
         AdministratorModule,
+        AuthModule,
         UserModule,
         RoleModule,
     ],
