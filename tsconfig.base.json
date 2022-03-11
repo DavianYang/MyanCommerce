@@ -30,10 +30,16 @@
             "@myancommerce/core": ["apps/core/src/index.ts"],
             "@myancommerce/generated": ["libs/generated/src/index.ts"],
             "@myancommerce/nox-common": ["libs/nox-common/src/index.ts"],
+            "@myancommerce/nsx-administrator": [
+                "libs/nsx-administrator/src/index.ts"
+            ],
+            "@myancommerce/nsx-auth": ["libs/nsx-auth/src/index.ts"],
+            "@myancommerce/nsx-common": ["libs/nsx-common/src/index.ts"],
             "@myancommerce/nsx-config": ["libs/nsx-config/src/index.ts"],
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
-            "@myancommerce/shared": ["libs/shared/src/index.ts"],
-            "@myancommerce/testing": ["libs/testing/src/index.ts"]
+            "@myancommerce/nsx-prisma": ["libs/nsx-prisma/src/index.ts"],
+            "@myancommerce/nsx-role": ["libs/nsx-role/src/index.ts"],
+            "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"]
         }
     },
     "include": ["apps", "libs"],

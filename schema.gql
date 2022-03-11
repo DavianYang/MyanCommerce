@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AdministratorDto {
+  createdAt: DateTime!
+  emailAddress: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+input CreateAdministratorInput {
+  emailAddress: String!
+  firstName: String!
+  lastName: String!
+  roleIds: [Int!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createAdministrator(input: CreateAdministratorInput!): AdministratorDto!
+  createRole(input: RoleWhereInput!): Role!
+  updateAdministrator: AdministratorDto!
+}
+
+type Query {
+  administrator(id: String!): AdministratorDto!
+  administrators(cursor: String, skip: Int, take: Int): [AdministratorDto!]!
+}
+
+type Role {
+  code: String!
+  description: String!
+  id: ID!
+}
+
+input RoleWhereInput {
+  code: String!
+  description: String!
+}
+
+type User {
+  createdAt: DateTime!
+  id: ID!
+  identifier: String!
+  lastLogin: DateTime
+  roles: [Role!]!
+  updatedAt: DateTime!
+  verified: Boolean!
+}

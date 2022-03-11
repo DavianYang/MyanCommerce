@@ -1,14 +1,9 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { Type } from '@myancommerce/shared';
-import { Logger } from '@myancommerce/nsx-logger';
-import {
-    setConfig,
-    getConfig,
-    MyanCommerceConfig,
-    RuntimeMyanCommerceConfig,
-} from '@myancommerce/nsx-config';
-import { coreEntitiesMap } from '../entity/entities';
+
+import { Logger, NSXLogger } from '@myancommerce/nsx-logger';
+import { AppModule } from './app.module';
+import { environment } from '../environments/environment';
 
 export type MyanCommerceBootstrapFunction = (
     config: JSON,
@@ -23,27 +18,19 @@ declare const module: any;
  * @example
  * ```TypeScript
  * import { bootstrap } from '@myancommerce/core';
- * import { config } from './myancommerce-config';
  *
- * bootstrap(config).catch(err => {
+ * bootstrap().catch(err => {
  *     console.log(err);
  * });
  * ```
  * @docsCategory
  * */
 
-export async function bootstrap(
-    userConfig: Partial<MyanCommerceConfig>,
-): Promise<INestApplication> {
-    const config = await preBootstrapConfig(userConfig);
-
-    Logger.useLogger(config.logger);
+export async function bootstrap(): Promise<INestApplication> {
+    Logger.useLogger(environment.logger as NSXLogger);
     Logger.info(`Bootstrapping MyanCommerce Server (pid: ${process.pid})...`);
 
-    // tslint:disable-next-line:whitespace
-    const { AppModule } = await import('./app.module');
-
-    const { hostname, port } = config.apiOptions;
+    const { hostname, port } = environment.apiConfig;
 
     const app = await NestFactory.create(AppModule, { bufferLogs: true });
 
@@ -57,34 +44,11 @@ export async function bootstrap(
     }
 
     app.enableShutdownHooks();
-    logWelcomeMessage(config);
+    logWelcomeMessage();
     return app;
 }
 
-/**
- * Setting the global config must be done prior to loading the AppModule.
- */
-export async function preBootstrapConfig(
-    userConfig: Partial<MyanCommerceConfig>,
-): Promise<Readonly<RuntimeMyanCommerceConfig>> {
-    if (userConfig) {
-        setConfig(userConfig);
-    }
-
-    const entities = await getAllEntities();
-
-    setConfig({
-        dbConnectionOptions: {
-            entities,
-        },
-    });
-
-    const config = getConfig();
-
-    return config;
-}
-
-export function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
+export function logWelcomeMessage() {
     let version: string;
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -93,7 +57,7 @@ export function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
         version = 'unknown';
     }
 
-    const { hostname, port, shopApiPath, adminApiPath } = config.apiOptions;
+    const { hostname, port, shopApiPath, adminApiPath } = environment.apiConfig;
 
     const title = `MyanCommerce server (v${version} now running on http://${
         hostname || 'localhost'
@@ -102,8 +66,8 @@ export function logWelcomeMessage(config: RuntimeMyanCommerceConfig) {
     const apiCliGreetings: Array<readonly [string, string]> = [];
     const pathToUrl = (path: string) =>
         `http://${hostname || 'localhost'}:${port}/${path}`;
-    apiCliGreetings.push(['Shop API', pathToUrl(shopApiPath)]);
-    apiCliGreetings.push(['Admin API', pathToUrl(adminApiPath)]);
+    apiCliGreetings.push(['Shop API', pathToUrl(shopApiPath as string)]);
+    apiCliGreetings.push(['Admin API', pathToUrl(adminApiPath as string)]);
 
     const columnGreetings = arrageCliGreetingInColumns(apiCliGreetings);
 
@@ -128,15 +92,4 @@ function arrageCliGreetingInColumns(
 ): string[] {
     const columnWidth = Math.max(...lines.map(l => l[0].length)) + 2;
     return lines.map(l => `${(l[0] + ':').padEnd(columnWidth)}${l[1]}`);
-}
-
-/**
- * Returns an array of core entities and any additional entities defined in plugins.
- */
-export async function getAllEntities(): Promise<Array<Type<any>>> {
-    const coreEntities = Object.values(coreEntitiesMap) as Array<Type<any>>;
-
-    const allEntities: Array<Type<any>> = coreEntities;
-
-    return allEntities;
 }

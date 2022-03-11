@@ -10,11 +10,12 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
 };
 
-export type Administrator = Node & {
-  __typename?: 'Administrator';
+export type AdministratorDto = {
+  __typename?: 'AdministratorDto';
   createdAt: Scalars['DateTime'];
   emailAddress: Scalars['String'];
   firstName: Scalars['String'];
@@ -24,92 +25,18 @@ export type Administrator = Node & {
   user: User;
 };
 
-export type AdministratorList = PaginatedList & {
-  __typename?: 'AdministratorList';
-  items: Array<Administrator>;
-  totalItems: Scalars['Int'];
-};
-
 export type CreateAdministratorInput = {
   emailAddress: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
-  roleIds: Array<Scalars['ID']>;
-};
-
-export type CreateCustomerInput = {
-  emailAddress?: InputMaybe<Scalars['String']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-};
-
-export type CreateCustomerResult = Customer | EmailAddressConflictError;
-
-export type CreateRoleInput = {
-  code: Scalars['String'];
-  description: Scalars['String'];
-};
-
-export type Customer = Node & {
-  __typename?: 'Customer';
-  createdAt: Scalars['DateTime'];
-  emailAddress?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  lastName?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-  user?: Maybe<User>;
-};
-
-export type DeletionResponse = {
-  __typename?: 'DeletionResponse';
-  message?: Maybe<Scalars['String']>;
-  result: DeletionResult;
-};
-
-export enum DeletionResult {
-  /** the entity is successfully deleted */
-  Deleted = 'DELETED',
-  /** Deletion did not happen, error message to be given */
-  NotDeleted = 'NOT_DELETED'
-}
-
-/** Returned wehn attempting to create a Customer with an email address already registered to an existing User. */
-export type EmailAddressConflictError = ErrorResult & {
-  __typename?: 'EmailAddressConflictError';
-  errorCode: ErrorCode;
-  message: Scalars['String'];
-};
-
-export enum ErrorCode {
-  UnknownError = 'UNKNOWN_ERROR'
-}
-
-export type ErrorResult = {
-  errorCode: ErrorCode;
-  message: Scalars['String'];
+  roleIds: Array<Scalars['Int']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Create a new Administrator */
-  createAdministrator: Administrator;
-  /** Create a new Customer */
-  createCustomer?: Maybe<Customer>;
-  /** Create a new Role */
+  createAdministrator: AdministratorDto;
   createRole: Role;
-  /** Delete an existing Administrator */
-  deleteAdministrator: DeletionResponse;
-  /** Delete an existing Role */
-  deleteRole: DeletionResponse;
-  /** Update an existing Administrator */
-  updateAdministrator: Administrator;
-  /** Update an existing Role */
-  updateRole: Role;
+  updateAdministrator: AdministratorDto;
 };
 
 
@@ -118,97 +45,41 @@ export type MutationCreateAdministratorArgs = {
 };
 
 
-export type MutationCreateCustomerArgs = {
-  input: CreateCustomerInput;
-};
-
-
 export type MutationCreateRoleArgs = {
-  input: CreateRoleInput;
-};
-
-
-export type MutationDeleteAdministratorArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationDeleteRoleArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationUpdateAdministratorArgs = {
-  id: Scalars['ID'];
-  input: UpdateAdministratorInput;
-};
-
-
-export type MutationUpdateRoleArgs = {
-  input: UpdateRoleInput;
-};
-
-export type Node = {
-  id: Scalars['ID'];
-};
-
-export type PaginatedList = {
-  items: Array<Node>;
-  totalItems: Scalars['Int'];
+  input: RoleWhereInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  activeAdministrator?: Maybe<Administrator>;
-  administrator?: Maybe<Administrator>;
-  administrators: AdministratorList;
-  customer?: Maybe<Customer>;
-  role?: Maybe<Role>;
-  roles: RoleList;
+  administrator: AdministratorDto;
+  administrators: Array<AdministratorDto>;
 };
 
 
 export type QueryAdministratorArgs = {
-  id: Scalars['ID'];
+  id: Scalars['String'];
 };
 
 
-export type QueryCustomerArgs = {
-  id: Scalars['ID'];
+export type QueryAdministratorsArgs = {
+  cursor?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
 };
 
-
-export type QueryRoleArgs = {
-  id: Scalars['ID'];
-};
-
-export type Role = Node & {
+export type Role = {
   __typename?: 'Role';
   code: Scalars['String'];
   description: Scalars['String'];
   id: Scalars['ID'];
 };
 
-export type RoleList = PaginatedList & {
-  __typename?: 'RoleList';
-  items: Array<Role>;
-  totalItems: Scalars['Int'];
+export type RoleWhereInput = {
+  code: Scalars['String'];
+  description: Scalars['String'];
 };
 
-export type UpdateAdministratorInput = {
-  emailAddress?: InputMaybe<Scalars['String']>;
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  roleIds?: InputMaybe<Array<Scalars['ID']>>;
-};
-
-export type UpdateRoleInput = {
-  code?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
-};
-
-export type User = Node & {
+export type User = {
   __typename?: 'User';
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
@@ -219,57 +90,26 @@ export type User = Node & {
   verified: Scalars['Boolean'];
 };
 
-export type AdministratorFragment = { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string };
-
-export type GetAdministratorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAdministratorsQuery = { __typename?: 'Query', administrators: { __typename?: 'AdministratorList', totalItems: number, items: Array<{ __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string }> } };
-
-export type GetAdministratorQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetAdministratorQuery = { __typename?: 'Query', administrator?: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } | null | undefined };
+export type AdministratorFragment = { __typename?: 'AdministratorDto', id: string, firstName: string, lastName: string, emailAddress: string, user: { __typename?: 'User', id: string, identifier: string, lastLogin?: any | null | undefined, roles: Array<{ __typename?: 'Role', id: string, code: string, description: string }> } };
 
 export type CreateAdministratorMutationVariables = Exact<{
   input: CreateAdministratorInput;
 }>;
 
 
-export type CreateAdministratorMutation = { __typename?: 'Mutation', createAdministrator: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } };
+export type CreateAdministratorMutation = { __typename?: 'Mutation', createAdministrator: { __typename?: 'AdministratorDto', id: string, firstName: string, lastName: string, emailAddress: string, user: { __typename?: 'User', id: string, identifier: string, lastLogin?: any | null | undefined, roles: Array<{ __typename?: 'Role', id: string, code: string, description: string }> } } };
 
-export type UpdateAdministratorMutationVariables = Exact<{
-  id: Scalars['ID'];
-  input: UpdateAdministratorInput;
+export type GetAdministratorQueryVariables = Exact<{
+  id: Scalars['String'];
 }>;
 
 
-export type UpdateAdministratorMutation = { __typename?: 'Mutation', updateAdministrator: { __typename?: 'Administrator', id: string, firstName: string, lastName: string, emailAddress: string } };
-
-export type DeleteAdministratorMutationVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type DeleteAdministratorMutation = { __typename?: 'Mutation', deleteAdministrator: { __typename?: 'DeletionResponse', message?: string | null | undefined, result: DeletionResult } };
+export type GetAdministratorQuery = { __typename?: 'Query', administrator: { __typename?: 'AdministratorDto', id: string, firstName: string, lastName: string, emailAddress: string, user: { __typename?: 'User', id: string, identifier: string, lastLogin?: any | null | undefined, roles: Array<{ __typename?: 'Role', id: string, code: string, description: string }> } } };
 
 export namespace Administrator {
   export type Fragment = AdministratorFragment;
-}
-
-export namespace GetAdministrators {
-  export type Variables = GetAdministratorsQueryVariables;
-  export type Query = GetAdministratorsQuery;
-  export type Administrators = GetAdministratorsQuery['administrators'];
-  export type Items = GetAdministratorsQuery['administrators']['items'][number];
-}
-
-export namespace GetAdministrator {
-  export type Variables = GetAdministratorQueryVariables;
-  export type Query = GetAdministratorQuery;
-  export type Administrator = GetAdministratorQuery['administrator'];
+  export type User = AdministratorFragment['user'];
+  export type Roles = AdministratorFragment['user']['roles'][number];
 }
 
 export namespace CreateAdministrator {
@@ -278,14 +118,8 @@ export namespace CreateAdministrator {
   export type CreateAdministrator = CreateAdministratorMutation['createAdministrator'];
 }
 
-export namespace UpdateAdministrator {
-  export type Variables = UpdateAdministratorMutationVariables;
-  export type Mutation = UpdateAdministratorMutation;
-  export type UpdateAdministrator = UpdateAdministratorMutation['updateAdministrator'];
-}
-
-export namespace DeleteAdministrator {
-  export type Variables = DeleteAdministratorMutationVariables;
-  export type Mutation = DeleteAdministratorMutation;
-  export type DeleteAdministrator = DeleteAdministratorMutation['deleteAdministrator'];
+export namespace GetAdministrator {
+  export type Variables = GetAdministratorQueryVariables;
+  export type Query = GetAdministratorQuery;
+  export type Administrator = GetAdministratorQuery['administrator'];
 }
