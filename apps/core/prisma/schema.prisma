@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+generator dbml {
+  provider   = "prisma-dbml-generator"
+  output     = "../dbml"
+  outputName = "awesome.dbml"
+  projectName = "Project Name"
+  projectDatabaseType = "PostgreSQL"
+  projectNote = "Test project description"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  identifier    String         @unique
+  verified      Boolean        @default(false)
+  roles          Role[]
+  administrator Administrator?
+  customer      Customer?
+}
+
+model Role {
+  id          Int   @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  code        String   @db.VarChar(255) @unique
+  description String   @db.Text()
+  user        User[]
+}
+
+model Administrator {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  firstName    String
+  lastName     String
+  emailAddress String   @unique
+  user         User?     @relation(fields: [userId], references: [id])
+  userId       String   @unique
+}
+
+model Customer {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  firstName    String
+  lastName     String
+  phoneNumber  String?
+  emailAddress String   @unique
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String   @unique
+}

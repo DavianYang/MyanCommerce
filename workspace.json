@@ -4,8 +4,13 @@
         "core": "apps/core",
         "generated": "libs/generated",
         "nox-common": "libs/nox-common",
+        "nsx-administrator": "libs/nsx-administrator",
+        "nsx-auth": "libs/nsx-auth",
+        "nsx-common": "libs/nsx-common",
         "nsx-config": "libs/nsx-config",
         "nsx-logger": "libs/nsx-logger",
-        "testing": "libs/testing"
+        "nsx-prisma": "libs/nsx-prisma",
+        "nsx-role": "libs/nsx-role",
+        "nsx-user": "libs/nsx-user"
     }
 }

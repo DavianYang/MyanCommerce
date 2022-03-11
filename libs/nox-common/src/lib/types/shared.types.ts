@@ -1,3 +1,6 @@
+import { Request as HttpRequest, Response as HttpResponse } from 'express';
+import { PrismaClient } from '@prisma/client';
+
 /**
  * A type representing the type rather than instance of a class.
  */
@@ -20,6 +23,12 @@ export type DeepPartial<T> = {
               : DeepPartial<T[P]>);
 };
 
+export interface RequestContext {
+    prisma: PrismaClient;
+    request: HttpRequest;
+    response: HttpResponse;
+}
+
 /**
  * @description
  * An entity ID. Depending on the configured {@link EntityIdStrategy}, it will be either
@@ -27,7 +36,7 @@ export type DeepPartial<T> = {
  *
  * @docsCategory shared
  */
-export type ID = string | number;
+export type ID = number | string;
 
 /**
  * @description
