@@ -48,6 +48,482 @@ type InvalidCredentialsError {
   message: String!
 }
 
+"""
+Languages in the form of a ISO 639-1 language code with optional region or script modifier (e.g. de_AT).
+"""
+enum LanguageCode {
+  """Afrikaans"""
+  af
+
+  """Akan"""
+  ak
+
+  """Amharic"""
+  am
+
+  """Arabic"""
+  ar
+
+  """Assamese"""
+  as
+
+  """Azerbaijani"""
+  az
+
+  """Belarusian"""
+  be
+
+  """Bulgarian"""
+  bg
+
+  """Bambara"""
+  bm
+
+  """Bangla"""
+  bn
+
+  """Tibetan"""
+  bo
+
+  """Breton"""
+  br
+
+  """Bosnian"""
+  bs
+
+  """Catalan"""
+  ca
+
+  """Chechen"""
+  ce
+
+  """Corsican"""
+  co
+
+  """Czech"""
+  cs
+
+  """Church Slavic"""
+  cu
+
+  """Welsh"""
+  cy
+
+  """Danish"""
+  da
+
+  """German"""
+  de
+
+  """Austrian German"""
+  de_AT
+
+  """Swiss High German"""
+  de_CH
+
+  """Dzongkha"""
+  dz
+
+  """Ewe"""
+  ee
+
+  """Greek"""
+  el
+
+  """English"""
+  en
+
+  """Australian English"""
+  en_AU
+
+  """Canadian English"""
+  en_CA
+
+  """British English"""
+  en_GB
+
+  """American English"""
+  en_US
+
+  """Esperanto"""
+  eo
+
+  """Spanish"""
+  es
+
+  """European Spanish"""
+  es_ES
+
+  """Mexican Spanish"""
+  es_MX
+
+  """Estonian"""
+  et
+
+  """Basque"""
+  eu
+
+  """Persian"""
+  fa
+
+  """Dari"""
+  fa_AF
+
+  """Fulah"""
+  ff
+
+  """Finnish"""
+  fi
+
+  """Faroese"""
+  fo
+
+  """French"""
+  fr
+
+  """Canadian French"""
+  fr_CA
+
+  """Swiss French"""
+  fr_CH
+
+  """Western Frisian"""
+  fy
+
+  """Irish"""
+  ga
+
+  """Scottish Gaelic"""
+  gd
+
+  """Galician"""
+  gl
+
+  """Gujarati"""
+  gu
+
+  """Manx"""
+  gv
+
+  """Hausa"""
+  ha
+
+  """Hebrew"""
+  he
+
+  """Hindi"""
+  hi
+
+  """Croatian"""
+  hr
+
+  """Haitian Creole"""
+  ht
+
+  """Hungarian"""
+  hu
+
+  """Armenian"""
+  hy
+
+  """Interlingua"""
+  ia
+
+  """Indonesian"""
+  id
+
+  """Igbo"""
+  ig
+
+  """Sichuan Yi"""
+  ii
+
+  """Icelandic"""
+  is
+
+  """Italian"""
+  it
+
+  """Japanese"""
+  ja
+
+  """Javanese"""
+  jv
+
+  """Georgian"""
+  ka
+
+  """Kikuyu"""
+  ki
+
+  """Kazakh"""
+  kk
+
+  """Kalaallisut"""
+  kl
+
+  """Khmer"""
+  km
+
+  """Kannada"""
+  kn
+
+  """Korean"""
+  ko
+
+  """Kashmiri"""
+  ks
+
+  """Kurdish"""
+  ku
+
+  """Cornish"""
+  kw
+
+  """Kyrgyz"""
+  ky
+
+  """Latin"""
+  la
+
+  """Luxembourgish"""
+  lb
+
+  """Ganda"""
+  lg
+
+  """Lingala"""
+  ln
+
+  """Lao"""
+  lo
+
+  """Lithuanian"""
+  lt
+
+  """Luba-Katanga"""
+  lu
+
+  """Latvian"""
+  lv
+
+  """Malagasy"""
+  mg
+
+  """Maori"""
+  mi
+
+  """Macedonian"""
+  mk
+
+  """Malayalam"""
+  ml
+
+  """Mongolian"""
+  mn
+
+  """Marathi"""
+  mr
+
+  """Malay"""
+  ms
+
+  """Maltese"""
+  mt
+
+  """Burmese"""
+  my
+
+  """Norwegian Bokmål"""
+  nb
+
+  """North Ndebele"""
+  nd
+
+  """Nepali"""
+  ne
+
+  """Dutch"""
+  nl
+
+  """Flemish"""
+  nl_BE
+
+  """Norwegian Nynorsk"""
+  nn
+
+  """Nyanja"""
+  ny
+
+  """Oromo"""
+  om
+
+  """Odia"""
+  or
+
+  """Ossetic"""
+  os
+
+  """Punjabi"""
+  pa
+
+  """Polish"""
+  pl
+
+  """Pashto"""
+  ps
+
+  """Portuguese"""
+  pt
+
+  """Brazilian Portuguese"""
+  pt_BR
+
+  """European Portuguese"""
+  pt_PT
+
+  """Quechua"""
+  qu
+
+  """Romansh"""
+  rm
+
+  """Rundi"""
+  rn
+
+  """Romanian"""
+  ro
+
+  """Moldavian"""
+  ro_MD
+
+  """Russian"""
+  ru
+
+  """Kinyarwanda"""
+  rw
+
+  """Sanskrit"""
+  sa
+
+  """Sindhi"""
+  sd
+
+  """Northern Sami"""
+  se
+
+  """Sango"""
+  sg
+
+  """Sinhala"""
+  si
+
+  """Slovak"""
+  sk
+
+  """Slovenian"""
+  sl
+
+  """Samoan"""
+  sm
+
+  """Shona"""
+  sn
+
+  """Somali"""
+  so
+
+  """Albanian"""
+  sq
+
+  """Serbian"""
+  sr
+
+  """Southern Sotho"""
+  st
+
+  """Sundanese"""
+  su
+
+  """Swedish"""
+  sv
+
+  """Swahili"""
+  sw
+
+  """Congo Swahili"""
+  sw_CD
+
+  """Tamil"""
+  ta
+
+  """Telugu"""
+  te
+
+  """Tajik"""
+  tg
+
+  """Thai"""
+  th
+
+  """Tigrinya"""
+  ti
+
+  """Turkmen"""
+  tk
+
+  """Tongan"""
+  to
+
+  """Turkish"""
+  tr
+
+  """Tatar"""
+  tt
+
+  """Uyghur"""
+  ug
+
+  """Ukrainian"""
+  uk
+
+  """Urdu"""
+  ur
+
+  """Uzbek"""
+  uz
+
+  """Vietnamese"""
+  vi
+
+  """Volapük"""
+  vo
+
+  """Wolof"""
+  wo
+
+  """Xhosa"""
+  xh
+
+  """Yiddish"""
+  yi
+
+  """Yoruba"""
+  yo
+
+  """Chinese"""
+  zh
+
+  """Simplified Chinese"""
+  zh_Hans
+
+  """Traditional Chinese"""
+  zh_Hant
+
+  """Zulu"""
+  zu
+}
+
 input LoginSocialInput {
   accessToken: String!
   provider: SocialAuthProviders!
