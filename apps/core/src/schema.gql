@@ -20,6 +20,15 @@ type AuthUserResponse {
 
 union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
 
+type CountryDto {
+  code: String!
+  createdAt: DateTime!
+  id: ID!
+  languageCode: LanguageCode!
+  name: String!
+  updatedAt: DateTime!
+}
+
 input CreateAdministratorInput {
   emailAddress: String!
   firstName: String!
