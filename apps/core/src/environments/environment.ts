@@ -7,6 +7,11 @@ import {
     CometXConfig,
     GraphQLOptions,
 } from './envrionment.interface';
+import { AuthModule } from '@myancommerce/nsx-auth';
+import { AdministratorModule } from '@myancommerce/nsx-administrator';
+import { CustomerModule } from '@myancommerce/nsx-customer';
+import { UserModule } from '@myancommerce/nsx-user';
+import { RoleModule } from '@myancommerce/nsx-role';
 
 dotenv.config({ path: __dirname + `./.env` });
 
