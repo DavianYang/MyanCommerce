@@ -2,9 +2,9 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Project "Project Name" {
+Project "CometX" {
   database_type: 'PostgreSQL'
-  Note: 'Test project description'
+  Note: 'Online Commerce Platform'
 }
 
 Table User {
