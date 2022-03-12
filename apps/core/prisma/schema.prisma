@@ -5,11 +5,11 @@ generator client {
 
 generator dbml {
   provider   = "prisma-dbml-generator"
-  output     = "../dbml"
-  outputName = "awesome.dbml"
-  projectName = "Project Name"
+  output     = "../../../doc/uml"
+  outputName = "myancommerce.dbml"
+  projectName = "CometX"
   projectDatabaseType = "PostgreSQL"
-  projectNote = "Test project description"
+  projectNote = "Online Commerce Platform"
 }
 
 datasource db {
