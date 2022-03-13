@@ -7,10 +7,11 @@
         "nsx-administrator": "libs/nsx-administrator",
         "nsx-auth": "libs/nsx-auth",
         "nsx-common": "libs/nsx-common",
-        "nsx-config": "libs/nsx-config",
+        "nsx-customer": "libs/nsx-customer",
         "nsx-logger": "libs/nsx-logger",
         "nsx-prisma": "libs/nsx-prisma",
         "nsx-role": "libs/nsx-role",
+        "nsx-testing": "libs/nsx-testing",
         "nsx-user": "libs/nsx-user"
     }
 }

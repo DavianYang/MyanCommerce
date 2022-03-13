@@ -35,10 +35,11 @@
             ],
             "@myancommerce/nsx-auth": ["libs/nsx-auth/src/index.ts"],
             "@myancommerce/nsx-common": ["libs/nsx-common/src/index.ts"],
-            "@myancommerce/nsx-config": ["libs/nsx-config/src/index.ts"],
+            "@myancommerce/nsx-customer": ["libs/nsx-customer/src/index.ts"],
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
             "@myancommerce/nsx-prisma": ["libs/nsx-prisma/src/index.ts"],
             "@myancommerce/nsx-role": ["libs/nsx-role/src/index.ts"],
+            "@myancommerce/nsx-testing": ["libs/nsx-testing/src/index.ts"],
             "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"]
         }
     },
