@@ -15,7 +15,7 @@ export class CustomerDto extends BaseModel implements Partial<Customer> {
     emailAddress!: string;
 
     @Field(() => String, { nullable: true })
-    phoneNumber: string;
+    phoneNumber: string | null;
 
     @Field({ nullable: true })
     title: string;
