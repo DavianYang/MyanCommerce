@@ -10,7 +10,7 @@ export class CustomerResolver {
     constructor(private readonly customerService: CustomerService) {}
 
     @Query(() => [CustomerDto])
-    administrators(
+    customers(
         @Context() { prisma }: RequestContext,
         @Args() { cursor, take, skip }: PaginationArgs,
     ): Promise<CustomerDto[]> {
@@ -24,7 +24,7 @@ export class CustomerResolver {
     }
 
     @Query(() => CustomerDto)
-    administrator(
+    customer(
         @Context() { prisma }: RequestContext,
         @Args('id', { type: () => String }) userId: ID,
     ): Promise<CustomerDto | null> {
@@ -34,7 +34,7 @@ export class CustomerResolver {
     }
 
     @Mutation(() => CustomerDto)
-    createAdministrator(
+    createCustomer(
         @Context() { prisma }: RequestContext,
         @Args('input') input: CreateCustomerInput,
     ): Promise<CustomerDto> {
