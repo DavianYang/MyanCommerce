@@ -1,4 +1,5 @@
 import { NSXLogger } from '@myancommerce/nsx-logger';
+import { Type } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ConfigModuleOptions } from '@nestjs/config';
 import { BuildSchemaOptions } from '@nestjs/graphql';
@@ -62,6 +63,34 @@ export interface ApiOptions {
     shopApiDebug?: boolean;
 }
 
+export interface SocialAuthOptions {
+    name: string;
+    clientID: string;
+    clientSecret: string;
+}
+
+export interface AuthOptions {
+    /**
+     * @description
+     * JWT(Json Web Token) made up of three parts, the header, the payload and the signature.
+     * During the signing process, the algorithm take the header, the payload and the secret to create a unique signature
+     * Since secret token play an important role for singature since third party don't have access for it.
+     */
+    jwtTokenSecret: string;
+    /**
+     * @description
+     * Set Token Expiration
+     */
+    jwtTokenExpiry: string;
+    /**
+     * @description
+     * Set Cookie Expiration for JWT token
+     */
+    jwtCookieExpiry: string;
+
+    bcryptSaltOrRound?: number;
+}
+
 export interface GraphQLOptions {
     /**
      * @description
@@ -91,6 +120,13 @@ export interface GraphQLOptions {
      * @default { origin: true, credentials: true }
      */
     cors: CorsOptions | boolean;
+    /**
+     * @description
+     * Include module that generate resolver to Graphql Schemas
+     *
+     * @default []
+     */
+    include: Array<Type<any>>;
 }
 
 export interface CometXConfig {
@@ -105,6 +141,18 @@ export interface CometXConfig {
      * Configuration for Graphql APIs, including hostname, port, Graphql paths.
      */
     apiConfig: ApiOptions;
+
+    /**
+     * @description
+     * Configuration for authorization.
+     */
+    authConfig: AuthOptions;
+
+    /**
+     * @description
+     * Configures SocalAuthStrategy which defines how authentication is handled in the Shop API
+     */
+    socialAuthConfig: SocialAuthOptions;
 
     /**
      * @description

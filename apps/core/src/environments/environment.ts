@@ -4,8 +4,10 @@ import { DefaultLogger } from '@myancommerce/nsx-logger';
 import { LogLevel } from '@myancommerce/nsx-logger';
 import {
     ApiOptions,
+    AuthOptions,
     CometXConfig,
     GraphQLOptions,
+    SocialAuthOptions,
 } from './envrionment.interface';
 import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
@@ -36,12 +38,31 @@ const apiConfig: ApiOptions = {
     shopApiDebug: true, // turn this off for production
 };
 
+const socialAuthConfig: SocialAuthOptions = {
+    name: 'google',
+    clientID: process.env['CLIENT_ID'] as string,
+    clientSecret: process.env['CLIENT_SECRET'] as string,
+};
+
+const authConfig: AuthOptions = {
+    jwtTokenSecret: process.env['JWT_SECRET'] as string,
+    jwtTokenExpiry: process.env['JWT_EXPIRE_IN'] as string,
+    jwtCookieExpiry: process.env['JWT_COOKIE_EXPIRES_IN'] as string,
+};
+
 const graphqlConfig: GraphQLOptions = {
     sortSchema: true,
     autoSchemaFile: 'apps/core/src/schema.gql',
     buildSchemaOptions: {
         numberScalarMode: 'integer',
     },
+    include: [
+        AuthModule,
+        AdministratorModule,
+        CustomerModule,
+        UserModule,
+        RoleModule,
+    ],
     cors: {
         credentials: true,
         origin: 'http://localhost:4200',
@@ -51,7 +72,9 @@ const graphqlConfig: GraphQLOptions = {
 export const environment: CometXConfig = {
     appConfig,
     apiConfig,
+    authConfig,
     graphqlConfig,
+    socialAuthConfig,
     logger: new DefaultLogger({
         level: LogLevel.Info,
         timestamp: true,
