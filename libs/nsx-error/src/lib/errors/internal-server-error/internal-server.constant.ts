@@ -1,0 +1,2 @@
+export const INTERNAL_SERVER_ERROR_CODE = 'error.internal-server';
+export const INTERNAL_SERVER_ERROR_MESSAGE = 'INTERNAL_SERVER_ERROR_MESSASGE';

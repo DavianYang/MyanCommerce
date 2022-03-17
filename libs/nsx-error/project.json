@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-error",
+    "sourceRoot": "libs/nsx-error/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-error",
+                "main": "libs/nsx-error/src/index.ts",
+                "tsConfig": "libs/nsx-error/tsconfig.lib.json",
+                "assets": ["libs/nsx-error/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-error/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-error"],
+            "options": {
+                "jestConfig": "libs/nsx-error/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}
