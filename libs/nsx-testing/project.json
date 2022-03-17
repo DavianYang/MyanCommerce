@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-testing",
+    "sourceRoot": "libs/nsx-testing/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-testing",
+                "main": "libs/nsx-testing/src/index.ts",
+                "tsConfig": "libs/nsx-testing/tsconfig.lib.json",
+                "assets": ["libs/nsx-testing/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-testing/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-testing"],
+            "options": {
+                "jestConfig": "libs/nsx-testing/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}
