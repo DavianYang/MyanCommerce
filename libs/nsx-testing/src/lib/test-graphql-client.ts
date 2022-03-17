@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import { stringify } from 'querystring';
 import { DocumentNode } from 'graphql';
 import { print } from 'graphql/language/printer';
-import { ClientError } from './errors';
+import { ClientError } from '@myancommerce/nsx-error';
 
 type QueryParams = { [key: string]: string | number };
 
