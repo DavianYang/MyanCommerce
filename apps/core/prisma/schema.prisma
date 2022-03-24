@@ -1,15 +1,15 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions", "referentialIntegrity"]
 }
 
 generator dbml {
-  provider   = "prisma-dbml-generator"
-  output     = "../../../doc/uml"
-  outputName = "myancommerce.dbml"
-  projectName = "CometX"
+  provider            = "prisma-dbml-generator"
+  output              = "../../../doc/uml"
+  outputName          = "myancommerce.dbml"
+  projectName         = "CometX"
   projectDatabaseType = "PostgreSQL"
-  projectNote = "Online Commerce Platform"
+  projectNote         = "Online Commerce Platform"
 }
 
 datasource db {
