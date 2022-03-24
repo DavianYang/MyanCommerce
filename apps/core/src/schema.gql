@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AddressDto {
+  city: String
+  company: String
+  country: CountryDto!
+  createdAt: DateTime!
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  id: ID!
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String!
+  streetLine2: String
+  updatedAt: DateTime!
+}
+
 type AdministratorDto {
   createdAt: DateTime!
   emailAddress: String!
@@ -12,21 +29,27 @@ type AdministratorDto {
   user: UserDto!
 }
 
-type AuthUserResponse {
-  id: ID!
-  identifier: String!
-  token: String!
-}
-
-union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
-
 type CountryDto {
   code: String!
   createdAt: DateTime!
+  enabled: Boolean!
   id: ID!
-  languageCode: LanguageCode!
   name: String!
   updatedAt: DateTime!
+}
+
+input CreateAddressInput {
+  city: String
+  company: String
+  countryCode: String
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String!
+  streetLine2: String
 }
 
 input CreateAdministratorInput {
@@ -146,9 +169,30 @@ type RoleDto {
   id: ID!
 }
 
-enum SocialAuthProviders {
-  FACEBOOK
-  GOOGLE
+type Success {
+  success: Boolean!
+}
+
+input UpdateAddressInput {
+  city: String
+  company: String
+  countryCode: String
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String
+  streetLine2: String
+}
+
+input UpdateCountryInput {
+  code: String
+  enabled: Boolean
+  name: String
+}
+
 input UpdateCustomerInput {
   emailAddress: String
   firstName: String
@@ -166,6 +210,7 @@ input UpdateRoleInput {
 
 type UserDto {
   createdAt: DateTime!
+  deletedAt: DateTime
   id: ID!
   identifier: String!
   lastLogin: DateTime
