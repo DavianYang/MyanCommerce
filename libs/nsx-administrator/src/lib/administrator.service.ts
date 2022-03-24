@@ -1,32 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, Administrator, PrismaClient } from '@prisma/client';
+import { Prisma, Administrator } from '@prisma/client';
 import { UserService } from '@myancommerce/nsx-user';
+import { PrismaService } from '@myancommerce/nsx-prisma';
 
 @Injectable()
 export class AdministratorService {
-    constructor(private userService: UserService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+        private userService: UserService,
+    ) {}
 
     async findOne(
-        prisma: PrismaClient,
         args: Prisma.AdministratorFindUniqueArgs,
     ): Promise<Administrator | null> {
-        return prisma.administrator.findUnique(args);
+        return this.prisma.administrator.findUnique(args);
     }
 
     async findAll(
-        prisma: PrismaClient,
         args: Prisma.AdministratorFindManyArgs,
     ): Promise<Administrator[]> {
-        return prisma.administrator.findMany(args);
+        return this.prisma.administrator.findMany(args);
     }
 
-    async create(
-        prisma: PrismaClient,
-        { data }: Prisma.AdministratorCreateArgs,
-    ): Promise<Administrator> {
-        return await prisma.$transaction(async (_prisma: any) => {
+    async create({
+        data,
+    }: Prisma.AdministratorCreateArgs): Promise<Administrator> {
+        return await this.prisma.$transaction(async (_prisma: any) => {
             const user = await this.userService.createAdminUser(
-                _prisma,
                 data.emailAddress,
             );
 
@@ -45,17 +45,11 @@ export class AdministratorService {
         });
     }
 
-    async update(
-        prisma: PrismaClient,
-        args: Prisma.AdministratorUpdateArgs,
-    ): Promise<Administrator> {
-        return prisma.administrator.update(args);
+    async update(args: Prisma.AdministratorUpdateArgs): Promise<Administrator> {
+        return this.prisma.administrator.update(args);
     }
 
-    async delete(
-        prisma: PrismaClient,
-        args: Prisma.AdministratorDeleteArgs,
-    ): Promise<Administrator> {
-        return prisma.administrator.delete(args);
+    async delete(args: Prisma.AdministratorDeleteArgs): Promise<Administrator> {
+        return this.prisma.administrator.delete(args);
     }
 }
