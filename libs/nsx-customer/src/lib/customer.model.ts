@@ -3,26 +3,31 @@ import { Customer } from '@prisma/client';
 import { BaseModel } from '@myancommerce/nsx-common';
 import { UserDto } from '@myancommerce/nsx-user';
 
+import { AddressDto } from './address.model';
+
 @ObjectType()
 export class CustomerDto extends BaseModel implements Partial<Customer> {
-    @Field()
+    @Field(() => String)
     firstName!: string;
 
-    @Field()
+    @Field(() => String)
     lastName!: string;
 
-    @Field()
+    @Field(() => String)
     emailAddress!: string;
 
     @Field(() => String, { nullable: true })
-    phoneNumber: string | null;
+    phoneNumber?: string | null;
 
-    @Field({ nullable: true })
+    @Field(() => String, { nullable: true })
     title: string;
 
-    // @Field(() => AddressDto)
-    // address!: AddressDto[];
+    @Field(() => [AddressDto])
+    addresses?: AddressDto[];
 
     @Field(() => UserDto)
     user?: UserDto;
+
+    @Field(() => Date, { nullable: true })
+    deletedAt?: Date | null;
 }

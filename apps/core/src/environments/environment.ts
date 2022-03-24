@@ -9,13 +9,22 @@ import {
     GraphQLOptions,
     SocialAuthOptions,
 } from './envrionment.interface';
-import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
 import { RoleModule } from '@myancommerce/nsx-role';
+import { CountryModule } from '@myancommerce/nsx-country';
+import { AuthModule } from '@myancommerce/nsx-auth';
 
-dotenv.config({ path: __dirname + `./.env` });
+dotenv.config({
+    path: `apps/core/.env.${
+        process.env['NODE_ENV'] === 'development'
+            ? 'dev'
+            : process.env['NODE_ENV'] === 'production'
+            ? 'prod'
+            : 'test'
+    }`,
+});
 
 const appConfig: ConfigModuleOptions = {
     isGlobal: true,
@@ -62,6 +71,7 @@ const graphqlConfig: GraphQLOptions = {
         CustomerModule,
         UserModule,
         RoleModule,
+        CountryModule,
     ],
     cors: {
         credentials: true,
@@ -75,6 +85,7 @@ export const environment: CometXConfig = {
     authConfig,
     graphqlConfig,
     socialAuthConfig,
+    dbConnection: process.env['DATABASE_URL'] as string,
     logger: new DefaultLogger({
         level: LogLevel.Info,
         timestamp: true,

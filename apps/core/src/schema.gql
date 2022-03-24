@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AddressDto {
+  city: String
+  company: String
+  country: CountryDto!
+  createdAt: DateTime!
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  id: ID!
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String!
+  streetLine2: String
+  updatedAt: DateTime!
+}
+
 type AdministratorDto {
   createdAt: DateTime!
   emailAddress: String!
@@ -12,21 +29,27 @@ type AdministratorDto {
   user: UserDto!
 }
 
-type AuthUserResponse {
-  id: ID!
-  identifier: String!
-  token: String!
-}
-
-union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
-
 type CountryDto {
   code: String!
   createdAt: DateTime!
+  enabled: Boolean!
   id: ID!
-  languageCode: LanguageCode!
   name: String!
   updatedAt: DateTime!
+}
+
+input CreateAddressInput {
+  city: String
+  company: String
+  countryCode: String
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String!
+  streetLine2: String
 }
 
 input CreateAdministratorInput {
@@ -36,9 +59,39 @@ input CreateAdministratorInput {
   roleIds: [Int!]!
 }
 
+input CreateCountryInput {
+  code: String!
+  enabled: Boolean!
+  name: String!
+}
+
+input CreateCustomerInput {
+  emailAddress: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String
+  title: String
+}
+
+union CreateCustomerResult = CustomerDto | EmailAddressConflictError
+
 input CreateRoleInput {
   code: String!
   description: String!
+}
+
+type CustomerDto {
+  addresses: [AddressDto!]!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  emailAddress: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  phoneNumber: String
+  title: String
+  updatedAt: DateTime!
+  user: UserDto!
 }
 
 """
@@ -46,512 +99,66 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-enum ErrorCode {
-  UNKNOwN_ERROR
+type DeletionResponse {
+  message: String
+  result: DeletionResult!
 }
 
-"""Returned if the user authentication credentials are not valid"""
-type InvalidCredentialsError {
-  authenticationError: String!
-  errorCode: ErrorCode!
+enum DeletionResult {
+  """The entity was successfully deleted"""
+  DELETED
+
+  """Deletion did not take place, reason given in message"""
+  NOT_DELETED
+}
+
+"""
+Returned when attempting to create a Customer with an email address already registered to an existing User.
+"""
+type EmailAddressConflictError {
+  errorCode: String!
   message: String!
 }
 
-"""
-Languages in the form of a ISO 639-1 language code with optional region or script modifier (e.g. de_AT).
-"""
-enum LanguageCode {
-  """Afrikaans"""
-  af
-
-  """Akan"""
-  ak
-
-  """Amharic"""
-  am
-
-  """Arabic"""
-  ar
-
-  """Assamese"""
-  as
-
-  """Azerbaijani"""
-  az
-
-  """Belarusian"""
-  be
-
-  """Bulgarian"""
-  bg
-
-  """Bambara"""
-  bm
-
-  """Bangla"""
-  bn
-
-  """Tibetan"""
-  bo
-
-  """Breton"""
-  br
-
-  """Bosnian"""
-  bs
-
-  """Catalan"""
-  ca
-
-  """Chechen"""
-  ce
-
-  """Corsican"""
-  co
-
-  """Czech"""
-  cs
-
-  """Church Slavic"""
-  cu
-
-  """Welsh"""
-  cy
-
-  """Danish"""
-  da
-
-  """German"""
-  de
-
-  """Austrian German"""
-  de_AT
-
-  """Swiss High German"""
-  de_CH
-
-  """Dzongkha"""
-  dz
-
-  """Ewe"""
-  ee
-
-  """Greek"""
-  el
-
-  """English"""
-  en
-
-  """Australian English"""
-  en_AU
-
-  """Canadian English"""
-  en_CA
-
-  """British English"""
-  en_GB
-
-  """American English"""
-  en_US
-
-  """Esperanto"""
-  eo
-
-  """Spanish"""
-  es
-
-  """European Spanish"""
-  es_ES
-
-  """Mexican Spanish"""
-  es_MX
-
-  """Estonian"""
-  et
-
-  """Basque"""
-  eu
-
-  """Persian"""
-  fa
-
-  """Dari"""
-  fa_AF
-
-  """Fulah"""
-  ff
-
-  """Finnish"""
-  fi
-
-  """Faroese"""
-  fo
-
-  """French"""
-  fr
-
-  """Canadian French"""
-  fr_CA
-
-  """Swiss French"""
-  fr_CH
-
-  """Western Frisian"""
-  fy
-
-  """Irish"""
-  ga
-
-  """Scottish Gaelic"""
-  gd
-
-  """Galician"""
-  gl
-
-  """Gujarati"""
-  gu
-
-  """Manx"""
-  gv
-
-  """Hausa"""
-  ha
-
-  """Hebrew"""
-  he
-
-  """Hindi"""
-  hi
-
-  """Croatian"""
-  hr
-
-  """Haitian Creole"""
-  ht
-
-  """Hungarian"""
-  hu
-
-  """Armenian"""
-  hy
-
-  """Interlingua"""
-  ia
-
-  """Indonesian"""
-  id
-
-  """Igbo"""
-  ig
-
-  """Sichuan Yi"""
-  ii
-
-  """Icelandic"""
-  is
-
-  """Italian"""
-  it
-
-  """Japanese"""
-  ja
-
-  """Javanese"""
-  jv
-
-  """Georgian"""
-  ka
-
-  """Kikuyu"""
-  ki
-
-  """Kazakh"""
-  kk
-
-  """Kalaallisut"""
-  kl
-
-  """Khmer"""
-  km
-
-  """Kannada"""
-  kn
-
-  """Korean"""
-  ko
-
-  """Kashmiri"""
-  ks
-
-  """Kurdish"""
-  ku
-
-  """Cornish"""
-  kw
-
-  """Kyrgyz"""
-  ky
-
-  """Latin"""
-  la
-
-  """Luxembourgish"""
-  lb
-
-  """Ganda"""
-  lg
-
-  """Lingala"""
-  ln
-
-  """Lao"""
-  lo
-
-  """Lithuanian"""
-  lt
-
-  """Luba-Katanga"""
-  lu
-
-  """Latvian"""
-  lv
-
-  """Malagasy"""
-  mg
-
-  """Maori"""
-  mi
-
-  """Macedonian"""
-  mk
-
-  """Malayalam"""
-  ml
-
-  """Mongolian"""
-  mn
-
-  """Marathi"""
-  mr
-
-  """Malay"""
-  ms
-
-  """Maltese"""
-  mt
-
-  """Burmese"""
-  my
-
-  """Norwegian Bokmål"""
-  nb
-
-  """North Ndebele"""
-  nd
-
-  """Nepali"""
-  ne
-
-  """Dutch"""
-  nl
-
-  """Flemish"""
-  nl_BE
-
-  """Norwegian Nynorsk"""
-  nn
-
-  """Nyanja"""
-  ny
-
-  """Oromo"""
-  om
-
-  """Odia"""
-  or
-
-  """Ossetic"""
-  os
-
-  """Punjabi"""
-  pa
-
-  """Polish"""
-  pl
-
-  """Pashto"""
-  ps
-
-  """Portuguese"""
-  pt
-
-  """Brazilian Portuguese"""
-  pt_BR
-
-  """European Portuguese"""
-  pt_PT
-
-  """Quechua"""
-  qu
-
-  """Romansh"""
-  rm
-
-  """Rundi"""
-  rn
-
-  """Romanian"""
-  ro
-
-  """Moldavian"""
-  ro_MD
-
-  """Russian"""
-  ru
-
-  """Kinyarwanda"""
-  rw
-
-  """Sanskrit"""
-  sa
-
-  """Sindhi"""
-  sd
-
-  """Northern Sami"""
-  se
-
-  """Sango"""
-  sg
-
-  """Sinhala"""
-  si
-
-  """Slovak"""
-  sk
-
-  """Slovenian"""
-  sl
-
-  """Samoan"""
-  sm
-
-  """Shona"""
-  sn
-
-  """Somali"""
-  so
-
-  """Albanian"""
-  sq
-
-  """Serbian"""
-  sr
-
-  """Southern Sotho"""
-  st
-
-  """Sundanese"""
-  su
-
-  """Swedish"""
-  sv
-
-  """Swahili"""
-  sw
-
-  """Congo Swahili"""
-  sw_CD
-
-  """Tamil"""
-  ta
-
-  """Telugu"""
-  te
-
-  """Tajik"""
-  tg
-
-  """Thai"""
-  th
-
-  """Tigrinya"""
-  ti
-
-  """Turkmen"""
-  tk
-
-  """Tongan"""
-  to
-
-  """Turkish"""
-  tr
-
-  """Tatar"""
-  tt
-
-  """Uyghur"""
-  ug
-
-  """Ukrainian"""
-  uk
-
-  """Urdu"""
-  ur
-
-  """Uzbek"""
-  uz
-
-  """Vietnamese"""
-  vi
-
-  """Volapük"""
-  vo
-
-  """Wolof"""
-  wo
-
-  """Xhosa"""
-  xh
-
-  """Yiddish"""
-  yi
-
-  """Yoruba"""
-  yo
-
-  """Chinese"""
-  zh
-
-  """Simplified Chinese"""
-  zh_Hans
-
-  """Traditional Chinese"""
-  zh_Hant
-
-  """Zulu"""
-  zu
-}
-
-input LoginSocialInput {
-  accessToken: String!
-  provider: SocialAuthProviders!
-}
-
 type Mutation {
+  """
+  Create a new Address and associate it with the Customer specified by customerId
+  """
+  createAddress(customerId: String!, input: CreateAddressInput!): AddressDto!
   createAdministrator(input: CreateAdministratorInput!): AdministratorDto!
+  createCountry(input: CreateCountryInput!): CountryDto!
+
+  """
+  Create a new Customer. If a password is provided, a new User will also be created an linked to the Customer.
+  """
+  createCustomer(input: CreateCustomerInput!): CreateCustomerResult!
   createRole(input: CreateRoleInput!): RoleDto!
+
+  """Delete an existing Address with addressId"""
+  deleteAddress(addressId: String!): Success!
+  deleteCountry(id: String!): CountryDto!
+
+  """Delete a Customer"""
+  deleteCustomer(customerId: String!): DeletionResponse!
   deleteRole(id: Int!): RoleDto!
-  login(identifier: String!): AuthenticationResult!
-  loginSocial(input: LoginSocialInput!): AuthenticationResult!
+
+  """Update an existing Address with addressId"""
+  updateAddress(addressId: String!, input: UpdateAddressInput!): AddressDto!
   updateAdministrator: AdministratorDto!
+  updateCountry(id: String!, input: UpdateCountryInput!): CountryDto!
+
+  """Update an existing Customer"""
+  updateCustomer(email: String!, input: UpdateCustomerInput!): UpdateCustomerResult!
   updateRole(id: Int!, input: UpdateRoleInput!): RoleDto!
 }
 
 type Query {
   administrator(id: String!): AdministratorDto!
   administrators(cursor: String, skip: Int, take: Int): [AdministratorDto!]!
-  me: UserDto!
+  countries(cursor: String, skip: Int, take: Int): [CountryDto!]!
+  country(id: String!): CountryDto!
+  customer(id: String!): CustomerDto!
+  customers(cursor: String, skip: Int, take: Int): [CustomerDto!]!
   role(id: Int!): RoleDto!
   roles(cursor: String, skip: Int, take: Int): [RoleDto!]!
 }
@@ -562,10 +169,39 @@ type RoleDto {
   id: ID!
 }
 
-enum SocialAuthProviders {
-  FACEBOOK
-  GOOGLE
+type Success {
+  success: Boolean!
 }
+
+input UpdateAddressInput {
+  city: String
+  company: String
+  countryCode: String
+  defaultBillingAddress: Boolean
+  defaultShippingAddress: Boolean
+  fullName: String
+  phoneNumber: String
+  postalCode: String
+  province: String
+  streetLine1: String
+  streetLine2: String
+}
+
+input UpdateCountryInput {
+  code: String
+  enabled: Boolean
+  name: String
+}
+
+input UpdateCustomerInput {
+  emailAddress: String
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  title: String
+}
+
+union UpdateCustomerResult = CustomerDto | EmailAddressConflictError
 
 input UpdateRoleInput {
   code: String!
@@ -574,6 +210,7 @@ input UpdateRoleInput {
 
 type UserDto {
   createdAt: DateTime!
+  deletedAt: DateTime
   id: ID!
   identifier: String!
   lastLogin: DateTime

@@ -1,31 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { User, Prisma, PrismaClient } from '@prisma/client';
+import { User, Prisma } from '@prisma/client';
 import { RoleService } from '@myancommerce/nsx-role';
+import { PrismaService } from '@myancommerce/nsx-prisma';
+import { ID } from '@myancommerce/nox-common';
 
 @Injectable()
 export class UserService {
-    constructor(private roleService: RoleService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+        private roleService: RoleService,
+    ) {}
 
-    async findOne(
-        prisma: PrismaClient,
-        args: Prisma.UserFindUniqueArgs,
-    ): Promise<User | null> {
-        return prisma.user.findUnique(args);
+    async findOne(args: Prisma.UserFindUniqueArgs): Promise<User | null> {
+        return this.prisma.user.findUnique(args);
     }
 
-    async findMany(
-        prisma: PrismaClient,
-        args: Prisma.UserFindManyArgs,
-    ): Promise<User[]> {
-        return prisma.user.findMany(args);
+    async findMany(args: Prisma.UserFindManyArgs): Promise<User[]> {
+        return this.prisma.user.findMany(args);
     }
 
-    async createCustomerUser(
-        prisma: PrismaClient,
-        identifier: string,
-    ): Promise<User> {
-        const customerRole = await this.roleService.getCustomerRole(prisma);
-        return prisma.user.create({
+    async createCustomerUser(identifier: string): Promise<User> {
+        const customerRole = await this.roleService.getCustomerRole();
+        return this.prisma.user.create({
             data: {
                 identifier,
                 roles: {
@@ -37,13 +33,10 @@ export class UserService {
         });
     }
 
-    async createAdminUser(
-        prisma: PrismaClient,
-        identifier: string,
-    ): Promise<User> {
-        const adminRole = await this.roleService.getAdminRole(prisma);
+    async createAdminUser(identifier: string): Promise<User> {
+        const adminRole = await this.roleService.getAdminRole();
 
-        return prisma.user.create({
+        return this.prisma.user.create({
             data: {
                 identifier,
                 roles: {
@@ -55,17 +48,20 @@ export class UserService {
         });
     }
 
-    async updateUser(
-        prisma: PrismaClient,
-        args: Prisma.UserUpdateArgs,
-    ): Promise<User> {
-        return prisma.user.update(args);
+    async updateUser(args: Prisma.UserUpdateArgs): Promise<User> {
+        return this.prisma.user.update(args);
     }
 
-    async deleteUser(
-        prisma: PrismaClient,
-        args: Prisma.UserDeleteArgs,
-    ): Promise<User> {
-        return prisma.user.delete(args);
+    async deleteUser(args: Prisma.UserDeleteArgs): Promise<User> {
+        return this.prisma.user.delete(args);
+    }
+
+    async softDelete(userId: ID) {
+        await this.prisma.user.update({
+            where: { id: userId as string },
+            data: {
+                deletedAt: new Date(),
+            },
+        });
     }
 }

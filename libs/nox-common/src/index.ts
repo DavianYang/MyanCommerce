@@ -1,8 +1,6 @@
 // Constants
 export * from './lib/constants/api.constants';
 export * from './lib/constants/service.constants';
-// Error
-export * from './lib/error/error-result';
 // Types
 export * from './lib/types/common-api.types';
 export * from './lib/types/shared.types';

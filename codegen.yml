@@ -4,9 +4,3 @@ schema:
 documents:
   - '*.spec.ts'
   - 'libs/**/src/lib/*.spec.ts'
-generates:
-  libs/generated/src/types/generated-graphql.ts:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-compatibility"

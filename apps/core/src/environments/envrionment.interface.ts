@@ -163,6 +163,12 @@ export interface CometXConfig {
 
     /**
      * @description
+     * The connection used by Prisma to connect to the database.
+     */
+    dbConnection: string;
+
+    /**
+     * @description
      * Provide a logging service which implements the {@link CometX} interface.
      * Note that the logging of SQL queries is controlled separately by the
      * `dbConnectionOptions.logging` property.

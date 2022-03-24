@@ -12,7 +12,6 @@ export class AdministratorResolver {
 
     @Query(() => [AdministratorDto])
     administrators(
-        @Context() { prisma }: RequestContext,
         @Args() { cursor, take, skip }: PaginationArgs,
     ): Promise<AdministratorDto[]> {
         const filterBy = Object.assign(
@@ -21,25 +20,23 @@ export class AdministratorResolver {
             take && { take },
             (skip && { skip }) || (cursor && { skip: 1 }),
         );
-        return this.administratorService.findAll(prisma, filterBy);
+        return this.administratorService.findAll(filterBy);
     }
 
     @Query(() => AdministratorDto)
     administrator(
-        @Context() { prisma }: RequestContext,
         @Args('id', { type: () => String }) userId: ID,
     ): Promise<AdministratorDto | null> {
-        return this.administratorService.findOne(prisma, {
+        return this.administratorService.findOne({
             where: { id: userId as string },
         });
     }
 
     @Mutation(() => AdministratorDto)
     createAdministrator(
-        @Context() { prisma }: RequestContext,
         @Args('input') input: CreateAdministratorInput,
     ): Promise<AdministratorDto> {
-        const admin = this.administratorService.create(prisma, { data: input });
+        const admin = this.administratorService.create({ data: input });
         return admin;
     }
 

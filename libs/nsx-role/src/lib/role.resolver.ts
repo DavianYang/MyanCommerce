@@ -1,6 +1,6 @@
-import { ID, RequestContext } from '@myancommerce/nox-common';
+import { ID } from '@myancommerce/nox-common';
 import { PaginationArgs } from '@myancommerce/nsx-common';
-import { Resolver, Args, Mutation, Context, Query, Int } from '@nestjs/graphql';
+import { Resolver, Args, Mutation, Query, Int } from '@nestjs/graphql';
 import { CreateRoleInput, UpdateRoleInput } from './role.input';
 import { RoleDto } from './role.model';
 import { RoleService } from './role.service';
@@ -11,7 +11,6 @@ export class RoleResolver {
 
     @Query(() => [RoleDto])
     roles(
-        @Context() { prisma }: RequestContext,
         @Args() { cursor, take, skip }: PaginationArgs,
     ): Promise<RoleDto[] | null> {
         const filterBy = Object.assign(
@@ -19,15 +18,12 @@ export class RoleResolver {
             take && { take },
             (skip && { skip }) || (cursor && { skip: 1 }),
         );
-        return this.roleService.roles(prisma, filterBy);
+        return this.roleService.roles(filterBy);
     }
 
     @Query(() => RoleDto)
-    role(
-        @Context() { prisma }: RequestContext,
-        @Args('id', { type: () => Int }) id: ID,
-    ): Promise<RoleDto | null> {
-        return this.roleService.role(prisma, {
+    role(@Args('id', { type: () => Int }) id: ID): Promise<RoleDto | null> {
+        return this.roleService.role({
             where: {
                 id: id as number,
             },
@@ -35,31 +31,24 @@ export class RoleResolver {
     }
 
     @Mutation(() => RoleDto)
-    createRole(
-        @Context() { prisma }: RequestContext,
-        @Args('input') input: CreateRoleInput,
-    ): Promise<RoleDto> {
-        return this.roleService.createRole(prisma, { data: input });
+    createRole(@Args('input') input: CreateRoleInput): Promise<RoleDto> {
+        return this.roleService.createRole({ data: input });
     }
 
     @Mutation(() => RoleDto)
     updateRole(
-        @Context() { prisma }: RequestContext,
         @Args('id', { type: () => Int }) id: number, // for test case
         @Args('input') input: UpdateRoleInput,
     ): Promise<RoleDto> {
-        return this.roleService.updateRole(prisma, {
+        return this.roleService.updateRole({
             where: { id: id },
             data: input,
         });
     }
 
     @Mutation(() => RoleDto)
-    deleteRole(
-        @Context() { prisma }: RequestContext,
-        @Args('id', { type: () => Int }) id: ID,
-    ) {
-        return this.roleService.deleteRole(prisma, {
+    deleteRole(@Args('id', { type: () => Int }) id: ID) {
+        return this.roleService.deleteRole({
             where: { id: id as number },
         });
     }

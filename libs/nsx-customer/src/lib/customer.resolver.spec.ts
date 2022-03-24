@@ -1,19 +1,27 @@
+import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
+import { testConfiguration, testEnvironment } from '@myancommerce/nsx-testing';
+import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CustomerResolver } from './customer.resolver';
-import { CustomerService } from './customer.service';
+import { CustomerModule } from './customer.module';
 
 describe('CustomerResolver', () => {
-  let resolver: CustomerResolver;
+    let prisma: PrismaService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [CustomerResolver, CustomerService],
-    }).compile();
+    beforeEach(async () => {
+        const moduleRef: TestingModule = await Test.createTestingModule({
+            imports: [
+                ConfigModule.forRoot({
+                    ...testEnvironment.appConfig,
+                    load: [testConfiguration],
+                }),
+                PrismaModule,
+                CustomerModule,
+            ],
+        }).compile();
 
-    resolver = module.get<CustomerResolver>(CustomerResolver);
-  });
+        prisma = moduleRef.get(PrismaService);
+        await prisma.cleanDatabase();
+    });
 
-  it('should be defined', () => {
-    expect(resolver).toBeDefined();
-  });
+    it('should be defined', () => {});
 });
