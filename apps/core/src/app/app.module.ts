@@ -4,12 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
-import { environment } from '../environments/environment';
-import { appConfiguration } from './app.config';
-import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { RoleModule } from '@myancommerce/nsx-role';
+import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
+import { CountryModule } from '@myancommerce/nsx-country';
+
+import { environment } from '../environments/environment';
+import { appConfiguration } from './app.config';
 
 @Module({
     imports: [
@@ -33,9 +35,10 @@ import { UserModule } from '@myancommerce/nsx-user';
             inject: [PrismaService],
         }),
         AdministratorModule,
-        AuthModule,
+        CustomerModule,
         UserModule,
         RoleModule,
+        CountryModule,
     ],
 })
 export class AppModule {}

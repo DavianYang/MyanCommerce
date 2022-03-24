@@ -36,6 +36,12 @@ input CreateAdministratorInput {
   roleIds: [Int!]!
 }
 
+input CreateCountryInput {
+  code: String!
+  enabled: Boolean!
+  name: String!
+}
+
 input CreateCustomerInput {
   emailAddress: String!
   firstName: String!
