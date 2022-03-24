@@ -31,6 +31,23 @@ import { appConfiguration } from './app.config';
                     response: res as HttpResponse,
                     prisma,
                 }),
+                formatError: error => ({
+                    code: error.extensions?.['code'] || 'SERVER_ERROR',
+                    name: error.extensions?.['exception']?.name || error.name,
+                    message:
+                        error.extensions?.['exception']?.response?.message ||
+                        error.message,
+                    errLocations: environment.apiConfig.adminApiDebug
+                        ? error.locations
+                        : undefined,
+                    errPath: environment.apiConfig.adminApiDebug
+                        ? error.path
+                        : undefined,
+                    variables: environment.apiConfig.adminApiDebug
+                        ? error.extensions?.['exception']?.variables
+                        : undefined,
+                    stacktrace: error.extensions?.['exception']?.stacktrace,
+                }),
             }),
             inject: [PrismaService],
         }),
