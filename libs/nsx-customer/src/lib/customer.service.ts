@@ -21,22 +21,35 @@ export class CustomerService {
     }
 
     async create(
-        prisma: PrismaClient,
-        { data }: Prisma.CustomerCreateArgs,
-    ): Promise<Customer> {
-        return await prisma.$transaction(async (_prisma: any) => {
+        input: CreateCustomerInput,
+    ): Promise<typeof CreateCustomerResult> {
+        const existingCustomer = await this.findOne({
+            where: { emailAddress: input.emailAddress },
+        });
+
+        if (existingCustomer) {
+            return new EmailAddressConflictError({
+                errorCode: EMAIL_ADDRESS_CONFLICT_ERROR_CODE,
+                message: EMAIL_ADDRESS_CONFLICT_ERROR_MESSSAGE,
+            });
+        }
+
+        // if password is specified, return verification token,
+        // if not, customer can have email address verified and set their password
+        // in a later step using `VerifyCustomerEmailAddress`
+
+        return await this.prisma.$transaction(async (_prisma: any) => {
             const user = await this.userService.createCustomerUser(
-                _prisma,
-                data.emailAddress,
+                input.emailAddress,
             );
 
             return await _prisma.customer.create({
                 data: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    emailAddress: data.emailAddress,
-                    title: data.title,
-                    phoneNumber: data.phoneNumber,
+                    firstName: input.firstName,
+                    lastName: input.lastName,
+                    emailAddress: input.emailAddress,
+                    title: input.title,
+                    phoneNumber: input.phoneNumber,
                     user: {
                         connect: {
                             id: user.id,

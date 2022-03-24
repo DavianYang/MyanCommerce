@@ -30,6 +30,16 @@ export class CustomerResolver {
     ): Promise<CustomerDto | null> {
         return this.customerService.findOne(prisma, {
             where: { id: userId as string },
+    // Strict for Admin
+    @Mutation(() => CreateCustomerResult, {
+        description:
+            'Create a new Customer. If a password is provided, a new User will also be created an linked to the Customer.',
+    })
+    async createCustomer(
+        @Input() input: CreateCustomerInput,
+    ): Promise<typeof CreateCustomerResult> {
+        return await this.customerService.create(input);
+    }
         });
     }
 
