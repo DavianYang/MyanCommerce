@@ -9,6 +9,7 @@ pnpm-lock.yaml
 .idea/**/tasks.xml
 .idea/dictionaries
 .env
+.env.dev
 .env.production
 .env.test
 lerna-debug.log
