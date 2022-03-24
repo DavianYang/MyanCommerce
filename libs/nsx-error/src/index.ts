@@ -7,3 +7,6 @@ export * from './lib/errors/client-error/client.constant';
 
 export * from './lib/errors/email-address-conflict-error/email-address-conflict.error';
 export * from './lib/errors/email-address-conflict-error/email-address-conflict.constant';
+
+export * from './lib/errors/entity-not-found-error/entity-not-found.error';
+export * from './lib/errors/entity-not-found-error/entity-not-found.constant';
