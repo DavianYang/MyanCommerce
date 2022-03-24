@@ -4,15 +4,18 @@ import { RoleDto } from '@myancommerce/nsx-role';
 
 @ObjectType()
 export class UserDto extends BaseModel {
-    @Field()
+    @Field(() => Date, { nullable: true })
+    deletedAt?: Date;
+
+    @Field(() => String)
     identifier: string;
 
-    @Field()
+    @Field(() => Boolean)
     verified: boolean;
 
     @Field(() => [RoleDto])
     roles: RoleDto[];
 
-    @Field({ nullable: true })
+    @Field(() => Date, { nullable: true })
     lastLogin: Date;
 }

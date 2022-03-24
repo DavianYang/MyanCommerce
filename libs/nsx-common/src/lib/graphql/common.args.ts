@@ -12,4 +12,7 @@ export class PaginationArgs {
     skip?: number;
 }
 
-export const Input = () => Args('input');
+export const Input = (name?: string) => Args(name || 'input');
+
+export const IDArg = (name?: string) =>
+    Args(name || 'id', { type: () => String });

@@ -1,4 +1,5 @@
 import { NSXLogger } from '@myancommerce/nsx-logger';
+import { Type } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ConfigModuleOptions } from '@nestjs/config';
 import { BuildSchemaOptions } from '@nestjs/graphql';
@@ -91,6 +92,13 @@ export interface GraphQLOptions {
      * @default { origin: true, credentials: true }
      */
     cors: CorsOptions | boolean;
+    /**
+     * @description
+     * Include module that generate resolver to Graphql Schemas
+     *
+     * @default []
+     */
+    include: Array<Type<any>>;
 }
 
 export interface CometXConfig {
@@ -112,6 +120,12 @@ export interface CometXConfig {
      * CORS settings.
      */
     graphqlConfig: GraphQLOptions;
+
+    /**
+     * @description
+     * The connection used by Prisma to connect to the database.
+     */
+    dbConnection: string;
 
     /**
      * @description

@@ -1,15 +1,15 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions", "referentialIntegrity"]
 }
 
 generator dbml {
-  provider   = "prisma-dbml-generator"
-  output     = "../../../doc/uml"
-  outputName = "myancommerce.dbml"
-  projectName = "CometX"
+  provider            = "prisma-dbml-generator"
+  output              = "../../../doc/uml"
+  outputName          = "myancommerce.dbml"
+  projectName         = "CometX"
   projectDatabaseType = "PostgreSQL"
-  projectNote = "Online Commerce Platform"
+  projectNote         = "Online Commerce Platform"
 }
 
 datasource db {
@@ -21,18 +21,19 @@ model User {
   id            String         @id @default(uuid())
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  deletedAt     DateTime?
   identifier    String         @unique
   verified      Boolean        @default(false)
-  roles          Role[]
+  roles         Role[]
   administrator Administrator?
   customer      Customer?
 }
 
 model Role {
-  id          Int   @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  code        String   @db.VarChar(255) @unique
+  code        String   @unique @db.VarChar(255)
   description String   @db.Text()
   user        User[]
 }
@@ -44,19 +45,51 @@ model Administrator {
   firstName    String
   lastName     String
   emailAddress String   @unique
-  user         User?    @relation(fields: [userId], references: [id])
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId       String   @unique
 }
 
 model Customer {
-  id           String   @id @default(uuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
   title        String
   firstName    String
   lastName     String
   phoneNumber  String?
-  emailAddress String   @unique
-  user         User?     @relation(fields: [userId], references: [id])
-  userId       String   @unique
+  emailAddress String    @unique
+  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       String    @unique
+  addresses    Address[]
+}
+
+model Address {
+  id                     String    @id @default(uuid())
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  fullName               String    @default("")
+  company                String    @default("")
+  streetLine1            String
+  streetLine2            String    @default("")
+  city                   String    @default("")
+  province               String    @default("")
+  postalCode             String    @default("")
+  phoneNumber            String    @default("")
+  defaultShippingAddress Boolean   @default(false)
+  defaultBillingAddress  Boolean   @default(false)
+  country                Country   @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  countryId              String    @unique
+  customer               Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  customerId             String    @unique
+}
+
+model Country {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  enabled   Boolean
+  code      String    @unique @db.VarChar(255)
+  address   Address[]
 }

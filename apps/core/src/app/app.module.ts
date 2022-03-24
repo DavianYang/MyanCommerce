@@ -4,12 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
-import { environment } from '../environments/environment';
-import { appConfiguration } from './app.config';
-import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { RoleModule } from '@myancommerce/nsx-role';
+import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
+import { CountryModule } from '@myancommerce/nsx-country';
+
+import { environment } from '../environments/environment';
+import { appConfiguration } from './app.config';
 
 @Module({
     imports: [
@@ -29,13 +31,31 @@ import { UserModule } from '@myancommerce/nsx-user';
                     response: res as HttpResponse,
                     prisma,
                 }),
+                formatError: error => ({
+                    code: error.extensions?.['code'] || 'SERVER_ERROR',
+                    name: error.extensions?.['exception']?.name || error.name,
+                    message:
+                        error.extensions?.['exception']?.response?.message ||
+                        error.message,
+                    errLocations: environment.apiConfig.adminApiDebug
+                        ? error.locations
+                        : undefined,
+                    errPath: environment.apiConfig.adminApiDebug
+                        ? error.path
+                        : undefined,
+                    variables: environment.apiConfig.adminApiDebug
+                        ? error.extensions?.['exception']?.variables
+                        : undefined,
+                    stacktrace: error.extensions?.['exception']?.stacktrace,
+                }),
             }),
             inject: [PrismaService],
         }),
         AdministratorModule,
-        AuthModule,
+        CustomerModule,
         UserModule,
         RoleModule,
+        CountryModule,
     ],
 })
 export class AppModule {}

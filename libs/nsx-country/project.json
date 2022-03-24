@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-country",
+    "sourceRoot": "libs/nsx-country/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-country",
+                "main": "libs/nsx-country/src/index.ts",
+                "tsConfig": "libs/nsx-country/tsconfig.lib.json",
+                "assets": ["libs/nsx-country/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-country/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-country"],
+            "options": {
+                "jestConfig": "libs/nsx-country/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}
