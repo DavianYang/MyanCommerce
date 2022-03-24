@@ -143,7 +143,15 @@ type RoleDto {
 enum SocialAuthProviders {
   FACEBOOK
   GOOGLE
+input UpdateCustomerInput {
+  emailAddress: String
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  title: String
 }
+
+union UpdateCustomerResult = CustomerDto | EmailAddressConflictError
 
 input UpdateRoleInput {
   code: String!

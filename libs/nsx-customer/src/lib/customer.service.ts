@@ -65,6 +65,9 @@ export class CustomerService {
         args: Prisma.CustomerUpdateArgs,
     ): Promise<Customer> {
         return prisma.customer.update(args);
+    async update(args: Prisma.CustomerUpdateArgs): Promise<Customer> {
+        // If Customer Id and customer from input email address isn't matched, return EmailAddressConflictError
+        return await this.prisma.customer.update(args);
     }
 
     async delete(

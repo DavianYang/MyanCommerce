@@ -40,6 +40,22 @@ export class CustomerResolver {
     ): Promise<typeof CreateCustomerResult> {
         return await this.customerService.create(input);
     }
+    // Strict for Admin and Current Customer
+    @Mutation(() => UpdateCustomerResult, {
+        description: 'Update an existing Customer',
+    })
+    async updateCustomer(
+        @Args('email', { type: () => String }) email: string,
+        @Input() input: UpdateCustomerInput,
+    ): Promise<typeof UpdateCustomerResult> {
+        return await this.customerService.update({
+            where: { emailAddress: email },
+            data: input,
+            select: { user: true },
+        });
+    }
+
+    // Strict for Admin and Current Customer
         });
     }
 
