@@ -2,11 +2,11 @@
     "version": 2,
     "projects": {
         "core": "apps/core",
-        "generated": "libs/generated",
         "nox-common": "libs/nox-common",
         "nsx-administrator": "libs/nsx-administrator",
         "nsx-auth": "libs/nsx-auth",
         "nsx-common": "libs/nsx-common",
+        "nsx-country": "libs/nsx-country",
         "nsx-customer": "libs/nsx-customer",
         "nsx-error": "libs/nsx-error",
         "nsx-logger": "libs/nsx-logger",

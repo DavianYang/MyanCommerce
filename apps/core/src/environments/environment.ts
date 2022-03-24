@@ -7,13 +7,21 @@ import {
     CometXConfig,
     GraphQLOptions,
 } from './envrionment.interface';
-import { AuthModule } from '@myancommerce/nsx-auth';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
 import { RoleModule } from '@myancommerce/nsx-role';
+import { CountryModule } from '@myancommerce/nsx-country';
 
-dotenv.config({ path: __dirname + `./.env` });
+dotenv.config({
+    path: `apps/core/.env.${
+        process.env['NODE_ENV'] === 'development'
+            ? 'dev'
+            : process.env['NODE_ENV'] === 'production'
+            ? 'prod'
+            : 'test'
+    }`,
+});
 
 const appConfig: ConfigModuleOptions = {
     isGlobal: true,
@@ -42,6 +50,13 @@ const graphqlConfig: GraphQLOptions = {
     buildSchemaOptions: {
         numberScalarMode: 'integer',
     },
+    include: [
+        AdministratorModule,
+        CustomerModule,
+        UserModule,
+        RoleModule,
+        CountryModule,
+    ],
     cors: {
         credentials: true,
         origin: 'http://localhost:4200',
@@ -52,6 +67,7 @@ export const environment: CometXConfig = {
     appConfig,
     apiConfig,
     graphqlConfig,
+    dbConnection: process.env['DATABASE_URL'] as string,
     logger: new DefaultLogger({
         level: LogLevel.Info,
         timestamp: true,
