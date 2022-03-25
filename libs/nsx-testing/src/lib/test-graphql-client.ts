@@ -10,11 +10,11 @@ export class TestGraphQLClient {
     private headers: { [key: string]: any } = {};
     constructor(private apiUrl: string = '') {}
 
-    async query<T = any, V = Record<string, any>>(
+    async query(
         query: DocumentNode,
-        variables?: V,
+        variables?: any,
         queryParams?: QueryParams,
-    ): Promise<T> {
+    ): Promise<any> {
         const response = await this.makeGraphQLRequest(
             query,
             variables,

@@ -18,7 +18,7 @@ const appConfig: ConfigModuleOptions = {
 
 const apiConfig: ApiOptions = {
     hostname: process.env['DATABASE_HOST'],
-    port: 3000,
+    port: 3200,
 
     adminApiPath: 'admin-api',
     adminApiPlayground: true, // turn this off for production
