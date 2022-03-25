@@ -8,7 +8,7 @@ import { CustomerService } from './customer.service';
 describe('CustomerService', () => {
     let service: CustomerService;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const moduleRef: TestingModule = await Test.createTestingModule({
             imports: [
                 ConfigModule.forRoot({
