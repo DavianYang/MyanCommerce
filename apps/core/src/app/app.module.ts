@@ -1,4 +1,5 @@
 import { Request as HttpRequest, Response as HttpResponse } from 'express';
+
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -8,7 +9,9 @@ import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { RoleModule } from '@myancommerce/nsx-role';
 import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
+import { AuthModule } from '@myancommerce/nsx-auth';
 import { CountryModule } from '@myancommerce/nsx-country';
+import { RedisCacheModule } from '@myancommerce/nsx-redis';
 
 import { environment } from '../environments/environment';
 import { appConfiguration } from './app.config';
@@ -51,7 +54,9 @@ import { appConfiguration } from './app.config';
             }),
             inject: [PrismaService],
         }),
+        RedisCacheModule,
         AdministratorModule,
+        AuthModule,
         CustomerModule,
         UserModule,
         RoleModule,

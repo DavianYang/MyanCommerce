@@ -11,6 +11,7 @@
         "nsx-error": "libs/nsx-error",
         "nsx-logger": "libs/nsx-logger",
         "nsx-prisma": "libs/nsx-prisma",
+        "nsx-redis": "libs/nsx-redis",
         "nsx-role": "libs/nsx-role",
         "nsx-testing": "libs/nsx-testing",
         "nsx-user": "libs/nsx-user"

@@ -39,6 +39,7 @@
             "@myancommerce/nsx-error": ["libs/nsx-error/src/index.ts"],
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
             "@myancommerce/nsx-prisma": ["libs/nsx-prisma/src/index.ts"],
+            "@myancommerce/nsx-redis": ["libs/nsx-redis/src/index.ts"],
             "@myancommerce/nsx-role": ["libs/nsx-role/src/index.ts"],
             "@myancommerce/nsx-testing": ["libs/nsx-testing/src/index.ts"],
             "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"]

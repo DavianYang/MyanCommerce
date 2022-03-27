@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-redis",
+    "sourceRoot": "libs/nsx-redis/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-redis",
+                "main": "libs/nsx-redis/src/index.ts",
+                "tsConfig": "libs/nsx-redis/tsconfig.lib.json",
+                "assets": ["libs/nsx-redis/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-redis/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-redis"],
+            "options": {
+                "jestConfig": "libs/nsx-redis/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

@@ -1,26 +1,28 @@
-import { PrismaService } from '@myancommerce/nsx-prisma';
-import { UserDto, UserService } from '@myancommerce/nsx-user';
-
-import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+
+import { UserDto, UserService } from '@myancommerce/nsx-user';
+import { RedisCacheService } from '@myancommerce/nsx-redis';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private prismaService: PrismaService,
         private jwtService: JwtService,
         private userSerivce: UserService,
+        private rediService: RedisCacheService,
     ) {}
 
     async login(identifier: string): Promise<any> {
         // if email and password are invalid
 
-        const user = await this.userSerivce.findOne(this.prismaService, {
+        const user = await this.userSerivce.findOne({
             where: { identifier },
             include: {
                 roles: true,
             },
         });
+
+        console.log(user);
 
         // if user password doesn't match with input password
 
@@ -30,17 +32,19 @@ export class AuthService {
 
         const token = this.prepareToken(user as UserDto);
 
+        await this.rediService.set('jwt_token', token);
+
         return {
             id: user.id,
             identifier: user.identifier,
-            token, // remove after adding chache
+            token, // remove after adding cache
         };
     }
 
     // async loginSocial();
 
     async getAuthUser(identifier: string) {
-        const user = await this.userSerivce.findOne(this.prismaService, {
+        const user = await this.userSerivce.findOne({
             where: { identifier },
             include: {
                 roles: true,

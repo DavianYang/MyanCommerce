@@ -11,6 +11,7 @@ import { AdminAuthResolver } from './auth.admin.resolver';
 import { ShopAuthResolver } from './auth.shop.resolver';
 import { JWTStrategy } from './strategy/jwt.strategy';
 import { GoogleStrategy } from './strategy/google.strategy';
+import { RedisCacheModule } from '@myancommerce/nsx-redis';
 
 @Module({
     providers: [
@@ -24,6 +25,7 @@ import { GoogleStrategy } from './strategy/google.strategy';
         ConfigModule,
         UserModule,
         PrismaModule,
+        RedisCacheModule,
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
             imports: [ConfigModule],

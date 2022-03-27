@@ -5,5 +5,4 @@ export * from './lib/graphql/common.enums';
 export * from './lib/graphql/common.types';
 
 export * from './lib/graphql/common.args';
-export * from './lib/graphql/common.error';
 export * from './lib/decorator/social-profile.decorator';

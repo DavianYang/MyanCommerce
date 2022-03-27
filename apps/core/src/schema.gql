@@ -29,6 +29,14 @@ type AdministratorDto {
   user: UserDto!
 }
 
+type AuthUserResponse {
+  id: ID!
+  identifier: String!
+  token: String!
+}
+
+union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
+
 type CountryDto {
   code: String!
   createdAt: DateTime!
@@ -120,6 +128,13 @@ type EmailAddressConflictError {
   message: String!
 }
 
+"""Returned if the user authentication credentials are not valid"""
+type InvalidCredentialsError {
+  authenticationError: String!
+  errorCode: String!
+  message: String!
+}
+
 type Mutation {
   """
   Create a new Address and associate it with the Customer specified by customerId
@@ -141,6 +156,8 @@ type Mutation {
   """Delete a Customer"""
   deleteCustomer(customerId: String!): DeletionResponse!
   deleteRole(id: Int!): RoleDto!
+  login(identifier: String!): AuthenticationResult!
+  loginSocial: AuthenticationResult!
 
   """Update an existing Address with addressId"""
   updateAddress(addressId: String!, input: UpdateAddressInput!): AddressDto!
@@ -159,6 +176,7 @@ type Query {
   country(id: String!): CountryDto!
   customer(id: String!): CustomerDto!
   customers(cursor: String, skip: Int, take: Int): [CustomerDto!]!
+  me: UserDto!
   role(id: Int!): RoleDto!
   roles(cursor: String, skip: Int, take: Int): [RoleDto!]!
 }

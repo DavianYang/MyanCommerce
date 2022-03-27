@@ -1,8 +1,7 @@
-import { Args, Mutation, Resolver, Query, Context } from '@nestjs/graphql';
+import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { UserDto, UserEntity, UserService } from '@myancommerce/nsx-user';
-import { RequestContext } from '@myancommerce/nox-common';
 
 import { AuthService } from './auth.service';
 import { GqlAuthGuard } from './guard/gql-auth.guard';
@@ -18,11 +17,8 @@ export class AdminAuthResolver {
 
     @Query(() => UserDto)
     @UseGuards(GqlAuthGuard)
-    async me(
-        @Context() { prisma }: RequestContext,
-        @UserEntity() user: UserDto,
-    ) {
-        return this.userService.findOne(prisma, {
+    async me(@UserEntity() user: UserDto) {
+        return this.userService.findOne({
             where: { identifier: user.identifier },
         });
     }
