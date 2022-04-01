@@ -1,29 +1,29 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { PrismaModule } from '@myancommerce/nsx-prisma';
 import { UserModule } from '@myancommerce/nsx-user';
+import { RedisCacheModule } from '@myancommerce/nsx-redis';
 
 import { AuthService } from './auth.service';
 import { AdminAuthResolver } from './auth.admin.resolver';
-import { ShopAuthResolver } from './auth.shop.resolver';
 import { JWTStrategy } from './strategy/jwt.strategy';
 import { GoogleStrategy } from './strategy/google.strategy';
-import { RedisCacheModule } from '@myancommerce/nsx-redis';
+import { PasswordCipher } from './helpers/password-cipher';
 
 @Module({
     providers: [
         AuthService,
+        PasswordCipher,
         AdminAuthResolver,
-        ShopAuthResolver,
         JWTStrategy,
         GoogleStrategy,
     ],
     imports: [
         ConfigModule,
-        UserModule,
+        forwardRef(() => UserModule),
         PrismaModule,
         RedisCacheModule,
         PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -44,6 +44,6 @@ import { RedisCacheModule } from '@myancommerce/nsx-redis';
             inject: [ConfigService],
         }),
     ],
-    exports: [AuthService],
+    exports: [AuthService, PasswordCipher],
 })
 export class AuthModule {}
