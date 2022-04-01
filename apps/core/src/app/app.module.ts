@@ -13,6 +13,7 @@ import { RedisCacheModule } from '@myancommerce/nsx-redis';
 
 import { environment } from '../environments/environment';
 import { appConfiguration } from './app.config';
+import { ShopModule } from '@myancommerce/nsx-shop';
 
 @Module({
     imports: [
@@ -45,6 +46,7 @@ import { appConfiguration } from './app.config';
         UserModule,
         RoleModule,
         CountryModule,
+        ShopModule,
     ],
 })
 export class AppModule {}
