@@ -5,18 +5,19 @@ import { ID } from '@myancommerce/nox-common';
 import { DeletionResponse, DeletionResult } from '@myancommerce/nsx-common';
 import {
     EmailAddressConflictError,
-    EMAIL_ADDRESS_CONFLICT_ERROR_CODE,
-    EMAIL_ADDRESS_CONFLICT_ERROR_MESSSAGE,
     EntityNotFoundError,
+    isGraphQlErrorResult,
 } from '@myancommerce/nsx-error';
 import { UserService } from '@myancommerce/nsx-user';
 import { PrismaService } from '@myancommerce/nsx-prisma';
 import { CountryService } from '@myancommerce/nsx-country';
 
-import { CreateCustomerResult } from './result/create-customer.result';
 import { UpdateAddressInput } from './input/update-address.input';
 import { CreateAddressInput } from './input/create-address.input';
 import { CreateCustomerInput } from './input/create-customer.input';
+import { RegisterCustomerInput } from './input/register-customer.input';
+import { RegisterCustomerResult } from './result/register-customer.result';
+import { CreateCustomerResult } from './result/create-customer.result';
 
 @Injectable()
 export class CustomerService {
@@ -50,10 +51,7 @@ export class CustomerService {
         });
 
         if (existingCustomer) {
-            return new EmailAddressConflictError({
-                errorCode: EMAIL_ADDRESS_CONFLICT_ERROR_CODE,
-                message: EMAIL_ADDRESS_CONFLICT_ERROR_MESSSAGE,
-            });
+            return new EmailAddressConflictError({ email: input.emailAddress });
         }
 
         // if password is specified, return verification token,
@@ -63,6 +61,7 @@ export class CustomerService {
         return await this.prisma.$transaction(async (_prisma: any) => {
             const user = await this.userService.createCustomerUser(
                 input.emailAddress,
+                input.password,
             );
 
             return await _prisma.customer.create({
@@ -78,8 +77,41 @@ export class CustomerService {
                         },
                     },
                 },
+                include: {
+                    user: true,
+                },
             });
         });
+    }
+
+    /**
+     * @description
+     * Registers a new Customer account
+     *
+     * This method is intended to be used in storefront Customer-creation flows.
+     */
+    async registerCustomerAccount(
+        input: RegisterCustomerInput,
+    ): Promise<typeof RegisterCustomerResult> {
+        // If require verification set to false and if no password provided
+        // Return Password missing error
+
+        const result = await this.create({
+            title: input.title,
+            firstName: input.firstName,
+            lastName: input.lastName,
+            emailAddress: input.emailAddress,
+            phoneNumber: input.phoneNumber,
+            password: input.password || '',
+        });
+
+        if (isGraphQlErrorResult(result)) {
+            return result;
+        }
+
+        return {
+            success: true,
+        };
     }
 
     async createAddress(
