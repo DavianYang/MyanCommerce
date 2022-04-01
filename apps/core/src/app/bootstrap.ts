@@ -57,7 +57,7 @@ export function logWelcomeMessage() {
         version = 'unknown';
     }
 
-    const { hostname, port, shopApiPath, adminApiPath } = environment.apiConfig;
+    const { hostname, port, apiPath } = environment.apiConfig;
 
     const title = `MyanCommerce server (v${version} now running on http://${
         hostname || 'localhost'
@@ -66,8 +66,8 @@ export function logWelcomeMessage() {
     const apiCliGreetings: Array<readonly [string, string]> = [];
     const pathToUrl = (path: string) =>
         `http://${hostname || 'localhost'}:${port}/${path}`;
-    apiCliGreetings.push(['Shop API', pathToUrl(shopApiPath as string)]);
-    apiCliGreetings.push(['Admin API', pathToUrl(adminApiPath as string)]);
+
+    apiCliGreetings.push(['API', pathToUrl(apiPath as string)]);
 
     const columnGreetings = arrageCliGreetingInColumns(apiCliGreetings);
 

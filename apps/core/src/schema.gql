@@ -30,12 +30,25 @@ type AdministratorDto {
 }
 
 type AuthUserResponse {
-  id: ID!
-  identifier: String!
   token: String!
+  user: UserDto!
 }
 
-union AuthenticationResult = AuthUserResponse | InvalidCredentialsError
+type AuthenticationDto {
+  createdAt: DateTime!
+  id: ID!
+  identifier: String!
+  identifierChangeToken: String
+  method: String!
+  passwordHash: String!
+  passwordResetToken: String
+  pendingIdentifier: String
+  updatedAt: DateTime!
+  user: UserDto!
+  verificationToken: String
+}
+
+union AuthenticationResult = AuthUserResponse | EmailAddressConflictError | InvalidCredentialsError
 
 type CountryDto {
   code: String!
@@ -64,6 +77,7 @@ input CreateAdministratorInput {
   emailAddress: String!
   firstName: String!
   lastName: String!
+  password: String!
   roleIds: [Int!]!
 }
 
@@ -77,6 +91,7 @@ input CreateCustomerInput {
   emailAddress: String!
   firstName: String!
   lastName: String!
+  password: String!
   phoneNumber: String
   title: String
 }
@@ -124,6 +139,7 @@ enum DeletionResult {
 Returned when attempting to create a Customer with an email address already registered to an existing User.
 """
 type EmailAddressConflictError {
+  email: String!
   errorCode: String!
   message: String!
 }
@@ -133,6 +149,11 @@ type InvalidCredentialsError {
   authenticationError: String!
   errorCode: String!
   message: String!
+}
+
+input LoginSocialInput {
+  accessToken: String!
+  provider: SocialAuthProviders!
 }
 
 type Mutation {
@@ -157,7 +178,8 @@ type Mutation {
   deleteCustomer(customerId: String!): DeletionResponse!
   deleteRole(id: Int!): RoleDto!
   login(identifier: String!): AuthenticationResult!
-  loginSocial: AuthenticationResult!
+  loginSocial(input: LoginSocialInput!): AuthenticationResult!
+  registerCustomerAccount(input: RegisterCustomerInput!): RegisterCustomerResult!
 
   """Update an existing Address with addressId"""
   updateAddress(addressId: String!, input: UpdateAddressInput!): AddressDto!
@@ -181,10 +203,26 @@ type Query {
   roles(cursor: String, skip: Int, take: Int): [RoleDto!]!
 }
 
+input RegisterCustomerInput {
+  emailAddress: String!
+  firstName: String!
+  lastName: String!
+  password: String
+  phoneNumber: String
+  title: String
+}
+
+union RegisterCustomerResult = EmailAddressConflictError | Success
+
 type RoleDto {
   code: String!
   description: String!
   id: ID!
+}
+
+enum SocialAuthProviders {
+  FACEBOOK
+  GOOGLE
 }
 
 type Success {
@@ -215,6 +253,7 @@ input UpdateCustomerInput {
   emailAddress: String
   firstName: String
   lastName: String
+  password: String
   phoneNumber: String
   title: String
 }
@@ -227,6 +266,7 @@ input UpdateRoleInput {
 }
 
 type UserDto {
+  authentication: [AuthenticationDto!]!
   createdAt: DateTime!
   deletedAt: DateTime
   id: ID!

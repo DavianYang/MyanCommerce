@@ -1,8 +1,12 @@
-import { NSXLogger } from '@myancommerce/nsx-logger';
-import { Type } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ConfigModuleOptions } from '@nestjs/config';
 import { BuildSchemaOptions } from '@nestjs/graphql';
+
+import {
+    PasswordHashingStrategy,
+    PasswordValidationStrategy,
+} from '@myancommerce/nsx-auth';
+import { NSXLogger } from '@myancommerce/nsx-logger';
 
 export interface ApiOptions {
     /**
@@ -21,46 +25,25 @@ export interface ApiOptions {
     port: number;
     /**
      * @description
-     * The path to the admin GraphQL API.
+     * The path to the GraphQL API.
      *
-     * @default 'admin-api'
+     * @default 'api'
      */
-    adminApiPath?: string;
+    apiPath?: string;
     /**
      * @description
-     * The path to the shop GraphQL API.
-     *
-     * @default 'shop-api'
-     */
-    shopApiPath?: string;
-    /**
-     * @description
-     * The playground config to the admin GraphQL API.
+     * The playground config to the GraphQL API.
      *
      * @default false
      */
-    adminApiPlayground?: boolean | any;
+    apiPlayground?: boolean | any;
     /**
      * @description
-     * The playground config to the shop GraphQL API.
+     * The debug config to the GraphQL API.
      *
      * @default false
      */
-    shopApiPlayground?: boolean | any;
-    /**
-     * @description
-     * The debug config to the admin GraphQL API.
-     *
-     * @default false
-     */
-    adminApiDebug?: boolean;
-    /**
-     * @description
-     * The debug config to the shop GraphQL API.
-     *
-     * @default false
-     */
-    shopApiDebug?: boolean;
+    apiDebug?: boolean;
 }
 
 export interface SocialAuthOptions {
@@ -87,8 +70,42 @@ export interface AuthOptions {
      * Set Cookie Expiration for JWT token
      */
     jwtCookieExpiry: string;
-
-    bcryptSaltOrRound?: number;
+    /**
+     * @description
+     * Determines whether new User accounts require verification of their email address.
+     *
+     * If set to "true", when registering via the `registerCustomerAccount` mutation, one should *not* set the
+     * `password` property - doing so will result in an error. Instead, the password is set at a later stage
+     * (once the email with the verification token has been opened) via the `verifyCustomerAccount` mutation.
+     *
+     * @default true
+     */
+    requireVerification?: boolean;
+    /**
+     * @description
+     * Allows you to customize the way passwords are hashed when using the {@link NativeAuthenticationStrategy}.
+     *
+     * @default BcryptPasswordHashingStrategy
+     * @since 1.3.0
+     */
+    passwordHashingStrategy?: PasswordHashingStrategy;
+    /**
+     * @description
+     * Allows you to set a custom policy for passwords when using the {@link NativeAuthenticationStrategy}.
+     * By default, it uses the {@link DefaultPasswordValidationStrategy}, which will impose a minimum length
+     * of four characters. To improve security for production, you are encouraged to specify a more strict
+     * policy, which you can do like this:
+     *
+     * @example
+     * ```ts
+     * {
+     *   passwordValidationStrategy: new DefaultPasswordValidationStrategy({
+     *     // Minimum eight characters, at least one letter and one number
+     *     regexp: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+     *   }),
+     * }
+     */
+    passwordValidationStrategy?: PasswordValidationStrategy;
 }
 
 export interface GraphQLOptions {
@@ -120,13 +137,9 @@ export interface GraphQLOptions {
      * @default { origin: true, credentials: true }
      */
     cors: CorsOptions | boolean;
-    /**
-     * @description
-     * Include module that generate resolver to Graphql Schemas
-     *
-     * @default []
-     */
-    include: Array<Type<any>>;
+
+    context?: any;
+    formatError?: any;
 }
 
 export interface CometXConfig {

@@ -1,10 +1,8 @@
-import { Request as HttpRequest, Response as HttpResponse } from 'express';
-
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
+import { PrismaModule } from '@myancommerce/nsx-prisma';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { RoleModule } from '@myancommerce/nsx-role';
 import { CustomerModule } from '@myancommerce/nsx-customer';
@@ -24,35 +22,21 @@ import { appConfiguration } from './app.config';
         }),
         PrismaModule,
         GraphQLModule.forRootAsync({
-            useFactory: async (prisma: PrismaService) => ({
+            useFactory: async () => ({
                 ...environment.graphqlConfig,
-                path: environment.apiConfig.adminApiPath,
-                debug: environment.apiConfig.adminApiDebug,
-                playground: environment.apiConfig.adminApiPlayground,
-                context: ({ req, res }: any) => ({
-                    request: req as HttpRequest,
-                    response: res as HttpResponse,
-                    prisma,
-                }),
-                formatError: error => ({
-                    code: error.extensions?.['code'] || 'SERVER_ERROR',
-                    name: error.extensions?.['exception']?.name || error.name,
-                    message:
-                        error.extensions?.['exception']?.response?.message ||
-                        error.message,
-                    errLocations: environment.apiConfig.adminApiDebug
-                        ? error.locations
-                        : undefined,
-                    errPath: environment.apiConfig.adminApiDebug
-                        ? error.path
-                        : undefined,
-                    variables: environment.apiConfig.adminApiDebug
-                        ? error.extensions?.['exception']?.variables
-                        : undefined,
-                    stacktrace: error.extensions?.['exception']?.stacktrace,
-                }),
+                path: environment.apiConfig.apiPath,
+                debug: environment.apiConfig.apiDebug,
+                playground: environment.apiConfig.apiPlayground,
+                include: [
+                    AuthModule,
+                    AdministratorModule,
+                    CustomerModule,
+                    UserModule,
+                    RoleModule,
+                    CountryModule,
+                    ShopModule,
+                ],
             }),
-            inject: [PrismaService],
         }),
         RedisCacheModule,
         AdministratorModule,
