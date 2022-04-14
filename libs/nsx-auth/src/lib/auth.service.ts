@@ -79,11 +79,46 @@ export class AuthService {
         return match;
     }
 
-    prepareToken(user: UserDto): string {
-        const { identifier, roles } = user;
+    // async login(
+    //     identifier: string,
+    // ): Promise<
+    //     | { user: User & { roles: Role[] }; token: string }
+    //     | UnauthorizedException
+    // > {
+    //     // if email and password are invalid
 
-        const rolesCode = roles.map(role => role.code);
+    //     const roleInclude = Prisma.validator<Prisma.UserInclude>()({
+    //         roles: true,
+    //     });
 
-        return this.jwtService.sign({ identifier, rolesCode });
-    }
+    //     const user = await this.userSerivce.findOne({
+    //         where: { identifier },
+    //         include: roleInclude,
+    //     });
+
+    //     // Compare Password and password hash
+
+    //     if (!user) {
+    //         return new UnauthorizedException();
+    //     }
+
+    //     const token = this.signJWTToken(user as unknown as UserDto);
+
+    //     await this.rediService.set('jwt_token', token);
+
+    //     return {
+    //         user,
+    //         token,
+    //     };
+    // }
+
+    // signJWTToken(user: UserDto): string {
+    //     const { identifier, roles } = user;
+
+    //     const rolesCode = roles.map(role => role.code);
+
+    //     // setCookies for jwt Token
+
+    //     return this.jwtService.sign({ identifier, rolesCode });
+    // }
 }
