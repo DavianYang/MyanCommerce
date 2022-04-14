@@ -1,33 +1,46 @@
-import { Query, Mutation, Resolver } from '@nestjs/graphql';
+import { Profile } from 'passport';
+import { Request as HttpRequest, Response as HttpResponse } from 'express';
+import { Query, Mutation, Resolver, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { Input, SocialProfile } from '@myancommerce/nsx-common';
-
 import {
     AuthenticationResult,
     AuthUserResponse,
     SocialAuthGuard,
     GqlJwtAuthGuard,
     ProfileEntity,
+    AuthService,
+    LoginShopResult,
+    LoginInput,
+    BaseAuthResolver,
 } from '@myancommerce/nsx-auth';
 import { UserDto, UserService } from '@myancommerce/nsx-user';
-import { Profile } from 'passport';
 import {
     CustomerService,
     RegisterCustomerInput,
     RegisterCustomerResult,
+    VerifyCustomerInput,
+    VerifyCustomerResult,
 } from '@myancommerce/nsx-customer';
+import { isGraphQlErrorResult } from '@myancommerce/nsx-error';
+import { setSessionToken } from '@myancommerce/nsx-session';
+import { ConfigService } from '@myancommerce/nsx-config';
 
 @Resolver()
-export class ShopAuthResolver {
+export class ShopAuthResolver extends BaseAuthResolver {
     constructor(
-        private readonly userService: UserService,
-        private readonly customerService: CustomerService,
-    ) {}
+        configService: ConfigService,
+        authService: AuthService,
+        userService: UserService,
+        private customerService: CustomerService,
+    ) {
+        super(configService, authService, userService);
+    }
 
     @UseGuards(GqlJwtAuthGuard)
     @Query(() => UserDto)
-    async me(@ProfileEntity() user: UserDto) {
+    async CurrentUser(@ProfileEntity() user: UserDto) {
         return await this.userService.findOne({
             where: { identifier: user.identifier },
         });
