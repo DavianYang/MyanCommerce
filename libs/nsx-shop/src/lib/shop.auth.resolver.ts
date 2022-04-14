@@ -59,4 +59,14 @@ export class ShopAuthResolver extends BaseAuthResolver {
     ): Promise<typeof RegisterCustomerResult> {
         return await this.customerService.registerCustomerAccount(input);
     }
+    @Mutation(() => LoginShopResult)
+    async loginShop(
+        @Context('req') req: HttpRequest,
+        @Context('res') res: HttpResponse,
+        @Input() inputArgs: LoginInput,
+    ) {
+        const apiType = 'shop';
+
+        return await super.baseLogin(req, res, apiType, inputArgs);
+    }
 }
