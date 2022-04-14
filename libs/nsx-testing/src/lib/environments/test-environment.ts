@@ -2,7 +2,13 @@ import * as dotenv from 'dotenv';
 import { ConfigModuleOptions } from '@nestjs/config';
 import { DefaultLogger } from '@myancommerce/nsx-logger';
 import { LogLevel } from '@myancommerce/nsx-logger';
-import { ApiOptions, CometXConfig, GraphQLOptions } from '@myancommerce/core';
+import {
+    ApiOptions,
+    AuthOptions,
+    CometXConfig,
+    GraphQLOptions,
+    SocialAuthOptions,
+} from '@myancommerce/core';
 import { AdministratorModule } from '@myancommerce/nsx-administrator';
 import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
@@ -46,9 +52,23 @@ const graphqlConfig: GraphQLOptions = {
     },
 };
 
+const socialAuthConfig: SocialAuthOptions = {
+    name: 'google',
+    clientID: process.env['CLIENT_ID'] as string,
+    clientSecret: process.env['CLIENT_SECRET'] as string,
+};
+
+const authConfig: AuthOptions = {
+    jwtTokenSecret: process.env['JWT_SECRET'] as string,
+    jwtTokenExpiry: process.env['JWT_EXPIRE_IN'] as string,
+    jwtCookieExpiry: process.env['JWT_COOKIE_EXPIRES_IN'] as string,
+};
+
 export const testEnvironment: CometXConfig = {
     appConfig,
     apiConfig,
+    authConfig,
+    socialAuthConfig,
     graphqlConfig,
     dbConnection: process.env['DATABASE_URL'] as string,
     logger: new DefaultLogger({

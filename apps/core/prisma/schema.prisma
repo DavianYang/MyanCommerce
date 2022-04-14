@@ -17,16 +17,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// @description
+// Authentication Entity contain method which uses a identifier (typically username or email address)
+// and password combination to authenticate a User.
+model Authentication {
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  identifier         String   @unique
+  method             String
+  passwordHash       String
+  verificationToken  String?  @unique
+  passwordResetToken String?  @unique
+
+  // @description
+  // A token issued when a User requests to change their identifier (typically an email address)
+  identifierChangeToken String? @unique
+
+  // @description
+  // When a request has been made to change the User's identifier, the new identifier
+  // will be stored here until it has been verified, after which it will
+  // replace the current value of the `identifier` field.
+  pendingIdentifier String? @unique
+  user              User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId            String?
+}
+
 model User {
-  id            String         @id @default(uuid())
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     DateTime?
-  identifier    String         @unique
-  verified      Boolean        @default(false)
-  roles         Role[]
-  administrator Administrator?
-  customer      Customer?
+  id                   String                 @id @default(uuid())
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  deletedAt            DateTime?
+  identifier           String                 @unique
+  verified             Boolean                @default(false)
+  lastLogin            DateTime?
+  authentication       Authentication[]
+  roles                Role[]
+  administrator        Administrator?
+  customer             Customer?
+  authenticatedSession AuthenticatedSession[]
 }
 
 model Role {
@@ -92,4 +121,25 @@ model Country {
   enabled   Boolean
   code      String    @unique @db.VarChar(255)
   address   Address[]
+}
+
+model AuthenticatedSession {
+  id                    String   @id @default(uuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  token                 String   @unique
+  expires               DateTime
+  invalidated           Boolean
+  authenticatedStrategy String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId                String
+}
+
+model AnonymousSession {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  token       String   @unique
+  expires     DateTime
+  invalidated Boolean
 }

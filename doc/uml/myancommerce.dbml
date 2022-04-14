@@ -7,6 +7,21 @@ Project "CometX" {
   Note: 'Online Commerce Platform'
 }
 
+Table Authentication {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  identifier String [unique, not null]
+  method String [not null]
+  passwordHash String [not null]
+  verificationToken String [unique]
+  passwordResetToken String [unique]
+  identifierChangeToken String [unique]
+  pendingIdentifier String [unique]
+  user User
+  userId String
+}
+
 Table User {
   id String [pk]
   createdAt DateTime [default: `now()`, not null]
@@ -14,9 +29,12 @@ Table User {
   deletedAt DateTime
   identifier String [unique, not null]
   verified Boolean [not null, default: false]
+  lastLogin DateTime
+  authentication Authentication [not null]
   roles Role [not null]
   administrator Administrator
   customer Customer
+  authenticatedSession AuthenticatedSession [not null]
 }
 
 Table Role {
@@ -84,10 +102,33 @@ Table Country {
   address Address [not null]
 }
 
+Table AuthenticatedSession {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+  invalidated Boolean [not null]
+  authenticatedStrategy String [not null]
+  user User [not null]
+  userId String [not null]
+}
+
+Table AnonymousSession {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+  invalidated Boolean [not null]
+}
+
 Table RoleToUser {
   rolesId Int [ref: > Role.id]
   userId String [ref: > User.id]
 }
+
+Ref: Authentication.userId > User.id [delete: Cascade]
 
 Ref: Administrator.userId - User.id [delete: Cascade]
 
@@ -96,3 +137,5 @@ Ref: Customer.userId - User.id [delete: Cascade]
 Ref: Address.countryId > Country.id [delete: Cascade]
 
 Ref: Address.customerId > Customer.id [delete: Cascade]
+
+Ref: AuthenticatedSession.userId > User.id [delete: Cascade]

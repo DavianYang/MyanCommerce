@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-shop",
+    "sourceRoot": "libs/nsx-shop/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-shop",
+                "main": "libs/nsx-shop/src/index.ts",
+                "tsConfig": "libs/nsx-shop/tsconfig.lib.json",
+                "assets": ["libs/nsx-shop/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-shop/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-shop"],
+            "options": {
+                "jestConfig": "libs/nsx-shop/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

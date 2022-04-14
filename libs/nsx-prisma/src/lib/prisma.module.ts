@@ -1,6 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-
+import { ConfigModule } from '@myancommerce/nsx-config';
 import { PrismaService } from './prisma.service';
 
 @Global()

@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+const cookieSession = require('cookie-session');
 
 import { Logger, NSXLogger } from '@myancommerce/nsx-logger';
 import { AppModule } from './app.module';
@@ -36,6 +37,15 @@ export async function bootstrap(): Promise<INestApplication> {
 
     app.useLogger(new Logger());
 
+    const { tokenMethod } = environment.authConfig;
+
+    if (
+        tokenMethod === 'cookie' ||
+        (Array.isArray(tokenMethod) && tokenMethod.includes('cookie'))
+    ) {
+        app.use(cookieSession(environment.authConfig.cookieOptions));
+    }
+
     await app.listen(port, hostname || '');
 
     if (module.hot) {
@@ -45,6 +55,7 @@ export async function bootstrap(): Promise<INestApplication> {
 
     app.enableShutdownHooks();
     logWelcomeMessage();
+
     return app;
 }
 
@@ -57,7 +68,7 @@ export function logWelcomeMessage() {
         version = 'unknown';
     }
 
-    const { hostname, port, shopApiPath, adminApiPath } = environment.apiConfig;
+    const { hostname, port, apiPath } = environment.apiConfig;
 
     const title = `MyanCommerce server (v${version} now running on http://${
         hostname || 'localhost'
@@ -66,8 +77,8 @@ export function logWelcomeMessage() {
     const apiCliGreetings: Array<readonly [string, string]> = [];
     const pathToUrl = (path: string) =>
         `http://${hostname || 'localhost'}:${port}/${path}`;
-    apiCliGreetings.push(['Shop API', pathToUrl(shopApiPath as string)]);
-    apiCliGreetings.push(['Admin API', pathToUrl(adminApiPath as string)]);
+
+    apiCliGreetings.push(['API', pathToUrl(apiPath as string)]);
 
     const columnGreetings = arrageCliGreetingInColumns(apiCliGreetings);
 

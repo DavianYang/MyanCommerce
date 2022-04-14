@@ -5,8 +5,9 @@ import {
     OnModuleDestroy,
     OnModuleInit,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService } from '@myancommerce/nsx-config';
 import { PrismaClient } from '@prisma/client';
+
 import { environment } from '@myancommerce/core';
 
 @Injectable()
