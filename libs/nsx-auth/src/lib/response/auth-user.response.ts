@@ -1,12 +1,10 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { UserDto } from '@myancommerce/nsx-user';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class AuthUserResponse {
-    @Field(() => ID)
-    id: string;
-
-    @Field()
-    identifier: string;
+    @Field(() => UserDto)
+    user: UserDto;
 
     @Field()
     token: string; // remove after adding cache session

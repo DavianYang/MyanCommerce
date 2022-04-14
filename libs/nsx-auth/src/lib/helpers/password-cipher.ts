@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PasswordHashingStrategy } from '../strategy/password/password-hashing.strategy.interface';
+import { ConfigService } from '@myancommerce/nsx-config';
+import { PasswordHashingStrategy } from '../strategy/password/hashing.password.strategy.interface';
 
 @Injectable()
 export class PasswordCipher {
