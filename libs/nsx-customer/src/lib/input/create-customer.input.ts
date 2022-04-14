@@ -8,5 +8,5 @@ export class CreateCustomerInput extends PickType(
     InputType,
 ) {
     @Field(() => String)
-    password: string;
+    password: string | null;
 }
