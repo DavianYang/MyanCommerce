@@ -1,8 +1,15 @@
 import * as dotenv from 'dotenv';
 import { Request as HttpRequest, Response as HttpResponse } from 'express';
 import { ConfigModuleOptions } from '@nestjs/config';
+
 import { DefaultLogger } from '@myancommerce/nsx-logger';
 import { LogLevel } from '@myancommerce/nsx-logger';
+import {
+    BcryptPasswordHashingStrategy,
+    DefaultPasswordValidationStrategy,
+    LocalAuthenticationStrategy,
+} from '@myancommerce/nsx-auth';
+
 import {
     ApiOptions,
     AuthOptions,
@@ -10,8 +17,7 @@ import {
     GraphQLOptions,
     SocialAuthOptions,
 } from './envrionment.interface';
-
-import { BcryptPasswordHashingStrategy } from '@myancommerce/nsx-auth';
+import { InMemoryCacheStrategy } from '@myancommerce/nsx-cache';
 
 dotenv.config({
     path: `apps/core/.env.${
@@ -46,8 +52,28 @@ const authConfig: AuthOptions = {
     jwtTokenSecret: process.env['JWT_SECRET'] as string,
     jwtTokenExpiry: process.env['JWT_EXPIRE_IN'] as string,
     jwtCookieExpiry: process.env['JWT_COOKIE_EXPIRES_IN'] as string,
-    requireVerification: false,
+
+    tokenMethod: 'cookie',
+    cookieOptions: {
+        secret: Math.random().toString(36).substring(3),
+        httpOnly: true,
+    },
+    authTokenHeaderKey: 'cometx-auth-token',
+
+    requireVerification: true,
+    verificationTokenDuration: '7d',
+
+    sessionCacheStrategy: new InMemoryCacheStrategy(),
+    sessionDuration: '7d',
+    sessionCacheTTL: 300,
+
+    shopAuthenticationStrategy: [new LocalAuthenticationStrategy()],
+    adminAuthenticationStrategy: [new LocalAuthenticationStrategy()],
+
     passwordHashingStrategy: new BcryptPasswordHashingStrategy(),
+    passwordValidationStrategy: new DefaultPasswordValidationStrategy({
+        minLength: 4,
+    }),
 };
 
 const graphqlConfig: GraphQLOptions = {

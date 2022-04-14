@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+const cookieSession = require('cookie-session');
 
 import { Logger, NSXLogger } from '@myancommerce/nsx-logger';
 import { AppModule } from './app.module';
@@ -36,6 +37,15 @@ export async function bootstrap(): Promise<INestApplication> {
 
     app.useLogger(new Logger());
 
+    const { tokenMethod } = environment.authConfig;
+
+    if (
+        tokenMethod === 'cookie' ||
+        (Array.isArray(tokenMethod) && tokenMethod.includes('cookie'))
+    ) {
+        app.use(cookieSession(environment.authConfig.cookieOptions));
+    }
+
     await app.listen(port, hostname || '');
 
     if (module.hot) {
@@ -45,6 +55,7 @@ export async function bootstrap(): Promise<INestApplication> {
 
     app.enableShutdownHooks();
     logWelcomeMessage();
+
     return app;
 }
 

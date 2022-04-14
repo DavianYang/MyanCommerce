@@ -9,7 +9,6 @@ import { CustomerModule } from '@myancommerce/nsx-customer';
 import { UserModule } from '@myancommerce/nsx-user';
 import { AuthModule } from '@myancommerce/nsx-auth';
 import { CountryModule } from '@myancommerce/nsx-country';
-import { RedisCacheModule } from '@myancommerce/nsx-redis';
 
 import { environment } from '../environments/environment';
 import { appConfiguration } from './app.config';
@@ -39,7 +38,6 @@ import { ShopModule } from '@myancommerce/nsx-shop';
                 ],
             }),
         }),
-        RedisCacheModule,
         AdministratorModule,
         AuthModule,
         CustomerModule,

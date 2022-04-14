@@ -40,20 +40,22 @@ model Authentication {
   // replace the current value of the `identifier` field.
   pendingIdentifier String? @unique
   user              User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId            String
+  userId            String?
 }
 
 model User {
-  id             String           @id @default(uuid())
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  deletedAt      DateTime?
-  identifier     String           @unique
-  verified       Boolean          @default(false)
-  authentication Authentication[]
-  roles          Role[]
-  administrator  Administrator?
-  customer       Customer?
+  id                   String                 @id @default(uuid())
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  deletedAt            DateTime?
+  identifier           String                 @unique
+  verified             Boolean                @default(false)
+  lastLogin            DateTime?
+  authentication       Authentication[]
+  roles                Role[]
+  administrator        Administrator?
+  customer             Customer?
+  authenticatedSession AuthenticatedSession[]
 }
 
 model Role {
@@ -119,4 +121,25 @@ model Country {
   enabled   Boolean
   code      String    @unique @db.VarChar(255)
   address   Address[]
+}
+
+model AuthenticatedSession {
+  id                    String   @id @default(uuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  token                 String   @unique
+  expires               DateTime
+  invalidated           Boolean
+  authenticatedStrategy String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId                String
+}
+
+model AnonymousSession {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  token       String   @unique
+  expires     DateTime
+  invalidated Boolean
 }
