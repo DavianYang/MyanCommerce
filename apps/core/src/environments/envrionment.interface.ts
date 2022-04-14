@@ -235,6 +235,16 @@ export interface AuthOptions {
     requireVerification?: boolean;
     /**
      * @description
+     * Sets the length of time that a verification token is valid for, after which the verification token must be refreshed.
+     *
+     * Expressed as a string describing a time span per
+     * [zeit/ms](https://github.com/zeit/ms.js).  Eg: `60`, `'2 days'`, `'10h'`, `'7d'`
+     *
+     * @default '7d'
+     */
+    verificationTokenDuration?: string | number;
+    /**
+     * @description
      * Allows you to customize the way passwords are hashed when using the {@link NativeAuthenticationStrategy}.
      *
      * @default BcryptPasswordHashingStrategy
@@ -258,6 +268,18 @@ export interface AuthOptions {
      * }
      */
     passwordValidationStrategy?: PasswordValidationStrategy;
+    /**
+     * @description
+     * Configures one or more AuthenticationStrategies which defines how authentication
+     * is handled in the Shop Auth Resolver.
+     */
+    shopAuthenticationStrategy?: AuthenticationStrategy[];
+    /**
+     * @description
+     * Configures one or more AuthenticationStrategy which defines how authentication
+     * is handled in the Admin Auth Resolver.
+     */
+    adminAuthenticationStrategy?: AuthenticationStrategy[];
 }
 
 export interface GraphQLOptions {

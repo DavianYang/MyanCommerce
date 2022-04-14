@@ -59,6 +59,7 @@ export class ShopAuthResolver extends BaseAuthResolver {
     ): Promise<typeof RegisterCustomerResult> {
         return await this.customerService.registerCustomerAccount(input);
     }
+
     @Mutation(() => LoginShopResult)
     async loginShop(
         @Context('req') req: HttpRequest,
@@ -68,5 +69,40 @@ export class ShopAuthResolver extends BaseAuthResolver {
         const apiType = 'shop';
 
         return await super.baseLogin(req, res, apiType, inputArgs);
+    }
+
+    @Mutation(() => VerifyCustomerResult)
+    async verifyCustomerAccount(
+        @Context('req') req: HttpRequest,
+        @Context('res') res: HttpResponse,
+        @Input() inputArgs: VerifyCustomerInput,
+    ) {
+        const result = await this.customerService.verifyCustomerEmailAddress(
+            inputArgs.token,
+            inputArgs.password || undefined,
+        );
+
+        if (isGraphQlErrorResult(result)) {
+            return result;
+        }
+
+        const session =
+            await this.authService.createAuthenticatedSessionForUser(
+                result.user!,
+                'local',
+            );
+
+        setSessionToken({
+            req,
+            res,
+            sessionToken: session.token,
+            rememberMe: true,
+            authTokenHeaderKey: this.configService.get(
+                'authConfig.authTokenHeaderKey',
+            ),
+            tokenMethod: this.configService.get('authConfig.tokenMethod'),
+        });
+
+        return this.publiclyAccessibleUser(session.user);
     }
 }
