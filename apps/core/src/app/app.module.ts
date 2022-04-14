@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule } from '@myancommerce/nsx-config';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { PrismaModule } from '@myancommerce/nsx-prisma';
