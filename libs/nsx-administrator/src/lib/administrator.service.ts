@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Prisma, Administrator } from '@prisma/client';
 import { UserService } from '@myancommerce/nsx-user';
 import { PrismaService } from '@myancommerce/nsx-prisma';
+import { isGraphQlErrorResult } from '@myancommerce/nsx-error';
 import { CreateAdministratorInput } from './input/create-administrator.input';
+import { CreateAdmnistratorResult } from './result/create-administrator.result';
 
 @Injectable()
 export class AdministratorService {
@@ -23,25 +25,29 @@ export class AdministratorService {
         return this.prisma.administrator.findMany(args);
     }
 
-    async create(input: CreateAdministratorInput): Promise<Administrator> {
-        return await this.prisma.$transaction(async (_prisma: any) => {
-            const user = await this.userService.createAdminUser(
-                input.emailAddress,
-                input.password,
-            );
+    async create(
+        input: CreateAdministratorInput,
+    ): Promise<typeof CreateAdmnistratorResult> {
+        const user = await this.userService.createAdminUser(
+            input.emailAddress,
+            input.password,
+        );
 
-            return await _prisma.administrator.create({
-                data: {
-                    firstName: input.firstName,
-                    lastName: input.lastName,
-                    emailAddress: input.emailAddress,
-                    user: {
-                        connect: {
-                            id: user.id,
-                        },
+        if (isGraphQlErrorResult(user)) {
+            return user;
+        }
+
+        return await this.prisma.administrator.create({
+            data: {
+                firstName: input.firstName,
+                lastName: input.lastName,
+                emailAddress: input.emailAddress,
+                user: {
+                    connect: {
+                        id: user.id,
                     },
                 },
-            });
+            },
         });
     }
 

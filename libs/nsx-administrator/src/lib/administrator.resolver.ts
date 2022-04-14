@@ -5,6 +5,7 @@ import { PaginationArgs } from '@myancommerce/nsx-common';
 import { AdministratorDto } from './administrator.model';
 import { AdministratorService } from './administrator.service';
 import { CreateAdministratorInput } from './input/create-administrator.input';
+import { CreateAdmnistratorResult } from './result/create-administrator.result';
 
 @Resolver(() => AdministratorDto)
 export class AdministratorResolver {
@@ -32,10 +33,10 @@ export class AdministratorResolver {
         });
     }
 
-    @Mutation(() => AdministratorDto)
+    @Mutation(() => CreateAdmnistratorResult)
     createAdministrator(
         @Args('input') input: CreateAdministratorInput,
-    ): Promise<AdministratorDto> {
+    ): Promise<typeof CreateAdmnistratorResult> {
         const admin = this.administratorService.create(input);
         return admin;
     }
