@@ -34,17 +34,53 @@ export interface RequestContext {
  * An entity ID. Depending on the configured {@link EntityIdStrategy}, it will be either
  * a `string` or a `number`;
  *
- * @docsCategory shared
  */
 export type ID = number | string;
 
 /**
  * @description
  * A type describing the shape of a paginated list response.
- *
- * @docsCategory shared
  */
 export type PaginatedList<T> = {
     items: T[];
     totalItems: number;
 };
+
+/**
+ * @description
+ * A type describing session token that is delivered and read
+ */
+export type TokenMethod =
+    | 'cookie'
+    | 'bearer'
+    | ReadonlyArray<'cookie' | 'bearer'>;
+
+/**
+ * @description
+ * A interface describing Session
+ */
+export interface Session {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    token: string;
+    expires: Date;
+    invalidated: boolean;
+}
+
+/**
+ * @description
+ * A type describing HttpRequest with Session entity
+ */
+export type HttpRequestWithSession = HttpRequest & {
+    session?: Session;
+    sessionOptions?: { maxAge: number | undefined };
+};
+
+/**
+ * @description
+ * Which of the GraphQL APIs the current request came via.
+ *
+ * @docsCategory request
+ */
+export type ApiType = 'admin' | 'shop' | 'custom';
