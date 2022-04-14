@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Address, Customer, Prisma } from '@prisma/client';
+import { Address, Customer, Prisma, User } from '@prisma/client';
 
+import { ConfigService } from '@myancommerce/nsx-config';
 import { ID } from '@myancommerce/nox-common';
 import { DeletionResponse, DeletionResult } from '@myancommerce/nsx-common';
 import {
     EmailAddressConflictError,
     EntityNotFoundError,
+    ErrorResultUnion,
+    InternalServerError,
     isGraphQlErrorResult,
+    MissingPasswordError,
 } from '@myancommerce/nsx-error';
 import { UserService } from '@myancommerce/nsx-user';
 import { PrismaService } from '@myancommerce/nsx-prisma';
@@ -16,12 +20,14 @@ import { UpdateAddressInput } from './input/update-address.input';
 import { CreateAddressInput } from './input/create-address.input';
 import { CreateCustomerInput } from './input/create-customer.input';
 import { RegisterCustomerInput } from './input/register-customer.input';
-import { RegisterCustomerResult } from './result/register-customer.result';
 import { CreateCustomerResult } from './result/create-customer.result';
+import { RegisterCustomerResult } from './result/register-customer.result';
+import { VerifyCustomerResult } from './result/verify-customer-account.result';
 
 @Injectable()
 export class CustomerService {
     constructor(
+        private readonly configService: ConfigService,
         private readonly prisma: PrismaService,
         private userService: UserService,
         private countryService: CountryService,
@@ -58,29 +64,33 @@ export class CustomerService {
         // if not, customer can have email address verified and set their password
         // in a later step using `VerifyCustomerEmailAddress`
 
-        return await this.prisma.$transaction(async (_prisma: any) => {
-            const user = await this.userService.createCustomerUser(
-                input.emailAddress,
-                input.password,
-            );
+        const user = await this.userService.createCustomerUser(
+            input.emailAddress,
+            input.password,
+        );
 
-            return await _prisma.customer.create({
-                data: {
-                    firstName: input.firstName,
-                    lastName: input.lastName,
-                    emailAddress: input.emailAddress,
-                    title: input.title,
-                    phoneNumber: input.phoneNumber,
-                    user: {
-                        connect: {
-                            id: user.id,
-                        },
+        if (isGraphQlErrorResult(user)) {
+            return user;
+        }
+
+        const userInclude: Prisma.CustomerInclude = {
+            user: true,
+        };
+
+        return await this.prisma.customer.create({
+            data: {
+                firstName: input.firstName,
+                lastName: input.lastName,
+                emailAddress: input.emailAddress,
+                title: input.title,
+                phoneNumber: input.phoneNumber,
+                user: {
+                    connect: {
+                        id: user.id,
                     },
                 },
-                include: {
-                    user: true,
-                },
-            });
+            },
+            include: userInclude,
         });
     }
 
@@ -93,8 +103,12 @@ export class CustomerService {
     async registerCustomerAccount(
         input: RegisterCustomerInput,
     ): Promise<typeof RegisterCustomerResult> {
-        // If require verification set to false and if no password provided
-        // Return Password missing error
+        if (
+            !this.configService.get('authConfig.requireVerification') &&
+            !input.password
+        ) {
+            return new MissingPasswordError();
+        }
 
         const result = await this.create({
             title: input.title,
@@ -102,7 +116,7 @@ export class CustomerService {
             lastName: input.lastName,
             emailAddress: input.emailAddress,
             phoneNumber: input.phoneNumber,
-            password: input.password || '',
+            password: input.password || null,
         });
 
         if (isGraphQlErrorResult(result)) {
@@ -140,7 +154,6 @@ export class CustomerService {
             );
         }
 
-        // Create Address and Save to DB
         const createdAddress = await this.prisma.address.create({
             data: {
                 fullName: input.fullName,
@@ -227,13 +240,13 @@ export class CustomerService {
         });
     }
 
-    async deleteAddress(args: Prisma.AddressDeleteArgs): Promise<Address> {
-        return this.prisma.address.delete(args);
-    }
-
     async update(args: Prisma.CustomerUpdateArgs): Promise<Customer> {
         // If Customer Id and customer from input email address isn't matched, return EmailAddressConflictError
         return await this.prisma.customer.update(args);
+    }
+
+    async deleteAddress(args: Prisma.AddressDeleteArgs): Promise<Address> {
+        return this.prisma.address.delete(args);
     }
 
     async softDelete(customerId: ID): Promise<DeletionResponse> {

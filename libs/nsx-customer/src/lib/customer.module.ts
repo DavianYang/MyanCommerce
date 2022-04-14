@@ -6,9 +6,10 @@ import { CountryModule } from '@myancommerce/nsx-country';
 
 import { CustomerService } from './customer.service';
 import { CustomerResolver } from './customer.resolver';
+import { ConfigModule } from '@myancommerce/nsx-config';
 
 @Module({
-    imports: [PrismaModule, UserModule, CountryModule],
+    imports: [ConfigModule, PrismaModule, UserModule, CountryModule],
     providers: [CustomerResolver, CustomerService],
     exports: [CustomerService],
 })
