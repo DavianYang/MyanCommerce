@@ -1,31 +1,41 @@
+import { APP_GUARD } from '@nestjs/core';
 import { forwardRef, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { ConfigModule, ConfigService } from '@myancommerce/nsx-config';
 import { PrismaModule } from '@myancommerce/nsx-prisma';
 import { UserModule } from '@myancommerce/nsx-user';
-import { RedisCacheModule } from '@myancommerce/nsx-redis';
+import { SessionModule } from '@myancommerce/nsx-session';
 
 import { AuthService } from './auth.service';
-import { AdminAuthResolver } from './auth.admin.resolver';
+import { AdminAuthResolver } from './admin.auth.resolver';
 import { JWTStrategy } from './strategy/jwt.strategy';
 import { GoogleStrategy } from './strategy/google.strategy';
 import { PasswordCipher } from './helpers/password-cipher';
+import { VerificationTokenGeneration } from './helpers/verification-token-generation';
+import { BaseAuthResolver } from './base.auth.resolver';
+import { AuthGuard } from './guard/auth.guard';
 
 @Module({
     providers: [
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
         AuthService,
-        PasswordCipher,
+        BaseAuthResolver,
         AdminAuthResolver,
         JWTStrategy,
         GoogleStrategy,
+        PasswordCipher,
+        VerificationTokenGeneration,
     ],
     imports: [
         ConfigModule,
         forwardRef(() => UserModule),
         PrismaModule,
-        RedisCacheModule,
+        SessionModule,
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
             imports: [ConfigModule],
@@ -44,6 +54,11 @@ import { PasswordCipher } from './helpers/password-cipher';
             inject: [ConfigService],
         }),
     ],
-    exports: [AuthService, PasswordCipher],
+    exports: [
+        BaseAuthResolver,
+        AuthService,
+        PasswordCipher,
+        VerificationTokenGeneration,
+    ],
 })
 export class AuthModule {}
