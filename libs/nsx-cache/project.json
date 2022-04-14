@@ -1,29 +1,29 @@
 {
-    "root": "libs/nsx-redis",
-    "sourceRoot": "libs/nsx-redis/src",
+    "root": "libs/nsx-cache",
+    "sourceRoot": "libs/nsx-cache/src",
     "targets": {
         "build": {
             "executor": "@nrwl/js:tsc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/libs/nsx-redis",
-                "main": "libs/nsx-redis/src/index.ts",
-                "tsConfig": "libs/nsx-redis/tsconfig.lib.json",
-                "assets": ["libs/nsx-redis/*.md"]
+                "outputPath": "dist/libs/nsx-cache",
+                "main": "libs/nsx-cache/src/index.ts",
+                "tsConfig": "libs/nsx-cache/tsconfig.lib.json",
+                "assets": ["libs/nsx-cache/*.md"]
             }
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["libs/nsx-redis/**/*.ts"]
+                "lintFilePatterns": ["libs/nsx-cache/**/*.ts"]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
-            "outputs": ["coverage/libs/nsx-redis"],
+            "outputs": ["coverage/libs/nsx-cache"],
             "options": {
-                "jestConfig": "libs/nsx-redis/jest.config.js",
+                "jestConfig": "libs/nsx-cache/jest.config.js",
                 "passWithNoTests": true
             }
         }

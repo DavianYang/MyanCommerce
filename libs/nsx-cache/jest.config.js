@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'nsx-redis',
+    displayName: 'nsx-cache',
     preset: '../../jest.preset.js',
     globals: {
         'ts-jest': {
@@ -10,5 +10,5 @@ module.exports = {
         '^.+\\.[tj]s$': 'ts-jest',
     },
     moduleFileExtensions: ['ts', 'js', 'html'],
-    coverageDirectory: '../../coverage/libs/nsx-redis',
+    coverageDirectory: '../../coverage/libs/nsx-cache',
 };

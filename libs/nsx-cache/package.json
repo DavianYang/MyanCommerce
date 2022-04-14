@@ -1,5 +1,5 @@
 {
-    "name": "@myancommerce/nsx-redis",
+    "name": "@myancommerce/nsx-cache",
     "version": "0.0.1",
     "type": "commonjs"
 }
