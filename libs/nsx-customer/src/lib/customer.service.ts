@@ -268,4 +268,39 @@ export class CustomerService {
             result: DeletionResult.DELETED,
         };
     }
+
+    async verifyCustomerEmailAddress(
+        verificationToken: string,
+        password?: string,
+    ): Promise<
+        ErrorResultUnion<
+            typeof VerifyCustomerResult,
+            Customer & { user: User | null }
+        >
+    > {
+        const result = await this.userService.verifyUserByToken(
+            verificationToken,
+            password,
+        );
+
+        if (isGraphQlErrorResult(result)) return result;
+
+        const userInclude = Prisma.validator<Prisma.CustomerInclude>()({
+            user: true,
+        });
+
+        const customer = await this.prisma.customer.findUnique({
+            where: { userId: result.id },
+            include: userInclude,
+        });
+
+        if (!customer) {
+            throw new InternalServerError({
+                errorCode: 'error.cannot-locate-customer-for-user',
+                message: 'Cannot Locate Customer For User Verification',
+            });
+        }
+
+        return customer;
+    }
 }
