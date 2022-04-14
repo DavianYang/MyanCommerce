@@ -114,4 +114,50 @@ export class UserService {
             },
         });
     }
+
+    async addAuthentication(
+        identifier: string,
+        password: string | null,
+        userId: string,
+    ) {
+        let verificationToken: string | null = null;
+
+        if (this.configService.get('authConfig.requireVerification')) {
+            verificationToken =
+                this.verificationTokenGeneration.generateVerificationToken();
+        }
+
+        if (password) {
+            const passwordValidationResult = await this.validatePassword(
+                password,
+            );
+
+            if (passwordValidationResult !== true) {
+                return passwordValidationResult;
+            }
+        }
+
+        const authenticationMethod = await this.prisma.authentication.create({
+            data: {
+                identifier,
+                method: 'local',
+                verificationToken,
+                passwordHash:
+                    password ?? true
+                        ? ''
+                        : await this.passwordCipher.hash(
+                              password as unknown as string,
+                          ),
+
+                user: {
+                    connect: {
+                        id: userId,
+                    },
+                },
+            },
+        });
+
+        return authenticationMethod;
+    }
+
 }
