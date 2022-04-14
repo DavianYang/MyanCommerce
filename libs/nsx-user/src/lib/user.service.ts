@@ -38,33 +38,64 @@ export class UserService {
         return this.prisma.user.findMany(args);
     }
 
-    async createCustomerUser(identifier: string): Promise<User> {
-        const customerRole = await this.roleService.getCustomerRole();
-        return this.prisma.user.create({
+    async create(identifier: string, role: RoleDto) {
+        return await this.prisma.user.create({
             data: {
                 identifier,
+                verified: this.configService.get(
+                    'authConfig.requireVerification',
+                )
+                    ? false
+                    : true,
                 roles: {
                     connect: {
-                        id: customerRole.id,
+                        id: role.id,
                     },
                 },
             },
         });
     }
 
-    async createAdminUser(identifier: string): Promise<User> {
+    async createCustomerUser(
+        identifier: string,
+        password: string | null,
+    ): Promise<User | PasswordValidationError> {
+        const customerRole = await this.roleService.getCustomerRole();
+
+        const user = await this.create(identifier, customerRole);
+
+        const result = await this.addAuthentication(
+            identifier,
+            password,
+            user.id,
+        );
+
+        if (isGraphQlErrorResult(result)) {
+            return result;
+        }
+
+        return user;
+    }
+
+    async createAdminUser(
+        identifier: string,
+        password: string | null,
+    ): Promise<User | PasswordValidationError> {
         const adminRole = await this.roleService.getAdminRole();
 
-        return this.prisma.user.create({
-            data: {
-                identifier,
-                roles: {
-                    connect: {
-                        id: adminRole.id,
-                    },
-                },
-            },
-        });
+        const user = await this.create(identifier, adminRole);
+
+        const result = await this.addAuthentication(
+            identifier,
+            password,
+            user.id,
+        );
+
+        if (isGraphQlErrorResult(result)) {
+            return result;
+        }
+
+        return user;
     }
 
     async updateUser(args: Prisma.UserUpdateArgs): Promise<User> {
