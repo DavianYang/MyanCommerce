@@ -176,4 +176,53 @@ export class UserService {
 
         return true;
     }
+
+    /**
+     * @description
+     * Verifies a verificationToken by looking for a User and checks that the token is valid and has not expired.
+     *
+     * If valid, the User will be set to `verified: true`.
+     */
+
+    async verifyUserByToken(verificationToken: string, password?: string) {
+        const authentication = await this.prisma.authentication.findUnique({
+            where: { verificationToken },
+            include: { user: true },
+        });
+
+        if (!authentication?.user) {
+            return new VerificationTokenInvalidError();
+        }
+
+        if (
+            !this.verificationTokenGeneration.verifyVerificationToken(
+                verificationToken,
+            )
+        ) {
+            return new VerificationTokenExpired();
+        }
+
+        if (!password && !authentication.passwordHash) {
+            return new MissingPasswordError();
+        }
+
+        if (password && !!authentication.passwordHash) {
+            return new PasswordAlreadySetError();
+        }
+
+        await this.validatePassword(password as string);
+
+        await this.prisma.authentication.update({
+            where: { id: authentication!.id },
+            data: {
+                passwordHash: await this.passwordCipher.hash(
+                    password as string,
+                ),
+                verificationToken: null,
+                user: { update: { verified: true } },
+            },
+        });
+
+        return authentication.user;
+    }
 }
