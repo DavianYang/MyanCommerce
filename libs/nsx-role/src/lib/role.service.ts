@@ -1,3 +1,4 @@
+import { EntityNotFoundError } from '@myancommerce/nsx-error';
 import { PrismaService } from '@myancommerce/nsx-prisma';
 import { Injectable } from '@nestjs/common';
 import { Role, Prisma } from '@prisma/client';
@@ -34,7 +35,7 @@ export class RoleService {
     getCustomerRole(): Promise<Role> {
         return this.getRoleByCode(CUSTOMER_ROLE_CODE).then(role => {
             if (!role) {
-                throw new Error('error.customer-role-not-found');
+                throw new EntityNotFoundError('Role', 'customer-role');
             }
             return role;
         });
@@ -43,7 +44,7 @@ export class RoleService {
     getAdminRole(): Promise<Role> {
         return this.getRoleByCode(SUPERADMIN_ROLE_CODE).then(role => {
             if (!role) {
-                throw new Error('error.administrator-role-not-found');
+                throw new EntityNotFoundError('Role', 'administrator-role');
             }
             return role;
         });
