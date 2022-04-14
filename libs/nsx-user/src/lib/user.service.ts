@@ -1,17 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { User, Prisma } from '@prisma/client';
-import { RoleService } from '@myancommerce/nsx-role';
+
+import { ConfigService } from '@myancommerce/nsx-config';
+import { RoleService, RoleDto } from '@myancommerce/nsx-role';
 import { PrismaService } from '@myancommerce/nsx-prisma';
 import { ID } from '@myancommerce/nox-common';
+import {
+    PasswordCipher,
+    VerificationTokenGeneration,
+} from '@myancommerce/nsx-auth';
+import {
+    isGraphQlErrorResult,
+    PasswordValidationError,
+    VerificationTokenInvalidError,
+    VerificationTokenExpired,
+    PasswordAlreadySetError,
+    MissingPasswordError,
+} from '@myancommerce/nsx-error';
 
 @Injectable()
 export class UserService {
     constructor(
+        private readonly configService: ConfigService,
         private readonly prisma: PrismaService,
         private roleService: RoleService,
+        @Inject(forwardRef(() => PasswordCipher))
+        private passwordCipher: PasswordCipher,
+        @Inject(forwardRef(() => VerificationTokenGeneration))
+        private verificationTokenGeneration: VerificationTokenGeneration,
     ) {}
 
-    async findOne(args: Prisma.UserFindUniqueArgs): Promise<User | null> {
+    async findOne(args: Prisma.UserFindUniqueArgs) {
         return this.prisma.user.findUnique(args);
     }
 
