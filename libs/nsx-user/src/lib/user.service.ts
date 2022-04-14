@@ -160,4 +160,20 @@ export class UserService {
         return authenticationMethod;
     }
 
+    async validatePassword(password: string) {
+        const passwordValidationResult = await this.configService
+            .get('authConfig.passwordValidationStrategy')
+            .validate(password);
+
+        if (passwordValidationResult !== true) {
+            return new PasswordValidationError({
+                message:
+                    typeof passwordValidationResult === 'string'
+                        ? passwordValidationResult
+                        : 'Invalid Password',
+            });
+        }
+
+        return true;
+    }
 }
