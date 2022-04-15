@@ -73,7 +73,7 @@ export class CustomerService {
             return user;
         }
 
-        const userInclude: Prisma.CustomerInclude = {
+        const CustomerInclude: Prisma.CustomerInclude = {
             user: true,
         };
 
@@ -90,7 +90,7 @@ export class CustomerService {
                     },
                 },
             },
-            include: userInclude,
+            include: CustomerInclude,
         });
     }
 
@@ -184,7 +184,7 @@ export class CustomerService {
         });
 
         // - Enforce Single Address
-        // query Address with customer and cusomter addresses
+        // query Address with customer and customer addresses
         // if it is, map customer addresses id, and check if id and created Address Id are equal
         // If the id aren't equal, if input's defualtBillingAddress is true, make it false
         // If the id aren't equal, if input's defualtShippingAddress is true,make it false

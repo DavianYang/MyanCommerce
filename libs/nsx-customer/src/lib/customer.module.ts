@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
+import { ConfigModule } from '@myancommerce/nsx-config';
 import { UserModule } from '@myancommerce/nsx-user';
 import { PrismaModule } from '@myancommerce/nsx-prisma';
 import { CountryModule } from '@myancommerce/nsx-country';
 
 import { CustomerService } from './customer.service';
 import { CustomerResolver } from './customer.resolver';
-import { ConfigModule } from '@myancommerce/nsx-config';
 
 @Module({
     imports: [ConfigModule, PrismaModule, UserModule, CountryModule],
