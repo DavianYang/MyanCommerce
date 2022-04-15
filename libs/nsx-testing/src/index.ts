@@ -13,3 +13,6 @@ export * from './lib/population/customers.populate';
 export * from './lib/population/roles.populate';
 export * from './lib/population/populate-for-testing';
 export * from './lib/population/populate-options.interface';
+
+// Utils
+export * from './lib/utils/assert-throws-with-message';
