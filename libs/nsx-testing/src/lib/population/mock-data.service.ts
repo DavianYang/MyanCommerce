@@ -18,6 +18,7 @@ export class MockDataService {
                 phoneNumber: faker.phone.phoneNumber(),
                 emailAddress: faker.internet.email(),
                 title: faker.fake('Good Morning {{name.firstName}}!'),
+                password: faker.internet.password(),
             };
 
             results.push({ customer });
