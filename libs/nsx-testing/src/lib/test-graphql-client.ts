@@ -1,8 +1,8 @@
-import fetch from 'node-fetch';
+import { request as fetchRequest } from 'undici';
 import { stringify } from 'querystring';
 import { DocumentNode } from 'graphql';
 import { print } from 'graphql/language/printer';
-import { ClientError } from '@myancommerce/nsx-error';
+import { ClientError } from './client-error';
 
 type QueryParams = { [key: string]: string | number };
 
@@ -10,11 +10,11 @@ export class TestGraphQLClient {
     private headers: { [key: string]: any } = {};
     constructor(private apiUrl: string = '') {}
 
-    async query<T = any, V = Record<string, any>>(
+    async query(
         query: DocumentNode,
-        variables?: V,
+        variables?: any,
         queryParams?: QueryParams,
-    ): Promise<T> {
+    ): Promise<any> {
         const response = await this.makeGraphQLRequest(
             query,
             variables,
@@ -22,14 +22,17 @@ export class TestGraphQLClient {
         );
         const result = await this.getResult(response);
 
-        if (response.ok && !result.errors && result.data) {
+        if (response.statusCode === 200 && result) {
             return result.data;
-        } else {
+        }
+        if (result?.errors) {
             const errorResult =
-                typeof result === 'string' ? { error: result } : result;
+                result?.errors && typeof result.errors === 'string'
+                    ? { error: result.errors }
+                    : result.errors;
 
             throw new ClientError(
-                { ...errorResult, status: response.status },
+                { ...errorResult, status: response.statusCode },
                 { query: print(query), variables },
             );
         }
@@ -41,7 +44,11 @@ export class TestGraphQLClient {
             ...this.headers,
             ...options.headers,
         };
-        const response = await fetch(url, { ...options, headers });
+        const response = await fetchRequest(url, {
+            ...options,
+            headers,
+        });
+
         return response;
     }
 
@@ -67,11 +74,12 @@ export class TestGraphQLClient {
     }
 
     private async getResult(response: any): Promise<any> {
-        const contentType = response.headers.get('Content-Type');
+        const contentType = response.headers['content-type'];
+
         if (contentType && contentType.startsWith('application/json')) {
-            return response.json();
+            return response.body.json();
         } else {
-            return response.text();
+            return response.body.text();
         }
     }
 }

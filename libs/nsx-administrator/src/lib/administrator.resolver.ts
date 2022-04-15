@@ -2,9 +2,10 @@ import { Resolver, Query, Args, Mutation, Context } from '@nestjs/graphql';
 import { ID, RequestContext } from '@myancommerce/nox-common';
 import { PaginationArgs } from '@myancommerce/nsx-common';
 
-import { CreateAdministratorInput } from './administrator.input';
 import { AdministratorDto } from './administrator.model';
 import { AdministratorService } from './administrator.service';
+import { CreateAdministratorInput } from './input/create-administrator.input';
+import { CreateAdmnistratorResult } from './result/create-administrator.result';
 
 @Resolver(() => AdministratorDto)
 export class AdministratorResolver {
@@ -32,11 +33,11 @@ export class AdministratorResolver {
         });
     }
 
-    @Mutation(() => AdministratorDto)
+    @Mutation(() => CreateAdmnistratorResult)
     createAdministrator(
         @Args('input') input: CreateAdministratorInput,
-    ): Promise<AdministratorDto> {
-        const admin = this.administratorService.create({ data: input });
+    ): Promise<typeof CreateAdmnistratorResult> {
+        const admin = this.administratorService.create(input);
         return admin;
     }
 

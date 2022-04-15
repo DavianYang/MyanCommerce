@@ -34,6 +34,7 @@ export class CustomerResolver {
             cursor && { cursor: { id: cursor } },
             take && { take },
             (skip && { skip }) || (cursor && { skip: 1 }),
+            { include: { user: true } },
         );
         return await this.customerService.findAll(filterBy);
     }
@@ -41,12 +42,13 @@ export class CustomerResolver {
     // Strict for Admin
     @Query(() => CustomerDto)
     async customer(
-        @Args('id', { type: () => String }) userId: ID,
+        @IDArg('customerId') customerId: ID,
     ): Promise<CustomerDto | null> {
         return await this.customerService.findOne({
-            where: { id: userId as string },
-            select: {
+            where: { id: customerId as string },
+            include: {
                 user: true,
+                addresses: true,
             },
         });
     }

@@ -1,0 +1,32 @@
+{
+    "root": "libs/nsx-cache",
+    "sourceRoot": "libs/nsx-cache/src",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/libs/nsx-cache",
+                "main": "libs/nsx-cache/src/index.ts",
+                "tsConfig": "libs/nsx-cache/tsconfig.lib.json",
+                "assets": ["libs/nsx-cache/*.md"]
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/nsx-cache/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/libs/nsx-cache"],
+            "options": {
+                "jestConfig": "libs/nsx-cache/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

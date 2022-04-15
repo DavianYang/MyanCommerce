@@ -1,6 +1,3 @@
 overwrite: true
 schema:
   - 'apps/core/src/schema.gql'
-documents:
-  - '*.spec.ts'
-  - 'libs/**/src/lib/*.spec.ts'

@@ -17,7 +17,7 @@
         "strict": true,
         "strictPropertyInitialization": false,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": false,
         "noImplicitOverride": true,
         "noUnusedParameters": true,
         "noUnusedLocals": true,
@@ -33,13 +33,17 @@
                 "libs/nsx-administrator/src/index.ts"
             ],
             "@myancommerce/nsx-auth": ["libs/nsx-auth/src/index.ts"],
+            "@myancommerce/nsx-cache": ["libs/nsx-cache/src/index.ts"],
             "@myancommerce/nsx-common": ["libs/nsx-common/src/index.ts"],
+            "@myancommerce/nsx-config": ["libs/nsx-config/src/index.ts"],
             "@myancommerce/nsx-country": ["libs/nsx-country/src/index.ts"],
             "@myancommerce/nsx-customer": ["libs/nsx-customer/src/index.ts"],
             "@myancommerce/nsx-error": ["libs/nsx-error/src/index.ts"],
             "@myancommerce/nsx-logger": ["libs/nsx-logger/src/index.ts"],
             "@myancommerce/nsx-prisma": ["libs/nsx-prisma/src/index.ts"],
             "@myancommerce/nsx-role": ["libs/nsx-role/src/index.ts"],
+            "@myancommerce/nsx-session": ["libs/nsx-session/src/index.ts"],
+            "@myancommerce/nsx-shop": ["libs/nsx-shop/src/index.ts"],
             "@myancommerce/nsx-testing": ["libs/nsx-testing/src/index.ts"],
             "@myancommerce/nsx-user": ["libs/nsx-user/src/index.ts"]
         }

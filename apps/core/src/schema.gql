@@ -29,6 +29,27 @@ type AdministratorDto {
   user: UserDto!
 }
 
+type AuthUserResponse {
+  token: String!
+  user: UserDto!
+}
+
+type AuthenticationDto {
+  createdAt: DateTime!
+  id: ID!
+  identifier: String!
+  identifierChangeToken: String
+  method: String!
+  passwordHash: String!
+  passwordResetToken: String
+  pendingIdentifier: String
+  updatedAt: DateTime!
+  user: UserDto!
+  verificationToken: String
+}
+
+union AuthenticationResult = AuthUserResponse | EmailAddressConflictError | InvalidCredentialsError
+
 type CountryDto {
   code: String!
   createdAt: DateTime!
@@ -56,8 +77,11 @@ input CreateAdministratorInput {
   emailAddress: String!
   firstName: String!
   lastName: String!
+  password: String!
   roleIds: [Int!]!
 }
+
+union CreateAdmnistratorResult = AdministratorDto | EmailAddressConflictError | PasswordValidationError
 
 input CreateCountryInput {
   code: String!
@@ -69,15 +93,21 @@ input CreateCustomerInput {
   emailAddress: String!
   firstName: String!
   lastName: String!
+  password: String!
   phoneNumber: String
   title: String
 }
 
-union CreateCustomerResult = CustomerDto | EmailAddressConflictError
+union CreateCustomerResult = CustomerDto | EmailAddressConflictError | PasswordValidationError
 
 input CreateRoleInput {
   code: String!
   description: String!
+}
+
+type CurrentUser {
+  id: ID!
+  identifier: String!
 }
 
 type CustomerDto {
@@ -116,6 +146,31 @@ enum DeletionResult {
 Returned when attempting to create a Customer with an email address already registered to an existing User.
 """
 type EmailAddressConflictError {
+  email: String!
+  errorCode: String!
+  message: String!
+}
+
+"""Returned if the user authentication credentials are not valid."""
+type InvalidCredentialsError {
+  authenticationError: String!
+  errorCode: String!
+  message: String!
+}
+
+union LoginAdminResult = CurrentUser | InvalidCredentialsError
+
+input LoginInput {
+  emailAddress: String!
+  password: String!
+}
+
+union LoginShopResult = CurrentUser | InvalidCredentialsError
+
+"""
+Returned when attempting to register or verify a customer account without a password, when one is required.
+"""
+type MissingPasswordError {
   errorCode: String!
   message: String!
 }
@@ -125,7 +180,7 @@ type Mutation {
   Create a new Address and associate it with the Customer specified by customerId
   """
   createAddress(customerId: String!, input: CreateAddressInput!): AddressDto!
-  createAdministrator(input: CreateAdministratorInput!): AdministratorDto!
+  createAdministrator(input: CreateAdministratorInput!): CreateAdmnistratorResult!
   createCountry(input: CreateCountryInput!): CountryDto!
 
   """
@@ -141,6 +196,10 @@ type Mutation {
   """Delete a Customer"""
   deleteCustomer(customerId: String!): DeletionResponse!
   deleteRole(id: Int!): RoleDto!
+  loginAdmin(input: LoginInput!): LoginAdminResult!
+  loginShop(input: LoginInput!): LoginShopResult!
+  loginSocial: AuthenticationResult!
+  registerCustomerAccount(input: RegisterCustomerInput!): RegisterCustomerResult!
 
   """Update an existing Address with addressId"""
   updateAddress(addressId: String!, input: UpdateAddressInput!): AddressDto!
@@ -150,18 +209,47 @@ type Mutation {
   """Update an existing Customer"""
   updateCustomer(email: String!, input: UpdateCustomerInput!): UpdateCustomerResult!
   updateRole(id: Int!, input: UpdateRoleInput!): RoleDto!
+  verifyCustomerAccount(input: VerifyCustomerInput!): VerifyCustomerResult!
+}
+
+"""
+Returned when attempting to verify a customer account with a password, when a password has already been set.
+"""
+type PasswordAlreadySetError {
+  errorCode: String!
+  message: String!
+}
+
+"""
+Returned when attempting to register or verify a customer account where the given password fails password validation.
+"""
+type PasswordValidationError {
+  errorCode: String!
+  message: String!
 }
 
 type Query {
+  CurrentUser: UserDto!
   administrator(id: String!): AdministratorDto!
   administrators(cursor: String, skip: Int, take: Int): [AdministratorDto!]!
   countries(cursor: String, skip: Int, take: Int): [CountryDto!]!
   country(id: String!): CountryDto!
-  customer(id: String!): CustomerDto!
+  customer(customerId: String!): CustomerDto!
   customers(cursor: String, skip: Int, take: Int): [CustomerDto!]!
   role(id: Int!): RoleDto!
   roles(cursor: String, skip: Int, take: Int): [RoleDto!]!
 }
+
+input RegisterCustomerInput {
+  emailAddress: String!
+  firstName: String!
+  lastName: String!
+  password: String
+  phoneNumber: String
+  title: String
+}
+
+union RegisterCustomerResult = EmailAddressConflictError | MissingPasswordError | PasswordValidationError | Success
 
 type RoleDto {
   code: String!
@@ -197,6 +285,7 @@ input UpdateCustomerInput {
   emailAddress: String
   firstName: String
   lastName: String
+  password: String
   phoneNumber: String
   title: String
 }
@@ -209,6 +298,7 @@ input UpdateRoleInput {
 }
 
 type UserDto {
+  authentication: [AuthenticationDto!]!
   createdAt: DateTime!
   deletedAt: DateTime
   id: ID!
@@ -218,3 +308,26 @@ type UserDto {
   updatedAt: DateTime!
   verified: Boolean!
 }
+
+"""
+Returned if the verification token (used to verify a Customer's email address) is valid, but has expired according to the verificationTokenDuration setting in the AuthOptions.
+"""
+type VerificationTokenExpired {
+  errorCode: String!
+  message: String!
+}
+
+"""
+Returned if the verification token (used to verify a Customer's email address) is either invalid or does not match any expected tokens.
+"""
+type VerificationTokenInvalidError {
+  errorCode: String!
+  message: String!
+}
+
+input VerifyCustomerInput {
+  password: String
+  token: String!
+}
+
+union VerifyCustomerResult = CurrentUser | MissingPasswordError | PasswordAlreadySetError | PasswordValidationError | VerificationTokenExpired | VerificationTokenInvalidError

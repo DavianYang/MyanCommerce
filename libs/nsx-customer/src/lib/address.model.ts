@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Address } from '@prisma/client';
 
 import { BaseModel } from '@myancommerce/nsx-common';
 import { CountryDto } from '@myancommerce/nsx-country';
 
 @ObjectType()
-export class AddressDto extends BaseModel {
+export class AddressDto extends BaseModel implements Partial<Address> {
     @Field(() => String, { nullable: true })
     fullName?: string;
 
