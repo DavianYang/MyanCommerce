@@ -9,3 +9,4 @@ export * from './lib/utils/shared.utils';
 
 export * from './lib/simple-deep-clone';
 export * from './lib/generate-public-id';
+export * from './lib/omit';
