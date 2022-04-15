@@ -57,7 +57,7 @@ export class ConfigModule
 
     private async destroyInjectableStrategies() {
         for (const strategy of this.getInjectableStrategies()) {
-            if (typeof strategy.init === 'function') {
+            if (typeof strategy.destroy === 'function') {
                 await strategy.destroy();
             }
         }
