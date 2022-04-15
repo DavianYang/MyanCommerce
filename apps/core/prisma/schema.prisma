@@ -108,7 +108,7 @@ model Address {
   defaultShippingAddress Boolean   @default(false)
   defaultBillingAddress  Boolean   @default(false)
   country                Country   @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  countryId              String    @unique
+  countryId              String
   customer               Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   customerId             String    @unique
 }

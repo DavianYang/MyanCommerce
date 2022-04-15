@@ -234,7 +234,7 @@ type Query {
   administrators(cursor: String, skip: Int, take: Int): [AdministratorDto!]!
   countries(cursor: String, skip: Int, take: Int): [CountryDto!]!
   country(id: String!): CountryDto!
-  customer(id: String!): CustomerDto!
+  customer(customerId: String!): CustomerDto!
   customers(cursor: String, skip: Int, take: Int): [CustomerDto!]!
   role(id: Int!): RoleDto!
   roles(cursor: String, skip: Int, take: Int): [RoleDto!]!

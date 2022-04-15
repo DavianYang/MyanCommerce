@@ -87,7 +87,7 @@ Table Address {
   defaultShippingAddress Boolean [not null, default: false]
   defaultBillingAddress Boolean [not null, default: false]
   country Country [not null]
-  countryId String [unique, not null]
+  countryId String [not null]
   customer Customer
   customerId String [unique, not null]
 }
