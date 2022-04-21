@@ -15,4 +15,4 @@ export * from './lib/population/populate-for-testing';
 export * from './lib/population/populate-options.interface';
 
 // Utils
-export * from './lib/utils/assert-throws-with-message';
+export * from './lib/utils';

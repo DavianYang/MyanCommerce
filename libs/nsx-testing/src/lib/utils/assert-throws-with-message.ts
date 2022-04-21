@@ -10,7 +10,6 @@ export function assertThrowsWithMessage(
             await operation();
             fail('Should have thrown');
         } catch (err: any) {
-            console.log(err);
             const messageStr =
                 typeof message === 'function' ? message() : message;
 

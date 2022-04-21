@@ -25,6 +25,7 @@ export class TestGraphQLClient {
         if (response.statusCode === 200 && result) {
             return result.data;
         }
+
         if (result?.errors) {
             const errorResult =
                 result?.errors && typeof result.errors === 'string'

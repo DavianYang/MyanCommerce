@@ -3,6 +3,7 @@ export class ClientError extends Error {
         super(ClientError.extractMessage(response));
     }
     private static extractMessage(response: any): string {
+        console.log(`From Client Error - ${response}`);
         if (response) {
             return response[0].message;
         } else {

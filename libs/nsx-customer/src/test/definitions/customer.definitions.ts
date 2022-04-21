@@ -35,3 +35,32 @@ export const GET_CUSTOMER_WITH_USER = gql`
         }
     }
 `;
+
+export const UPDATE_CUSTOMER = gql`
+    mutation UpdateCustomer($id: String!, $input: UpdateCustomerInput!) {
+        updateCustomer(customerId: $id, input: $input) {
+            ... on CustomerDto {
+                id
+                title
+                firstName
+                lastName
+                phoneNumber
+                emailAddress
+            }
+            ... on EmailAddressConflictError {
+                errorCode
+                message
+            }
+        }
+    }
+`;
+
+export const DELETE_CUSTOMER = gql`
+    mutation DeleteCustomer($id: String!) {
+        deleteCustomer(customerId: $id) {
+            ... on DeletionResponse {
+                result
+            }
+        }
+    }
+`;
