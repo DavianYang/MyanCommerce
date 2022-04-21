@@ -44,6 +44,7 @@ Table Role {
   code String [unique, not null]
   description String [not null]
   user User [not null]
+  permissions String [not null]
 }
 
 Table Administrator {

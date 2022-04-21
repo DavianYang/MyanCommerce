@@ -26,7 +26,7 @@ export class CustomerDto extends BaseModel implements Partial<Customer> {
     addresses?: AddressDto[];
 
     @Field(() => UserDto)
-    user?: UserDto;
+    user?: UserDto | null;
 
     @Field(() => Date, { nullable: true })
     deletedAt?: Date | null;

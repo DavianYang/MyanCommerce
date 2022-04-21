@@ -65,6 +65,7 @@ model Role {
   code        String   @unique @db.VarChar(255)
   description String   @db.Text()
   user        User[]
+  permissions String[]
 }
 
 model Administrator {

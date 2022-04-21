@@ -10,8 +10,6 @@ import { SessionModule } from '@myancommerce/nsx-session';
 
 import { AuthService } from './auth.service';
 import { AdminAuthResolver } from './admin.auth.resolver';
-import { JWTStrategy } from './strategy/jwt.strategy';
-import { GoogleStrategy } from './strategy/google.strategy';
 import { PasswordCipher } from './helpers/password-cipher';
 import { VerificationTokenGeneration } from './helpers/verification-token-generation';
 import { BaseAuthResolver } from './base.auth.resolver';
@@ -26,8 +24,6 @@ import { AuthGuard } from './guard/auth.guard';
         AuthService,
         BaseAuthResolver,
         AdminAuthResolver,
-        JWTStrategy,
-        GoogleStrategy,
         PasswordCipher,
         VerificationTokenGeneration,
     ],

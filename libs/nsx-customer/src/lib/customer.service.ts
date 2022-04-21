@@ -23,6 +23,8 @@ import { RegisterCustomerInput } from './input/register-customer.input';
 import { CreateCustomerResult } from './result/create-customer.result';
 import { RegisterCustomerResult } from './result/register-customer.result';
 import { VerifyCustomerResult } from './result/verify-customer-account.result';
+import { UpdateCustomerInput } from './input';
+import { UpdateCustomerResult } from './result';
 
 @Injectable()
 export class CustomerService {
@@ -34,9 +36,9 @@ export class CustomerService {
     ) {}
 
     async findOne(
-        args: Prisma.CustomerFindUniqueArgs,
+        args: Prisma.CustomerFindFirstArgs,
     ): Promise<Customer | null> {
-        return this.prisma.customer.findUnique(args);
+        return this.prisma.customer.findFirst(args);
     }
 
     async findAll(args: Prisma.CustomerFindManyArgs): Promise<Customer[]> {
@@ -240,9 +242,35 @@ export class CustomerService {
         });
     }
 
-    async update(args: Prisma.CustomerUpdateArgs): Promise<Customer> {
-        // If Customer Id and customer from input email address isn't matched, return EmailAddressConflictError
-        return await this.prisma.customer.update(args);
+    async update(
+        customerId: ID,
+        input: UpdateCustomerInput,
+    ): Promise<typeof UpdateCustomerResult> {
+        const hasEmailAddress = (
+            i: any,
+        ): i is UpdateCustomerInput & { emailAddress: string } =>
+            Object.hasOwnProperty.call(i, 'emailAddress');
+
+        const customer = await this.findOne({
+            where: { id: customerId as string },
+        });
+
+        if (hasEmailAddress(input)) {
+            if (customer?.emailAddress !== input.emailAddress) {
+                const existingCustomer = await this.findOne({
+                    where: { emailAddress: input.emailAddress },
+                });
+
+                if (existingCustomer) {
+                    return new EmailAddressConflictError();
+                }
+            }
+        }
+
+        return await this.prisma.customer.update({
+            where: { id: customerId as string },
+            data: input,
+        });
     }
 
     async deleteAddress(args: Prisma.AddressDeleteArgs): Promise<Address> {
@@ -251,7 +279,7 @@ export class CustomerService {
 
     async softDelete(customerId: ID): Promise<DeletionResponse> {
         await this.prisma.$transaction(async (_prisma: any) => {
-            const customer = await this.prisma.customer.update({
+            const customer = await _prisma.customer.update({
                 where: { id: customerId as string },
                 data: {
                     deletedAt: new Date(),

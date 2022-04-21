@@ -8,6 +8,8 @@ import { PrismaModule, PrismaService } from '@myancommerce/nsx-prisma';
 import { UserModule } from '@myancommerce/nsx-user';
 import { CountryModule } from '@myancommerce/nsx-country';
 import {
+    createErrorResultGuard,
+    ErrorResultGuard,
     populateForTesting,
     testConfiguration,
     testEnvironment,
@@ -20,6 +22,8 @@ import {
     GET_CUSTOMERS,
     GET_CUSTOMER,
     GET_CUSTOMER_WITH_USER,
+    UPDATE_CUSTOMER,
+    DELETE_CUSTOMER,
 } from './definitions/customer.definitions';
 import {
     CREATE_ADDRESS,
@@ -33,8 +37,11 @@ describe('CustomerResolver', () => {
 
     // Placeholder customers for testing
     let firstCustomer: CustomerDto;
-    // let secondCustomer: CustomerDto;
-    // let thirdCustomer: CustomerDto;
+    let secondCustomer: CustomerDto;
+    let thirdCustomer: CustomerDto;
+
+    const customerErrorGuard: ErrorResultGuard<CustomerDto> =
+        createErrorResultGuard(input => !!input.emailAddress);
 
     beforeAll(async () => {
         const moduleRef: TestingModule = await Test.createTestingModule({
@@ -64,7 +71,7 @@ describe('CustomerResolver', () => {
         }).compile();
 
         prisma = moduleRef.get(PrismaService);
-        await prisma.cleanDatabase();
+        // await prisma.cleanDatabase();
 
         const configService = moduleRef.get(ConfigService);
 
@@ -85,6 +92,7 @@ describe('CustomerResolver', () => {
     });
 
     afterAll(async () => {
+        await prisma.cleanDatabase();
         await app.close();
     });
 
@@ -93,8 +101,8 @@ describe('CustomerResolver', () => {
 
         expect(result.customers.length).toBe(5);
         firstCustomer = result.customers[0];
-        // secondCustomer = result.customers[1];
-        // thirdCustomer = result.customers[2];
+        secondCustomer = result.customers[1];
+        thirdCustomer = result.customers[2];
     });
 
     it('should query customer resolve with user', async () => {
@@ -110,28 +118,6 @@ describe('CustomerResolver', () => {
 
     describe('addresses', () => {
         let firstCustomerAddressIds: string[] = [];
-
-        // it('should throws invalid countryCode error', async () => {
-        //     const result = await apolloClient.query(CREATE_ADDRESS, {
-        //         id: firstCustomer.id,
-        //         input: {
-        //             fullName: 'fullName',
-        //             company: 'company',
-        //             streetLine1: 'streetLine1',
-        //             streetLine2: 'streetLine2',
-        //             city: 'city',
-        //             province: 'province',
-        //             postalCode: 'postalCode',
-        //             countryCode: 'INVALID',
-        //             phoneNumber: 'phoneNumber',
-        //             defaultShippingAddress: false,
-        //             defaultBillingAddress: false,
-        //         },
-        //     });
-
-        //     console.log('Invalid Error Result ------------');
-        //     console.log(result);
-        // });
 
         it('should creates a new address', async () => {
             const result = await apolloClient.query(CREATE_ADDRESS, {
@@ -150,7 +136,6 @@ describe('CustomerResolver', () => {
                     defaultBillingAddress: false,
                 },
             });
-
             expect(result.createAddress).toMatchObject({
                 fullName: 'fullName',
                 company: 'company',
@@ -173,7 +158,6 @@ describe('CustomerResolver', () => {
             const { customer } = await apolloClient.query(GET_CUSTOMER, {
                 id: firstCustomer.id,
             });
-
             expect(customer.addresses.length).toBe(1);
             firstCustomerAddressIds = customer.addresses
                 .map((address: any) => address.id)
@@ -185,7 +169,6 @@ describe('CustomerResolver', () => {
                 id: firstCustomerAddressIds[0],
                 input: { countryCode: 'AF' },
             });
-
             expect(result.updateAddress.country).toMatchObject({
                 code: 'AF',
                 name: 'Afghanistan',
@@ -193,5 +176,66 @@ describe('CustomerResolver', () => {
         });
 
         it('should allow only a single default address when updating the address', () => {});
+    });
+
+    describe.skip('update', () => {
+        it('should return errors when emailAddress not available while updating', async () => {
+            const { updateCustomer } = await apolloClient.query(
+                UPDATE_CUSTOMER,
+                {
+                    id: secondCustomer.id,
+                    input: {
+                        emailAddress: firstCustomer.emailAddress,
+                        firstName: firstCustomer.firstName,
+                    },
+                },
+            );
+
+            customerErrorGuard.assertErrorResult(updateCustomer);
+
+            expect(updateCustomer.message).toBe(
+                'User with this email already exist.',
+            );
+            expect(updateCustomer.errorCode).toBe(
+                'error.email-address-conflict',
+            );
+        });
+
+        it('should succeeds when emailAddress is available while updating', async () => {
+            const { updateCustomer } = await apolloClient.query(
+                UPDATE_CUSTOMER,
+                {
+                    id: secondCustomer.id,
+                    input: {
+                        emailAddress: 'unique-sample-email@gmail.com',
+                    },
+                },
+            );
+
+            customerErrorGuard.assertSuccess(updateCustomer);
+            expect(updateCustomer.emailAddress).toBe(
+                'unique-sample-email@gmail.com',
+            );
+        });
+    });
+
+    describe.skip('delete', () => {
+        it('should delete a customer', async () => {
+            const result = await apolloClient.query(DELETE_CUSTOMER, {
+                id: thirdCustomer.id,
+            });
+
+            expect(result.deleteCustomer).toEqual({
+                result: 'DELETED',
+            });
+        });
+
+        it('should not get a deleted customer', async () => {
+            const result = await apolloClient.query(GET_CUSTOMER, {
+                id: thirdCustomer.id,
+            });
+
+            expect(result).toBe(null);
+        });
     });
 });

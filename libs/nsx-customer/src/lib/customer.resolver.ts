@@ -13,12 +13,12 @@ import { CreateCustomerInput } from './input/create-customer.input';
 import { CustomerDto } from './customer.model';
 import { CustomerService } from './customer.service';
 
-import { CreateCustomerResult } from './result/create-customer.result';
-import { UpdateCustomerResult } from './result/update-customer.result';
 import { UpdateCustomerInput } from './input/update-customer.input';
-import { AddressDto } from './address.model';
 import { CreateAddressInput } from './input/create-address.input';
 import { UpdateAddressInput } from './input/update-address.input';
+import { CreateCustomerResult } from './result/create-customer.result';
+import { UpdateCustomerResult } from './result/update-customer.result';
+import { AddressDto } from './address.model';
 
 @Resolver(() => CustomerDto)
 export class CustomerResolver {
@@ -45,7 +45,7 @@ export class CustomerResolver {
         @IDArg('customerId') customerId: ID,
     ): Promise<CustomerDto | null> {
         return await this.customerService.findOne({
-            where: { id: customerId as string },
+            where: { id: customerId as string, deletedAt: null },
             include: {
                 user: true,
                 addresses: true,
@@ -81,14 +81,10 @@ export class CustomerResolver {
         description: 'Update an existing Customer',
     })
     async updateCustomer(
-        @Args('email', { type: () => String }) email: string,
+        @IDArg('customerId') customerId: ID,
         @Input() input: UpdateCustomerInput,
     ): Promise<typeof UpdateCustomerResult> {
-        return await this.customerService.update({
-            where: { emailAddress: email },
-            data: input,
-            select: { user: true },
-        });
+        return await this.customerService.update(customerId, input);
     }
 
     // Strict for Admin and Current Customer

@@ -21,7 +21,7 @@ export class RedisCacheStrategy implements CacheStrategy {
         }
 
         return new Promise((resolve, reject) => {
-            this.cache.get(sessionToken, (error, item) => {
+            this.cache.get(sessionToken, (error: any, item: string | null) => {
                 if (error) reject(error);
 
                 if (item) resolve(JSON.parse(item));
@@ -30,7 +30,7 @@ export class RedisCacheStrategy implements CacheStrategy {
     }
 
     set(session: CachedSession) {
-        this.cache.exists(session.token, (err, reply) => {
+        this.cache.exists(session.token, (err: any, reply: any) => {
             if (err) console.log(err);
 
             if (!reply) {
