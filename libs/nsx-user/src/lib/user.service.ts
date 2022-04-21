@@ -98,11 +98,11 @@ export class UserService {
         return user;
     }
 
-    async updateUser(args: Prisma.UserUpdateArgs): Promise<User> {
+    async update(args: Prisma.UserUpdateArgs): Promise<User> {
         return this.prisma.user.update(args);
     }
 
-    async deleteUser(args: Prisma.UserDeleteArgs): Promise<User> {
+    async delete(args: Prisma.UserDeleteArgs): Promise<User> {
         return this.prisma.user.delete(args);
     }
 

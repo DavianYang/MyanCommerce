@@ -43,7 +43,7 @@ export class AuthService {
             throw new NotVerifiedError(); // return since i don't wanna error check in resolver
         }
 
-        const updatedUser = await this.userSerivce.updateUser({
+        const updatedUser = await this.userSerivce.update({
             where: { id: user.id },
             data: { lastLogin: new Date() },
         });
