@@ -1,7 +1,7 @@
 version: '3'
 services:
   dev-db:
-    image: postgres:12
+    image: postgres:14
     ports:
       - 5432:5432
     environment:
@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: nestjs
   test-db:
-    image: postgres:12
+    image: postgres:14
     ports:
       - 5432:5432
     environment:
