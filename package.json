@@ -99,7 +99,7 @@
         "graphql-tools": "^8.2.0",
         "jest": "27.4.7",
         "lint-staged": "^11.2.6",
-        "node-fetch": "2",
+        "node-fetch": "3",
         "prettier": "^2.5.1",
         "prisma": "^3.10.0",
         "prisma-dbml-generator": "^0.8.3",
