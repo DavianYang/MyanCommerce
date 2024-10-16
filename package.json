@@ -27,7 +27,7 @@
         "codegen": "graphql-codegen --config codegen.yml"
     },
     "dependencies": {
-        "@apollo/gateway": "0.46.0",
+        "@apollo/gateway": "2.9.3",
         "@nestjs/common": "8.2.6",
         "@nestjs/config": "^1.2.0",
         "@nestjs/core": "8.2.6",
